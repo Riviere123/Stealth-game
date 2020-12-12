@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+
 public class TestEnemyStealthDetectionBehavior : MonoBehaviour
 {
     public bool spotted;

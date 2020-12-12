@@ -156,6 +156,7 @@ public class EnemyVisualCone : MonoBehaviour
         mesh.triangles = triangles;
 
     }
+    
     static Vector2 RadianToVector2(float radian)
     {
         return new Vector2(Mathf.Cos(radian), Mathf.Sin(radian));
@@ -188,4 +189,6 @@ public class EnemyVisualCone : MonoBehaviour
         }
         return layerNumber - 1;
     }
+
+    
 }

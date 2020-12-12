@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class EnemyVisualCone : MonoBehaviour
 {
@@ -10,6 +8,7 @@ public class EnemyVisualCone : MonoBehaviour
     public float timeToTrigger; //sets how long you must be in the cone before it triggers
     float endTime; //the time till trigger
     bool countDown = false; //check if we are already counting down
+    bool aqcuireTarget = false;
     public Material material; //material the mesh uses
     public LayerMask rayCastObjects; //objects we want to hit
     public LayerMask objectThatObstruct; //this can only be one
@@ -19,7 +18,8 @@ public class EnemyVisualCone : MonoBehaviour
     int[] triangles; //array of triangles
     GameObject coneVisual; //the gameobject to create
     Mesh mesh; //mesh to create
-    // Start is called before the first frame update
+    public GameObject target;
+
     private void Start()
     {
         mesh = new Mesh();
@@ -35,7 +35,7 @@ public class EnemyVisualCone : MonoBehaviour
 
     }
 
-    // Update is called once per frame
+
     void Update()
     {
 
@@ -70,18 +70,43 @@ public class EnemyVisualCone : MonoBehaviour
                     }
                 }
                 if(hit.collider.gameObject.layer == layermask_to_layer(player))
-                {                    
-                    vertices[i] = (transform.position + ((Vector3)lDirection * range));
-                    uv[i] = vertices[i];
-                    triangles[i * 3] = 0;
-                    triangles[i * 3 + 1] = i;
-                    if (i + 1 < rays)
+                {
+                    RaycastHit2D wallHit = Physics2D.Raycast(transform.position, lDirection, range, objectThatObstruct);
+                    if (wallHit)
                     {
-                        triangles[i * 3 + 2] = i + 1;
+                        vertices[i] = wallHit.point;
+                        uv[i] = vertices[i];
+                        triangles[i * 3] = 0;
+                        triangles[i * 3 + 1] = i;
+                        if (i + 1 < rays)
+                        {
+                            triangles[i * 3 + 2] = i + 1;
+                        }
+                        else
+                        {
+                            triangles[i * 3 + 2] = 0;
+                        }
                     }
                     else
                     {
-                        triangles[i * 3 + 2] = 0;
+                        vertices[i] = (transform.position + ((Vector3)lDirection * range));
+                        uv[i] = vertices[i];
+                        triangles[i * 3] = 0;
+                        triangles[i * 3 + 1] = i;
+                        if (i + 1 < rays)
+                        {
+                            triangles[i * 3 + 2] = i + 1;
+                        }
+                        else
+                        {
+                            triangles[i * 3 + 2] = 0;
+                        }
+                    }
+                    
+                    if (aqcuireTarget) //This is the trigger event
+                    {
+                        target = hit.collider.gameObject;
+                        aqcuireTarget = false;
                     }
                     seePlayer = true;
                 }
@@ -111,6 +136,7 @@ public class EnemyVisualCone : MonoBehaviour
                 if (Time.time >= endTime)
                 {
                     Debug.Log("Trigger");
+                    aqcuireTarget = true;
                     countDown = false;
                 }
             }
@@ -122,6 +148,7 @@ public class EnemyVisualCone : MonoBehaviour
         }
         else
         {
+            target = null;
             countDown = false;
         }
         mesh.vertices = vertices;

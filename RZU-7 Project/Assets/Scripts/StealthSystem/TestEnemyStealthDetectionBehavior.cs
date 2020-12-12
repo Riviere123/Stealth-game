@@ -3,12 +3,12 @@
 
 public class TestEnemyStealthDetectionBehavior : MonoBehaviour
 {
-    public bool spotted;
-    public float rotationSpeed;
+    
+    bool spotted;
+    [SerializeField]
+    float rotationSpeed = 15;
     public GameObject target;
     EnemyVisualCone evc;
-
-    bool turning;
 
     private void Start()
     {
@@ -26,23 +26,18 @@ public class TestEnemyStealthDetectionBehavior : MonoBehaviour
             target = null;
             spotted = false;
         }
-        if (!spotted)
-        {
-            transform.Rotate(0, 0, Time.deltaTime * rotationSpeed);
-        }
         if (spotted)
         {
             if (target)
             {
-                
-                
-
-
                 var dir = target.transform.position - transform.position;
                 var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-                /*                transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);*/
                 transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.AngleAxis(angle, Vector3.forward), Time.deltaTime * (rotationSpeed/2));
             }           
+        }
+        else
+        {
+             transform.Rotate(0, 0, Time.deltaTime * rotationSpeed);
         }
     }
 

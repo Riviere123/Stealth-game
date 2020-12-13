@@ -1,71 +1,63 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class InputMonitor : MonoBehaviour
 {
-    public Constants.InputContexts currentContextEnum;
-    public InputContext currentContextClass;
-    public MenuContext menuContext = new MenuContext();
-    public GameplayContext gameplayContext = new GameplayContext();
+    [SerializeField]
+    InputConstants.InputContexts currentContextEnum;
+    [SerializeField]
+    InputContext currentContextClass;
+    [SerializeField]
+    MenuContext menuContext;
+    [SerializeField]
+     GameplayContext gameplayContext;
 
     void Start()
     {
-        SetInputContext(Constants.InputContexts.menu);
+        menuContext = gameObject.AddComponent<MenuContext>();
+        gameplayContext = gameObject.AddComponent<GameplayContext>();
     }
 
     void Update()
     {
-        float horizInput = Input.GetAxis(Constants.horizontal);
-        if (!Mathf.Approximately(Mathf.Abs(horizInput), 0f))
-        {
-            currentContextClass.HorizontalButtonPress(horizInput);
-        }
+        currentContextClass.HorizontalButtonPress(Input.GetAxis(InputConstants.horizontal));
+        currentContextClass.VerticalButtonPress(Input.GetAxis(InputConstants.vertical));
 
-        float verticalInput = Input.GetAxis(Constants.vertical);
-        if (!Mathf.Approximately(Mathf.Abs(verticalInput), 0f))
-        {
-            currentContextClass.VerticalButtonPress(verticalInput);
-        }
-
-        if (Input.GetButtonDown(Constants.action1))
+        if (Input.GetButtonDown(InputConstants.action1))
         {
             currentContextClass.Action1ButtonPress();
         }
 
-        if (Input.GetButtonDown(Constants.action2))
+        if (Input.GetButtonDown(InputConstants.action2))
         {
             currentContextClass.Action2ButtonPress();
         }
 
-        if (Input.GetButtonDown(Constants.menu1))
+        if (Input.GetButtonDown(InputConstants.menu1))
         {
             currentContextClass.Menu1ButtonPress();
         }
 
-        if (Input.GetButtonDown(Constants.menu2))
+        if (Input.GetButtonDown(InputConstants.menu2))
         {
             currentContextClass.Menu2ButtonPress();
         }
     }
 
-    public void SetInputContext(Constants.InputContexts context)
+    public void SetInputContext(InputConstants.InputContexts context)
     {
         switch(context)
         {
-            case Constants.InputContexts.menu:
-                Debug.Log("Selected \"" + Constants.menu + "\" context");
+            case InputConstants.InputContexts.menu:
+                Debug.Log("Selected \"" + InputConstants.menu + "\" context");
                 SetMenuContext();
                 break;
 
-            case Constants.InputContexts.gameplay:
-                Debug.Log("Selected \"" + Constants.gameplay + "\" context");
+            case InputConstants.InputContexts.gameplay:
+                Debug.Log("Selected \"" + InputConstants.gameplay + "\" context");
                 SetGameplayContext();
                 break;
 
             default:
-                Debug.Log("Defaulted to \"" + Constants.gameplay + "\" context");
-                SetGameplayContext();
                 break;
         }
     }

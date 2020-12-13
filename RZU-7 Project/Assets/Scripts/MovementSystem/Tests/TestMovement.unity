@@ -240,7 +240,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!114 &765395404
 MonoBehaviour:
@@ -255,9 +255,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigidBody: {fileID: 765395403}
-  normalSpeed: 3
-  sprintSpeed: 5
-  crouchSpeed: 2
+  normalSpeed: 12
+  sprintSpeed: 18
+  crouchSpeed: 8
   currentMoveState: 0
   maxModifier: 1.4
   minModifier: 0.5
@@ -319,7 +319,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentContextEnum: 1
-  currentContextClass: {fileID: 0}
+  currentContextClass: {fileID: 1843886269}
   menuContext: {fileID: 1843886268}
   gameplayContext: {fileID: 1843886269}
 --- !u!4 &1843886271

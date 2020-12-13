@@ -11,12 +11,6 @@ public class InputMonitor : MonoBehaviour
     [SerializeField]
      GameplayContext gameplayContext;
 
-    void Start()
-    {
-        menuContext = gameObject.AddComponent<MenuContext>();
-        gameplayContext = gameObject.AddComponent<GameplayContext>();
-    }
-
     void Update()
     {
         currentContextClass.HorizontalButtonPress(Input.GetAxis(InputConstants.horizontal));

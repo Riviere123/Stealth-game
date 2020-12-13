@@ -6,11 +6,11 @@ public class ActorMovement : MonoBehaviour
     [SerializeField]
     Rigidbody2D rigidBody;
     [SerializeField]
-    float normalSpeed = 3f;
+    float normalSpeed = 12f;
     [SerializeField]
-    float sprintSpeed = 5f;
+    float sprintSpeed = 28f;
     [SerializeField]
-    float crouchSpeed = 2f;
+    float crouchSpeed = 8f;
     [SerializeField]
     InputConstants.ActorMovementStates currentMoveState;
     float currentSpeed;
@@ -66,7 +66,7 @@ public class ActorMovement : MonoBehaviour
 
     public void MoveActor(float horizontal, float vertical)
     {
-        rigidBody.AddForce(new Vector2(horizontal, vertical).normalized * currentSpeed * speedModifier * Time.fixedDeltaTime);
+        rigidBody.MovePosition((Vector2)gameObject.transform.position + new Vector2(horizontal, vertical).normalized * currentSpeed * speedModifier * Time.fixedDeltaTime);
     }
 
     public void ToggleCrouch()

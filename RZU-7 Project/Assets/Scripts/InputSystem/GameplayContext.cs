@@ -3,9 +3,9 @@
 public class GameplayContext : InputContext
 {
     [SerializeField]
-    ActorMovement actorMovement;        // Should be set in Editor from Player Object
+    ActorMovement actorMovement;      // Should be set in Editor from Player Object
     [SerializeField]
-    ActorAnimations actorAnimations;    // Should be set in Editor from Player Object
+    ActorAnimations actorAnimations;  // Should be set in Editor from Player Object
     float horizontalValue, verticalValue = 0f;
 
     // Handle physics based movement

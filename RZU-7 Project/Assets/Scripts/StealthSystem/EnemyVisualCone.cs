@@ -113,11 +113,10 @@ public class EnemyVisualCone : MonoBehaviour
             target = null;
             countDown = false;
         }
-
         mesh.vertices = vertices;
         mesh.uv = uv;
         mesh.triangles = triangles;
-
+        mesh.RecalculateBounds();
     }
     
     Vector2 RadianToVector2(float radian)

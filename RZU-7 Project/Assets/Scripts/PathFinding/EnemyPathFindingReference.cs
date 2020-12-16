@@ -45,6 +45,7 @@ public class EnemyPathFindingReference : MonoBehaviour
                 break;
         }
     }
+    
     private void FixedUpdate()
     {
         if(pathNodes.Count != 0)//if there are path nodes

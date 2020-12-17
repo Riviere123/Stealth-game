@@ -49,8 +49,7 @@ public class StealthUsingPathFindingAndSound : MonoBehaviour
                     else if (rotationDirection == RotationDirection.Right)
                     {
                         transform.Rotate(0, 0, Time.deltaTime * -rotationSpeed);
-                    }
-                    
+                    } 
                 }
                 if (evc.target != null)
                 {

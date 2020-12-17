@@ -15,7 +15,6 @@ public class StealthUsingPathFindingAndSound : MonoBehaviour
     [SerializeField]
     float recalculateDistance = 1;
     public GameObject target;
-    public Vector2 searchLocation;
     PathFinding pf;
     EnemyVisualCone evc;
     List<Node> pathNodes = new List<Node>();
@@ -116,6 +115,6 @@ public class StealthUsingPathFindingAndSound : MonoBehaviour
     }
     public enum State
     {
-        Look, Search, Patrol, Chase, LookCircle
+        Chase, LookCircle
     }
 }

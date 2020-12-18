@@ -66,7 +66,8 @@ public class ActorMovement : MonoBehaviour
 
     public void MoveActor(float horizontal, float vertical)
     {
-        rigidBody.MovePosition((Vector2)gameObject.transform.position + new Vector2(horizontal, vertical).normalized * currentSpeed * speedModifier * Time.fixedDeltaTime);
+        Debug.Log("Force Value: " + new Vector2(horizontal, vertical).normalized * currentSpeed * speedModifier * Time.fixedDeltaTime);
+        rigidBody.AddForce(new Vector2(horizontal, vertical).normalized * currentSpeed * speedModifier * Time.fixedDeltaTime);
     }
 
     public void ToggleCrouch()

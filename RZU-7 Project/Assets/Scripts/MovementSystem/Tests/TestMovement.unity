@@ -234,7 +234,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 12
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -255,9 +255,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigidBody: {fileID: 765395403}
-  normalSpeed: 12
-  sprintSpeed: 18
-  crouchSpeed: 8
+  normalSpeed: 2200
+  sprintSpeed: 3500
+  crouchSpeed: 1000
   currentMoveState: 0
   maxModifier: 1.4
   minModifier: 0.5

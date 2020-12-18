@@ -22,14 +22,14 @@ public class GameplayContext : InputContext
     // Move in the X plane
     public override void HorizontalButtonPress(float value)
     {
-        Debug.Log(InputConstants.gameplayContext + " " + InputConstants.input + " " + InputConstants.horizontal + ": " + Input.GetAxis(InputConstants.horizontal));
+        //Debug.Log(InputConstants.gameplayContext + " " + InputConstants.input + " " + InputConstants.horizontal + ": " + Input.GetAxis(InputConstants.horizontal));
         horizontalValue = value;
     }
 
     // Move in the Y plane
     public override void VerticalButtonPress(float value)
     {
-        Debug.Log(InputConstants.gameplayContext + " " + InputConstants.input + " " + InputConstants.vertical + ": " + Input.GetAxis(InputConstants.vertical));
+        //Debug.Log(InputConstants.gameplayContext + " " + InputConstants.input + " " + InputConstants.vertical + ": " + Input.GetAxis(InputConstants.vertical));
         verticalValue = value;
     }
 

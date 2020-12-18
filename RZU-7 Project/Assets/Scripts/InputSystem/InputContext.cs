@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public abstract class InputContext
+public abstract class InputContext : MonoBehaviour
 {
     public abstract void HorizontalButtonPress(float value);
 

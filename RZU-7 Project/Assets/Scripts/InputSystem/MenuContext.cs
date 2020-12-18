@@ -6,31 +6,31 @@ public class MenuContext : InputContext
 {
     public override void HorizontalButtonPress(float value)
     {
-        Debug.Log(Constants.menuContext + " " + Constants.input + " " + Constants.horizontal + ": " + Input.GetAxis(Constants.horizontal));
+        Debug.Log(InputConstants.menuContext + " " + InputConstants.input + " " + InputConstants.horizontal + ": " + Input.GetAxis(InputConstants.horizontal));
     }
 
     public override void VerticalButtonPress(float value)
     {
-        Debug.Log(Constants.menuContext + " " + Constants.input + " " + Constants.vertical + ": " + Input.GetAxis(Constants.vertical));
+        Debug.Log(InputConstants.menuContext + " " + InputConstants.input + " " + InputConstants.vertical + ": " + Input.GetAxis(InputConstants.vertical));
     }
 
     public override void Action1ButtonPress()
     {
-        Debug.Log(Constants.menuContext + " " + Constants.input + " " + Constants.action1 + ": " + Input.GetButtonDown(Constants.action1));
+        Debug.Log(InputConstants.menuContext + " " + InputConstants.input + " " + InputConstants.action1 + ": " + Input.GetButtonDown(InputConstants.action1));
     }
 
     public override void Action2ButtonPress()
     {
-        Debug.Log(Constants.menuContext + " " + Constants.input + " " + Constants.action2 + ": " + Input.GetButtonDown(Constants.action2));
+        Debug.Log(InputConstants.menuContext + " " + InputConstants.input + " " + InputConstants.action2 + ": " + Input.GetButtonDown(InputConstants.action2));
     }
 
     public override void Menu1ButtonPress()
     {
-        Debug.Log(Constants.menuContext + " " + Constants.input + " " + Constants.menu1 + ": " + Input.GetButtonDown(Constants.menu1));
+        Debug.Log(InputConstants.menuContext + " " + InputConstants.input + " " + InputConstants.menu1 + ": " + Input.GetButtonDown(InputConstants.menu1));
     }
 
     public override void Menu2ButtonPress()
     {
-        Debug.Log(Constants.menuContext + " " + Constants.input + " " + Constants.menu2 + ": " + Input.GetButtonDown(Constants.menu2));
+        Debug.Log(InputConstants.menuContext + " " + InputConstants.input + " " + InputConstants.menu2 + ": " + Input.GetButtonDown(InputConstants.menu2));
     }
 }

@@ -41,6 +41,7 @@ public class EnemyVisualCone : MonoBehaviour
         coneVisual.GetComponent<MeshFilter>().mesh = mesh;
         coneVisual.GetComponent<MeshRenderer>().material = material;
         coneVisual.transform.localScale = new Vector3(1, 1, -1);
+        coneVisual.layer = layermask_to_layer(LayerMask.GetMask("VisualCone"));
     }
 
 
@@ -50,8 +51,8 @@ public class EnemyVisualCone : MonoBehaviour
         var start = -(angle / 2);
         bool seePlayer = false;
 
-        vertices[0] = transform.position;
-        uv[0] = transform.position;
+        vertices[0] = transform.position + new Vector3(0, 0, 2);
+        uv[0] = vertices[0];
 
         for (int i = 1; i < rays; i++)
         {
@@ -154,7 +155,7 @@ public class EnemyVisualCone : MonoBehaviour
 
     void SetMeshStats(int i, Vector3 position)
     {
-        vertices[i] = position;
+        vertices[i] = position + new Vector3(0,0,2);
         uv[i] = vertices[i];
         triangles[i * 3] = 0;
         triangles[i * 3 + 1] = i;

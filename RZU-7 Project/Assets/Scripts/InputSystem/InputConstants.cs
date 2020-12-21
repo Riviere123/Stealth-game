@@ -1,11 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class Constants
+﻿public class InputConstants
 {
+    // Input System
     [System.Serializable]
-    public enum InputContexts { menu, gameplay };
+    public enum InputContexts
+    {
+        menu, gameplay
+    };
+
     // Debug Log Values
     public static readonly string input = "Input";
     public static readonly string menuContext = "Menu Context";
@@ -22,4 +23,11 @@ public class Constants
     public static readonly string action2 = "Action2";
     public static readonly string menu1 = "Menu1";
     public static readonly string menu2 = "Menu2";
+
+    // Movement System
+    [System.Serializable]
+    public enum ActorMovementStates
+    {
+        normal, sprint, crouch
+    };
 }

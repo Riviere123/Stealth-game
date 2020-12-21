@@ -1,0 +1,46 @@
+Readme:
+
+-------------------Player ------------------------
+Simply has the debug movement rotate with mouse and speed variable
+
+
+-----------------EnemySoundPath: this is the AI enemy-------------------
+
+-----------Pathfinding Script: needed and linked to the pathfinding grid.
+
+--------------Stealth Using Pathfinding And Sound script:
+
+Rotation Speed: how fast the ai can rotate.
+
+rotation direction: the direction he rotates whe
+n in look circle state.(just does a 360degree look)
+
+Move Speed: simply how fast the AI moves linearly.
+
+Distance from target to stop: This is the distance that must be satisfied from the target where it will not recalculate a new path to the target.(this prevents the AI from pushing threw the target by moving to his exact location.
+
+recalculate Distance: this is the dstance from the current end node the target is before we recalculate a new path to the target. if this is too high the AI will move to a node that could be too far from the Player making him zigzag to the player. too low may be CPU intensive to calculate paths too often. I find 1 a good number.
+
+Target: We are pulling the target from the enemy visual cone so if the player is in sight the target will not be None.
+
+State: This AI only has a look circle and chase AI states.
+
+
+---------Enemy Visual Cone (Note: turn on gizmos in scene view to see changes live)
+
+angle: this is the field of view the enemy can see.
+Rays: this is how many rays are used in the cone the higher the Angle the more rays you will want this controls the fidelity of the cone the more rays the more CPU intensive but the better the cone will look.
+
+Range: this is the visual distance the enemy can see.
+
+Time to trigger: this is how long you must be seen before the target variable is set to the player.
+
+material: this is the material we use for the visual cone. There is a material in the materials folder for this.
+
+Raycast Objects: you want to put any and all objects that you want to be registered in the rays. Obstacles and players.
+
+object that obstructs: you want to ONLY put obstacles layer in this. (you must set visual obstructions to the Obstacles layer.
+
+Player: this is the layer the player is on.
+
+Target: is the target we see(only checking for Player Layer Tag)

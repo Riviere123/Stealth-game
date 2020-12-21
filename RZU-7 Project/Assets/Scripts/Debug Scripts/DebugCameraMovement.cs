@@ -23,8 +23,10 @@ public class DebugCameraMovement : MonoBehaviour
     {
         cam = GetComponent<Camera>();
     }
+
     void Update()
     {
+        
         if (!target)
         {
             if (Input.GetKey(up))
@@ -44,10 +46,6 @@ public class DebugCameraMovement : MonoBehaviour
                 transform.Translate(Vector3.left * Time.deltaTime * speed);
             }
         }
-        if (target)
-        {
-            transform.position = target.transform.position + new Vector3(0, 0, -10);
-        }
         if (Input.GetKeyDown(zoomIn))
         {
             cam.orthographicSize++;
@@ -55,6 +53,10 @@ public class DebugCameraMovement : MonoBehaviour
         if (Input.GetKeyDown(zoomOut))
         {
             cam.orthographicSize--;
+        }
+        if (target)
+        {
+            transform.position = target.transform.position + new Vector3(0, 0, -10);
         }
     }
     

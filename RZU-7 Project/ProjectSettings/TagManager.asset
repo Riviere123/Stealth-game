@@ -17,8 +17,8 @@ TagManager:
   - 
   - Obstacle
   - Enemy
-  - 
-  - 
+  - Player
+  - VisualCone
   - 
   - 
   - 
@@ -45,6 +45,9 @@ TagManager:
     locked: 0
   - name: Background
     uniqueID: 2934329573
+    locked: 0
+  - name: Characters
+    uniqueID: 2313595795
     locked: 0
   - name: Middle
     uniqueID: 296011337

@@ -5,6 +5,17 @@ public class PathFinding : MonoBehaviour
 {
     public Grid grid;
     public List<Node> finalPath;
+    [SerializeField]
+    bool findGridAutomaticly;
+
+    private void Start()
+    {
+        if (findGridAutomaticly)
+        {
+            grid = GameObject.FindGameObjectWithTag("PathFindingGrid").GetComponent<Grid>();
+        }
+        
+    }
 
     public void FindPath(Vector2 a_startPos, Vector2 a_targetPos) //finds the closest path from start to target position
     {

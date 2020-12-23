@@ -1,0 +1,19 @@
+How to use the scene:
+
+run the game select the CreateSoundRing Gameobject in the hierarchy and play with the sound visual script settings:
+
+SoundRingPrefab: this is the prefab gameobject we spawn
+
+MaxSize: this is the max size the ring will get
+
+Duration: How long it takes until the ring is max size
+
+Color: you can set the color and alpha of the ring
+
+TestBool: when the game is running clicking the checkbox will spawn a ringwith the set parameters
+
+
+
+You can call the function and set all the parameters in the function from another script.
+
+CreateSound(Vector2 position, float maxSize, float duration, Color color)

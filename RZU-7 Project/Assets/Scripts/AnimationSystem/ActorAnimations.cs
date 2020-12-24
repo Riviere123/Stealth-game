@@ -36,12 +36,18 @@ public class ActorAnimations : MonoBehaviour
     /// <param name="movementState">The actor's movement state</param>
     public void SetMovementValues(float x, float y, MovementConstants.ActorMovementStates movementState)
     {
+        if (animator.GetBool(AnimationConstants.isDead))
+        {
+            x = y = 0f;
+        }
+
         animator.SetFloat(AnimationConstants.lastX, lastX);
         animator.SetFloat(AnimationConstants.lastY, lastY);
 
         animator.SetFloat(AnimationConstants.movingX, x);
         animator.SetFloat(AnimationConstants.movingY, y);
 
+        // If there is movement in at least one axis...
         if ((Mathf.Abs(x) + Mathf.Abs(y)) > 0)
         {
             SetAxisLastMovementInput(x, ref lastX);
@@ -104,5 +110,19 @@ public class ActorAnimations : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    /// <summary>
+    /// Sets the IsDead boolean in the animator
+    /// </summary>
+    /// <param name="val">The boolean value to set IsDead to</param>
+    public void SetIsDeadStatus(bool val)
+    {
+        if (val)
+        {
+            SetMovementBooleans(MovementConstants.ActorMovementStates.NONE);
+        }
+
+        animator.SetBool(AnimationConstants.isDead, val);
     }
 }

@@ -22,6 +22,13 @@ public class ActorMovement : MonoBehaviour
     float maxModifier = 1.4f;
     [SerializeField]
     float minModifier = .5f;
+    [SerializeField]
+    bool isDead;
+    public bool IsDead
+    {
+        get { return isDead; }
+        set { isDead = value; }
+    }
 
     private void Start()
     {
@@ -67,8 +74,14 @@ public class ActorMovement : MonoBehaviour
 
     public void MoveActor(float horizontal, float vertical)
     {
-        Debug.Log("Force Value: " + new Vector2(horizontal, vertical).normalized * currentSpeed * speedValueMultiplier * speedModifier * Time.fixedDeltaTime);
-        rigidBody.AddForce(new Vector2(horizontal, vertical).normalized * currentSpeed * speedValueMultiplier * speedModifier * Time.fixedDeltaTime);
+        if (!isDead)
+        {
+            rigidBody.AddForce(new Vector2(horizontal, vertical).normalized * currentSpeed * speedValueMultiplier * speedModifier * Time.fixedDeltaTime);
+        }
+        else
+        {
+            rigidBody.AddForce(Vector2.zero);
+        }
     }
 
     public void ToggleCrouch()

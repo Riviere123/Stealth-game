@@ -36,27 +36,31 @@ public class GameplayContext : InputContext
     // Toggle crouch
     public override void Action1ButtonPress()
     {
-        Debug.Log(InputConstants.gameplayContext + " " + InputConstants.input + " " + InputConstants.action1 + ": " + Input.GetButtonDown(InputConstants.action1));
+        //Debug.Log(InputConstants.gameplayContext + " " + InputConstants.input + " " + InputConstants.action1 + ": " + Input.GetButtonDown(InputConstants.action1));
         actorMovement.ToggleCrouch();
     }
 
     // Toggle sprint
     public override void Action2ButtonPress()
     {
-        Debug.Log(InputConstants.gameplayContext + " " + InputConstants.input + " " + InputConstants.action2 + ": " + Input.GetButtonDown(InputConstants.action2));
+        //Debug.Log(InputConstants.gameplayContext + " " + InputConstants.input + " " + InputConstants.action2 + ": " + Input.GetButtonDown(InputConstants.action2));
         actorMovement.ToggleSprint();
     }
 
     // Pause menu
     public override void Menu1ButtonPress()
     {
-        Debug.Log(InputConstants.gameplayContext + " " + InputConstants.input + " " + InputConstants.menu1 + ": " + Input.GetButtonDown(InputConstants.menu1));
+        //Debug.Log(InputConstants.gameplayContext + " " + InputConstants.input + " " + InputConstants.menu1 + ": " + Input.GetButtonDown(InputConstants.menu1));
+        actorMovement.IsDead = true;
+        actorAnimations.SetIsDeadStatus(true);
     }
 
     // Toggle map
     public override void Menu2ButtonPress()
     {
-        Debug.Log(InputConstants.gameplayContext + " " + InputConstants.input + " " + InputConstants.menu2 + ": " + Input.GetButtonDown(InputConstants.menu2));
+        //Debug.Log(InputConstants.gameplayContext + " " + InputConstants.input + " " + InputConstants.menu2 + ": " + Input.GetButtonDown(InputConstants.menu2));
+        actorMovement.IsDead = false;
+        actorAnimations.SetIsDeadStatus(false);
     }
 
 }

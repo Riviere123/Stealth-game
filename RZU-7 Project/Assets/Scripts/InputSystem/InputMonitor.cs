@@ -42,12 +42,12 @@ public class InputMonitor : MonoBehaviour
         switch(context)
         {
             case InputConstants.InputContexts.menu:
-                Debug.Log("Selected \"" + InputConstants.menu + "\" context");
+                //Debug.Log("Selected \"" + InputConstants.menu + "\" context");
                 SetMenuContext();
                 break;
 
             case InputConstants.InputContexts.gameplay:
-                Debug.Log("Selected \"" + InputConstants.gameplay + "\" context");
+                //Debug.Log("Selected \"" + InputConstants.gameplay + "\" context");
                 SetGameplayContext();
                 break;
 

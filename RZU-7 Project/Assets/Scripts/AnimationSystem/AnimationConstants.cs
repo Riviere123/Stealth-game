@@ -7,4 +7,6 @@
     public static readonly string isWalking = "IsWalking";
     public static readonly string isRunning = "IsRunning";
     public static readonly string isCrouching = "IsCrouching";
+    public static readonly string isDead = "IsDead";
+    public static readonly string isInteracting = "IsInteracting";
 }

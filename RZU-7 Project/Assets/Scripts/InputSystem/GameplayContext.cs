@@ -16,7 +16,7 @@ public class GameplayContext : InputContext
 
     void Update()
     {
-        actorAnimations.SetMovementValues(horizontalValue, verticalValue, new Vector2(horizontalValue, verticalValue).sqrMagnitude);
+        actorAnimations.SetMovementValues(horizontalValue, verticalValue, actorMovement.GetMoveState());
     }
 
     // Move in the X plane

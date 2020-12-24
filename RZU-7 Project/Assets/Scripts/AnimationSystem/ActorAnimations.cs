@@ -4,6 +4,9 @@
 /// Governs an actor's animations. Its main use is for the player,
 /// but should be adequate for enemies as well.
 /// </summary>
+/// <remarks>
+/// The <paramref name="animator"/> parameter is meant to be set in the editor.
+/// </remarks>
 /// <param name="animator">The actor animator</param>
 /// <param name="lastX">The last "valid" player input in the X direction as it pertains to animations</param>
 /// <param name="lastY">The last "valid" player input in the Y direction as it pertains to animations</param>
@@ -11,7 +14,7 @@
 public class ActorAnimations : MonoBehaviour
 {
     [SerializeField]
-    Animator animator; // Should be set in Editor
+    Animator animator;
     float lastX = 0f;
     float lastY = 0f;
     float zeroApproximationBoundary = 0.01f;
@@ -30,8 +33,8 @@ public class ActorAnimations : MonoBehaviour
     /// </summary>
     /// <param name="x">Player input in the X direction</param>
     /// <param name="y">Player input in the Y direction</param>
-    /// <param name="speed">The player speed</param>
-    public void SetMovementValues(float x, float y, float speed)
+    /// <param name="movementState">The actor's movement state</param>
+    public void SetMovementValues(float x, float y, MovementConstants.ActorMovementStates movementState)
     {
         animator.SetFloat(AnimationConstants.lastX, lastX);
         animator.SetFloat(AnimationConstants.lastY, lastY);
@@ -39,23 +42,15 @@ public class ActorAnimations : MonoBehaviour
         animator.SetFloat(AnimationConstants.movingX, x);
         animator.SetFloat(AnimationConstants.movingY, y);
 
-        CheckLastMovementInput(x, y);
-
-        SetIsWalking(x, y);
-    }
-
-    /// <summary>
-    /// Checks for there to be movement input in at least one direction and sets
-    /// the values for the last inputs that were relevant for the animation logic.
-    /// </summary>
-    /// <param name="x">Player input in the X direction</param>
-    /// <param name="y">Player input in the Y direction</param>
-    void CheckLastMovementInput(float x, float y)
-    {
         if ((Mathf.Abs(x) + Mathf.Abs(y)) > 0)
         {
-            CheckAxisLastMovementInput(x, ref lastX);
-            CheckAxisLastMovementInput(y, ref lastY);
+            SetAxisLastMovementInput(x, ref lastX);
+            SetAxisLastMovementInput(y, ref lastY);
+            SetMovementBooleans(movementState);
+        }
+        else
+        {
+            SetMovementBooleans(MovementConstants.ActorMovementStates.NONE);
         }
     }
 
@@ -65,7 +60,7 @@ public class ActorAnimations : MonoBehaviour
     /// </summary>
     /// <param name="newValue"></param>
     /// <param name="lastValue"></param>
-    void CheckAxisLastMovementInput(float newValue, ref float lastValue)
+    void SetAxisLastMovementInput(float newValue, ref float lastValue)
     {
         if (Mathf.Abs(newValue) > zeroApproximationBoundary)
         {
@@ -78,12 +73,36 @@ public class ActorAnimations : MonoBehaviour
     }
 
     /// <summary>
-    /// Sets the boolean in the animator for whether the actor is moving or not.
+    /// Sets the booleans in the animator for whether the actor is moving or not and what movement
+    /// state the actor is in.
     /// </summary>
-    /// <param name="x">Player input in the X direction</param>
-    /// <param name="y">Player input in the Y direction</param>
-    void SetIsWalking(float x, float y)
+    /// <param name="movementState">The actor's movement state</param>
+    void SetMovementBooleans(MovementConstants.ActorMovementStates movementState)
     {
-        animator.SetBool(AnimationConstants.isMoving, !Mathf.Approximately(x, 0f) || !Mathf.Approximately(y, 0f));
+        switch (movementState)
+        {
+            case MovementConstants.ActorMovementStates.WALK:
+                animator.SetBool(AnimationConstants.isWalking, true);
+                animator.SetBool(AnimationConstants.isRunning, false);
+                animator.SetBool(AnimationConstants.isCrouching, false);
+                break;
+            case MovementConstants.ActorMovementStates.RUN:
+                animator.SetBool(AnimationConstants.isWalking, false);
+                animator.SetBool(AnimationConstants.isRunning, true);
+                animator.SetBool(AnimationConstants.isCrouching, false);
+                break;
+            case MovementConstants.ActorMovementStates.CROUCH:
+                animator.SetBool(AnimationConstants.isWalking, false);
+                animator.SetBool(AnimationConstants.isRunning, false);
+                animator.SetBool(AnimationConstants.isCrouching, true);
+                break;
+            case MovementConstants.ActorMovementStates.NONE:
+                animator.SetBool(AnimationConstants.isWalking, false);
+                animator.SetBool(AnimationConstants.isRunning, false);
+                animator.SetBool(AnimationConstants.isCrouching, false);
+                break;
+            default:
+                break;
+        }
     }
 }

@@ -23,11 +23,4 @@
     public static readonly string action2 = "Action2";
     public static readonly string menu1 = "Menu1";
     public static readonly string menu2 = "Menu2";
-
-    // Movement System
-    [System.Serializable]
-    public enum ActorMovementStates
-    {
-        normal, sprint, crouch
-    };
 }

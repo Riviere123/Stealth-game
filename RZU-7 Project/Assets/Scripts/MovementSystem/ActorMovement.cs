@@ -12,7 +12,7 @@ public class ActorMovement : MonoBehaviour
     [SerializeField]
     float crouchSpeed = 8f;
     [SerializeField]
-    InputConstants.ActorMovementStates currentMoveState;
+    MovementConstants.ActorMovementStates currentMoveState;
     float currentSpeed;
     float speedValueMultiplier = 10f;  // Because the values get too high in the editor
 
@@ -29,21 +29,21 @@ public class ActorMovement : MonoBehaviour
         currentSpeed = normalSpeed;
     }
 
-    void SetSpeed(InputConstants.ActorMovementStates state)
+    void SetSpeed(MovementConstants.ActorMovementStates state)
     {
         switch(state)
         {
-            case InputConstants.ActorMovementStates.normal:
+            case MovementConstants.ActorMovementStates.WALK:
                 currentSpeed = normalSpeed;
                 currentMoveState = state;
                 break;
 
-            case InputConstants.ActorMovementStates.sprint:
+            case MovementConstants.ActorMovementStates.RUN:
                 currentSpeed = sprintSpeed;
                 currentMoveState = state;
                 break;
 
-            case InputConstants.ActorMovementStates.crouch:
+            case MovementConstants.ActorMovementStates.CROUCH:
                 currentSpeed = crouchSpeed;
                 currentMoveState = state;
                 break;
@@ -53,7 +53,7 @@ public class ActorMovement : MonoBehaviour
         }
     }
 
-    void ToggleState(InputConstants.ActorMovementStates newState)
+    void ToggleState(MovementConstants.ActorMovementStates newState)
     {
         if (currentMoveState != newState)
         {
@@ -61,7 +61,7 @@ public class ActorMovement : MonoBehaviour
         }
         else
         {
-            SetSpeed(InputConstants.ActorMovementStates.normal);
+            SetSpeed(MovementConstants.ActorMovementStates.WALK);
         }
     }
 
@@ -73,16 +73,21 @@ public class ActorMovement : MonoBehaviour
 
     public void ToggleCrouch()
     {
-        ToggleState(InputConstants.ActorMovementStates.crouch);
+        ToggleState(MovementConstants.ActorMovementStates.CROUCH);
     }
 
     public void ToggleSprint()
     {
-        ToggleState(InputConstants.ActorMovementStates.sprint);
+        ToggleState(MovementConstants.ActorMovementStates.RUN);
     }
 
     public void SetSpeedModifier(float value)
     {
         speedModifier = Mathf.Clamp(value, minModifier, maxModifier);
+    }
+
+    public MovementConstants.ActorMovementStates GetMoveState()
+    {
+        return currentMoveState;
     }
 }

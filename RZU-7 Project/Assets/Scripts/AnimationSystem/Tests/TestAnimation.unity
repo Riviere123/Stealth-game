@@ -365,6 +365,7 @@ GameObject:
   - component: {fileID: 1930484668}
   - component: {fileID: 1930484667}
   - component: {fileID: 1930484671}
+  - component: {fileID: 1930484672}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -438,7 +439,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 2.5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -487,6 +488,26 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1930484672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1930484666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 483b67e093c665c4395572df5ded1b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 10
+  target: {fileID: 2059298760}
+  up: 0
+  right: 0
+  down: 0
+  left: 0
+  zoomIn: 0
+  zoomOut: 0
 --- !u!1 &2059298760
 GameObject:
   m_ObjectHideFlags: 0
@@ -535,7 +556,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2059298760}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 1.177, y: -0.978, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -618,9 +639,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigidBody: {fileID: 2059298766}
-  normalSpeed: 2200
-  sprintSpeed: 3500
-  crouchSpeed: 1000
+  normalSpeed: 220
+  sprintSpeed: 350
+  crouchSpeed: 100
   currentMoveState: 0
   maxModifier: 1.4
   minModifier: 0.5

@@ -14,6 +14,7 @@ public class ActorMovement : MonoBehaviour
     [SerializeField]
     InputConstants.ActorMovementStates currentMoveState;
     float currentSpeed;
+    float speedValueMultiplier = 10f;  // Because the values get too high in the editor
 
     // speedModifier is meant to affect speed values based on environment or status conditions
     float speedModifier = 1f;
@@ -66,8 +67,8 @@ public class ActorMovement : MonoBehaviour
 
     public void MoveActor(float horizontal, float vertical)
     {
-        Debug.Log("Force Value: " + new Vector2(horizontal, vertical).normalized * currentSpeed * speedModifier * Time.fixedDeltaTime);
-        rigidBody.AddForce(new Vector2(horizontal, vertical).normalized * currentSpeed * speedModifier * Time.fixedDeltaTime);
+        Debug.Log("Force Value: " + new Vector2(horizontal, vertical).normalized * currentSpeed * speedValueMultiplier * speedModifier * Time.fixedDeltaTime);
+        rigidBody.AddForce(new Vector2(horizontal, vertical).normalized * currentSpeed * speedValueMultiplier * speedModifier * Time.fixedDeltaTime);
     }
 
     public void ToggleCrouch()

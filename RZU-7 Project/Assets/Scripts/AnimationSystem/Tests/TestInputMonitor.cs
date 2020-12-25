@@ -1,14 +1,6 @@
 ﻿using UnityEngine;
 
-/// <summary>
-/// Monitors for user input and executes the corresponding logic of the current
-/// input context.
-/// </summary>
-/// <param name="currentContextEnum">The enum corresponding to the current input context</param>
-/// <param name="currentContextClass">The current input class used to interpret user input</param>
-/// <param name="menuContext">The input context to interpret user input as menu navigation</param>
-/// <param name="gameplayContext">The input context to interpret user input as gameplay inputs</param>
-public class InputMonitor : MonoBehaviour
+public class TestInputMonitor : MonoBehaviour
 {
     [SerializeField]
     InputConstants.InputContexts currentContextEnum;
@@ -17,9 +9,8 @@ public class InputMonitor : MonoBehaviour
     [SerializeField]
     MenuContext menuContext;
     [SerializeField]
-     GameplayContext gameplayContext;
+    TestGameplayContext gameplayContext;
 
-    // Check for all user inputs
     void Update()
     {
         currentContextClass.HorizontalButtonPress(Input.GetAxis(InputConstants.horizontal));
@@ -46,13 +37,9 @@ public class InputMonitor : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Sets the current input context for the game
-    /// </summary>
-    /// <param name="context">The context to set the input system to</param>
     public void SetInputContext(InputConstants.InputContexts context)
     {
-        switch(context)
+        switch (context)
         {
             case InputConstants.InputContexts.menu:
                 //Debug.Log("Selected \"" + InputConstants.menu + "\" context");
@@ -69,17 +56,11 @@ public class InputMonitor : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Sets the context to "Menu"
-    /// </summary>
     public void SetMenuContext()
     {
         currentContextClass = menuContext;
     }
 
-    /// <summary>
-    /// Sets the context to "Gameplay"
-    /// </summary>
     public void SetGameplayContext()
     {
         currentContextClass = gameplayContext;

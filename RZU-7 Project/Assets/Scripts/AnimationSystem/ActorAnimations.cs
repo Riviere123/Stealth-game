@@ -36,16 +36,13 @@ public class ActorAnimations : MonoBehaviour
     /// <param name="movementState">The actor's movement state</param>
     public void SetMovementValues(float x, float y, MovementConstants.ActorMovementStates movementState)
     {
-        if (animator.GetBool(AnimationConstants.isDead))
+        if (animator.GetBool(AnimationConstants.isDead) || animator.GetBool(AnimationConstants.isInteracting))
         {
             x = y = 0f;
         }
 
         animator.SetFloat(AnimationConstants.lastX, lastX);
         animator.SetFloat(AnimationConstants.lastY, lastY);
-
-        animator.SetFloat(AnimationConstants.movingX, x);
-        animator.SetFloat(AnimationConstants.movingY, y);
 
         // If there is movement in at least one axis...
         if ((Mathf.Abs(x) + Mathf.Abs(y)) > 0)
@@ -57,6 +54,90 @@ public class ActorAnimations : MonoBehaviour
         else
         {
             SetMovementBooleans(MovementConstants.ActorMovementStates.NONE);
+        }
+    }
+
+    /// <summary>
+    /// Sets the IsDead boolean in the animator
+    /// </summary>
+    /// <param name="val">The boolean value to set IsDead to</param>
+    public void SetIsDeadStatus(bool val)
+    {
+        SetActorStatus(AnimationConstants.isDead, val);
+    }
+
+    /// <summary>
+    /// Sets the IsDead boolean in the animator
+    /// </summary>
+    /// <remarks>
+    /// Sigh...This exists because AnimatorEvents do not support calling functions with bool parameters
+    /// </remarks>
+    /// <param name="val">The boolean value to set IsDead to</param>
+    public void SetIsDeadStatus(Constants.ActorBoolState val)
+    {
+        SetActorStatus(AnimationConstants.isDead, val);
+    }
+
+    /// <summary>
+    /// Sets the IsInteracting boolean in the animator
+    /// </summary>
+    /// <param name="val">The boolean value to set IsInteracting to</param>
+    public void SetIsInteractingStatus(bool val)
+    {
+        SetActorStatus(AnimationConstants.isInteracting, val);
+    }
+
+    /// <summary>
+    /// Sets the IsInteracting boolean in the animator
+    /// </summary>
+    /// <remarks>
+    /// Sigh...This exists because AnimatorEvents do not support calling functions with bool parameters
+    /// Also, there is some bug in Unity where the original overloaded name of this function caused the
+    /// animation event logic to fail because it tries to use the bool version of this funcion. Hence the
+    /// "Enum" at the end of the name.
+    /// </remarks>
+    /// <param name="val">The boolean value to set IsInteracting to</param>
+    public void SetIsInteractingStatusEnum(Constants.ActorBoolState val)
+    {
+        SetActorStatus(AnimationConstants.isInteracting, val);
+    }
+
+    /// <summary>
+    /// Sets a boolean type in the animator
+    /// </summary>
+    /// <param name="status">The name of the variable to set in the animator</param>
+    /// <param name="val">The value to set the boolean to</param>
+    void SetActorStatus(string status, bool val)
+    {
+        if (val)
+        {
+            SetMovementBooleans(MovementConstants.ActorMovementStates.NONE);
+        }
+
+        animator.SetBool(status, val);
+    }
+
+    /// <summary>
+    /// Sets a boolean type in the animator
+    /// </summary>
+    /// <param name="status">The name of the variable to set in the animator</param>
+    /// <param name="val">The value to set the boolean to</param>
+    /// /// <remarks>
+    /// Sigh...This exists because AnimatorEvents do not support calling functions with bool parameters
+    /// </remarks>
+    void SetActorStatus(string status, Constants.ActorBoolState val)
+    {
+        switch (val)
+        {
+            case Constants.ActorBoolState.TRUE:
+                SetMovementBooleans(MovementConstants.ActorMovementStates.NONE);
+                animator.SetBool(status, true);
+                break;
+            case Constants.ActorBoolState.FALSE:
+                animator.SetBool(status, false);
+                break;
+            default:
+                break;
         }
     }
 
@@ -110,19 +191,5 @@ public class ActorAnimations : MonoBehaviour
             default:
                 break;
         }
-    }
-
-    /// <summary>
-    /// Sets the IsDead boolean in the animator
-    /// </summary>
-    /// <param name="val">The boolean value to set IsDead to</param>
-    public void SetIsDeadStatus(bool val)
-    {
-        if (val)
-        {
-            SetMovementBooleans(MovementConstants.ActorMovementStates.NONE);
-        }
-
-        animator.SetBool(AnimationConstants.isDead, val);
     }
 }

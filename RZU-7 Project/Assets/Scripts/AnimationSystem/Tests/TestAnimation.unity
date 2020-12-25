@@ -151,7 +151,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 479006025}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df2a5da4b5f9542c4ae54fd8185723d0, type: 3}
+  m_Script: {fileID: 11500000, guid: 06ab192c8db104d508c1e6985f8cceb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   actorMovement: {fileID: 2059298765}
@@ -177,7 +177,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 479006025}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67aca6af02b43554997aa20122aad789, type: 3}
+  m_Script: {fileID: 11500000, guid: 5538f558414064fa3870d8e9590c79bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   currentContextEnum: 1
@@ -439,7 +439,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 2.5
+  orthographic size: 2
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -645,6 +645,7 @@ MonoBehaviour:
   currentMoveState: 0
   maxModifier: 1.4
   minModifier: 0.5
+  cantMove: 0
 --- !u!50 &2059298766
 Rigidbody2D:
   serializedVersion: 4

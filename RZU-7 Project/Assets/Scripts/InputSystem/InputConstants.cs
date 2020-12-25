@@ -1,4 +1,7 @@
-﻿public class InputConstants
+﻿/// <summary>
+/// Collects all constants related to the input system
+/// </summary>
+public class InputConstants
 {
     // Input System
     [System.Serializable]

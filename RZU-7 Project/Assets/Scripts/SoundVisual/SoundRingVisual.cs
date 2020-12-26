@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using UnityEngine;
 
+/// <summary>
+/// Attach this to any gameobject that makes sounds the player or AI should know about.
+/// </summary>
 public class SoundRingVisual : MonoBehaviour
 {
     [SerializeField]

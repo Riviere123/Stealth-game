@@ -15,15 +15,39 @@ public class SoundRingVisual : MonoBehaviour
     Color color;
 
     [SerializeField]
-    bool testBool = false;
+    bool trigger = false;
+
     private void Update()
     {
-        if(testBool == true)
+        if(trigger == true)
         {
             CreateSound(transform.position, maxSize, duration, color);
-            testBool = false;
+            trigger = false;
         }
     }
+
+    /// <summary>
+    /// This spawns the sound ring with the provided details of this class. Add parameters to overide the classes details.
+    /// </summary>
+    public void CreateSound()
+    {
+        GameObject soundRing = Instantiate(soundRingPrefab);
+        SpriteRenderer SR = soundRing.GetComponent<SpriteRenderer>();
+
+        soundRing.transform.localScale = new Vector2(0, 0);
+        soundRing.transform.position = transform.position;
+        SR.color = color;
+
+        StartCoroutine(GrowRing(soundRing, duration, maxSize));
+    }
+
+    /// <summary>
+    /// This spawns a sound ring with the provided details you specify.
+    /// </summary>
+    /// <param name="position">The position to spawn this ring.</param>
+    /// <param name="maxSize">The maximum size the ring will get.</param>
+    /// <param name="duration">The time it takes the ring to reach maximum size.</param>
+    /// <param name="color">The color of the ring.</param>
     public void CreateSound(Vector2 position, float maxSize, float duration, Color color)
     {
         GameObject soundRing = Instantiate(soundRingPrefab);
@@ -34,6 +58,15 @@ public class SoundRingVisual : MonoBehaviour
 
         StartCoroutine(GrowRing(soundRing, duration, maxSize));
     }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="ring">The ring gameobject that we want to grow.</param>
+    /// <param name="duration">The time before it reaches max size.</param>
+    /// <param name="maxSize">The max size the ring will get.</param>
+    /// <returns></returns>
+    
     IEnumerator GrowRing(GameObject ring, float duration, float maxSize)
     {
         float increment = .01f;

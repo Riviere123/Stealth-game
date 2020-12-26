@@ -1,7 +1,9 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Attach this to any object that will create lighting that the AI or player should be aware of.
+/// </summary>
 public class FakeLighting : MonoBehaviour
 {
     [SerializeField]
@@ -46,6 +48,10 @@ public class FakeLighting : MonoBehaviour
         StartCoroutine(ScaleLight());
     }
 
+    /// <summary>
+    /// Flickers the ;ight based on the classes variables.
+    /// </summary>
+    /// <returns>Wait for flickertime</returns>
     IEnumerator Flicker()
     {
         float flickerAmmount = Random.Range(-flickerAlphaDifference, flickerAlphaDifference) + startAlpha;
@@ -60,7 +66,10 @@ public class FakeLighting : MonoBehaviour
             StartCoroutine(ScaleLight());
         }
     }
-
+    /// <summary>
+    /// Scales the light based on the classes variables.
+    /// </summary>
+    /// <returns>Wait for scaletime unless Synced</returns>
     IEnumerator ScaleLight()
     {
         float x = Random.Range(-scaleSizeDifference, scaleSizeDifference) + startScale.x;
@@ -88,6 +97,23 @@ public class FakeLighting : MonoBehaviour
             float scaleTime = Random.Range(-sizeScaleSpeedVariation, sizeScaleSpeedVariation) + scaleSizeSpeed;
             yield return new WaitForSeconds(scaleTime);
             StartCoroutine(ScaleLight());
+        }
+    }
+
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.GetComponent<FakeLightingDetection>())
+        {
+            collision.GetComponent<FakeLightingDetection>().visible = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.GetComponent<FakeLightingDetection>())
+        {
+            collision.GetComponent<FakeLightingDetection>().visible = false;
         }
     }
 }

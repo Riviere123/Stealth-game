@@ -1,6 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
+
+/// <summary>
+/// Controls the EnemyVisual Cone. 
+/// Attach this to an enemy AI and you will have full power over their individual visual field.
+/// </summary>
 public class EnemyVisualCone : MonoBehaviour
 {
     [SerializeField]
@@ -13,8 +18,8 @@ public class EnemyVisualCone : MonoBehaviour
     float timeToTrigger = .5f; //sets how long you must be in the cone before it triggers
 
     float endTime; //the time till trigger
-    bool countDown = false; //check if we are already counting down
-    bool aqcuireTarget = false; //if this is true and the player is in sight we will set target to the player
+    bool countDown; //check if we are already counting down
+    bool aqcuireTarget; //if this is true and the player is in sight we will set target to the player
 
     [SerializeField]
     Material material = null; //material the mesh uses
@@ -169,11 +174,22 @@ public class EnemyVisualCone : MonoBehaviour
         mesh.RecalculateBounds();
     }
     
+
+    /// <summary>
+    /// Turns radian angles to a Vector2 direction
+    /// </summary>
+    /// <param name="radian">The radian angle to change.</param>
+    /// <returns>Vector2 Direction</returns>
     Vector2 RadianToVector2(float radian)
     {
         return new Vector2(Mathf.Cos(radian), Mathf.Sin(radian));
     }
 
+    /// <summary>
+    /// Turns degree angles to a Vector2 direction
+    /// </summary>
+    /// <param name="degree">The degree angle to change.</param>
+    /// <returns>Vector2 Direction</returns>
     Vector2 DegreeToVector2(float degree)
     {
         return RadianToVector2(degree * Mathf.Deg2Rad);
@@ -190,6 +206,12 @@ public class EnemyVisualCone : MonoBehaviour
             Gizmos.DrawRay(transform.position, lDirection * range);
         }
     }
+
+    /// <summary>
+    /// Gets the correct layer mask Int 
+    /// </summary>
+    /// <param name="layerMask">The layermask you want to get the int for.</param>
+    /// <returns>Integer of layermask</returns>
     int layermask_to_layer(LayerMask layerMask)
     {
         int layerNumber = 0;
@@ -202,6 +224,11 @@ public class EnemyVisualCone : MonoBehaviour
         return layerNumber - 1;
     }
 
+    /// <summary>
+    /// Sets the mesh positions to create the mesh.
+    /// </summary>
+    /// <param name="i">The place in the arrays</param>
+    /// <param name="position">The Vector3 position to set the active point</param>
     void SetMeshStats(int i, Vector3 position)
     {
         vertices[i] = position + new Vector3(0,0,2);
@@ -218,6 +245,12 @@ public class EnemyVisualCone : MonoBehaviour
         }
     } 
 
+    /// <summary>
+    /// checks if the target is in visibility. This checks partial cover.
+    /// </summary>
+    /// <param name="position">The position from where we are checking.</param>
+    /// <param name="targetposition">The target position to check.</param>
+    /// <returns></returns>
     bool CheckPlayerVisibility(Vector3 position, Vector3 targetposition)
     {
         RaycastHit2D hit = Physics2D.Raycast(position, targetposition - position, Vector2.Distance(position,targetposition),rayCastObjects);
@@ -234,7 +267,6 @@ public class EnemyVisualCone : MonoBehaviour
             }
         }
         
-
         return false;      
     }
 }

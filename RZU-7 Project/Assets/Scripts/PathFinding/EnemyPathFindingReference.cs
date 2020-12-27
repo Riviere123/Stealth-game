@@ -1,6 +1,10 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
+
+/// <summary>
+/// This is a reference for how to use the pathfinding in your AI.
+/// </summary>
 public class EnemyPathFindingReference : MonoBehaviour
 {
     [SerializeField]

@@ -32,7 +32,7 @@ public class FakeLighting : MonoBehaviour
     float sizeScaleSpeedVariation;
 
     [SerializeField]
-    bool independantXYGrow;
+    bool independentXYGrow;
     [SerializeField]
     bool sync;
 
@@ -49,14 +49,15 @@ public class FakeLighting : MonoBehaviour
     }
 
     /// <summary>
-    /// Flickers the ;ight based on the classes variables.
+    /// Flickers the light based on the classes variables.
     /// </summary>
     /// <returns>Wait for flickertime</returns>
     IEnumerator Flicker()
-    {
-        float flickerAmmount = Random.Range(-flickerAlphaDifference, flickerAlphaDifference) + startAlpha;
-        sr.color = new Color(sr.color[0], sr.color[1], sr.color[2], flickerAmmount);
+    {  
+        float flickerAmount = Mathf.Clamp(Random.Range(-flickerAlphaDifference, flickerAlphaDifference) + startAlpha, 0, 1);
+        sr.color = new Color(sr.color[0], sr.color[1], sr.color[2], flickerAmount);
 
+        Mathf.Clamp(Random.Range(-flickerSpeedVariation, flickerSpeedVariation) + flickerSpeed,0,5);
         float flickerTime = Random.Range(-flickerSpeedVariation, flickerSpeedVariation) + flickerSpeed;
         yield return new WaitForSeconds(flickerTime);
         StartCoroutine(Flicker());
@@ -72,10 +73,10 @@ public class FakeLighting : MonoBehaviour
     /// <returns>Wait for scaletime unless Synced</returns>
     IEnumerator ScaleLight()
     {
-        float x = Random.Range(-scaleSizeDifference, scaleSizeDifference) + startScale.x;
-        float y = Random.Range(-scaleSizeDifference, scaleSizeDifference) + startScale.y;
+        float x = Mathf.Clamp(Random.Range(-scaleSizeDifference, scaleSizeDifference) + startScale.x, .1f, Mathf.Infinity);
+        float y = Mathf.Clamp(Random.Range(-scaleSizeDifference, scaleSizeDifference) + startScale.y, .1f, Mathf.Infinity);
 
-        if(x > y)
+        if (x > y)
         {
             cc2d.direction = CapsuleDirection2D.Horizontal;
         }
@@ -83,7 +84,8 @@ public class FakeLighting : MonoBehaviour
         {
             cc2d.direction = CapsuleDirection2D.Vertical;
         }
-        if (independantXYGrow)
+        
+        if (independentXYGrow)
         {
             transform.localScale = new Vector2(x, y);
         }
@@ -94,21 +96,28 @@ public class FakeLighting : MonoBehaviour
  
         if (!sync)
         {
-            float scaleTime = Random.Range(-sizeScaleSpeedVariation, sizeScaleSpeedVariation) + scaleSizeSpeed;
+            float scaleTime = Mathf.Clamp(Random.Range(-sizeScaleSpeedVariation, sizeScaleSpeedVariation) + scaleSizeSpeed, .01f, Mathf.Infinity);
             yield return new WaitForSeconds(scaleTime);
             StartCoroutine(ScaleLight());
         }
     }
 
-
-    private void OnTriggerEnter2D(Collider2D collision)
+    /// <summary>
+    /// if the collision object is in the trigger collider and if the colliding object has the fakelighting detection script, set it to visible.
+    /// </summary>
+    /// <param name="collision">The colliding object</param>
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.GetComponent<FakeLightingDetection>())
         {
             collision.GetComponent<FakeLightingDetection>().visible = true;
         }
     }
-
+    
+    /// <summary>
+    /// On collision exit, if the colliding object has the fakelighting detection script, set visible to false.
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.GetComponent<FakeLightingDetection>())

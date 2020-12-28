@@ -8,39 +8,40 @@ public class FakeLighting : MonoBehaviour
 {
     [SerializeField]
     [Range(0,1)]
-    float startAlpha;
+    float startAlpha; //The alpha can be changed in the inspector after run time. But this will be set to the sprites alpha value at Start.
     [SerializeField]
     [Range(0, 1)]
-    float flickerAlphaDifference;
+    float flickerAlphaDifference; //The range of difference the alpha will flicker to.
     [SerializeField]
     [Range(0, 1)]
-    float flickerSpeed;
+    float flickerSpeed; //The frequency the alpha flickers.
     [SerializeField]
     [Range(0, 1)]
-    float flickerSpeedVariation;
+    float flickerSpeedVariation; //The range of variation on the flicker speed.
 
     [SerializeField]
-    Vector2 startScale;
+    Vector2 startScale; //The starting scale of the object. This can be changed after runtime in the inspector but is set at start to equal the localscale of the object.
     [SerializeField]
     [Range(0, 1)]
-    float scaleSizeDifference;
+    float scaleSizeDifference; //The possible variance in scale when changed from the startScale.
     [SerializeField]
     [Range(0, 1)]
-    float scaleSizeSpeed;
+    float scaleSizeSpeed; //The time between changing sizes.
     [SerializeField]
     [Range(0, 1)]
-    float sizeScaleSpeedVariation;
+    float sizeScaleSpeedVariation; //The variance ontop of scaleSizeSpeed to change between changing size.
 
     [SerializeField]
-    bool independentXYGrow;
+    bool independentXYGrow; //Allows the gameobject's X and Y to scale independantly creating oblong lighting.
     [SerializeField]
-    bool sync;
+    bool sync; //Syncs the growing and flickering effect.
 
     SpriteRenderer sr;
     CapsuleCollider2D cc2d;
 
     private void Start()
     {
+        startScale = transform.localScale;
         sr = GetComponent<SpriteRenderer>();
         cc2d = GetComponent<CapsuleCollider2D>();
 

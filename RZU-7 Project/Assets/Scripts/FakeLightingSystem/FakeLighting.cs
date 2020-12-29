@@ -39,6 +39,9 @@ public class FakeLighting : MonoBehaviour
     [SerializeField]
     bool sync; //Syncs the growing and flickering effect. THIS OPTION CAN NOT BE EDITED AFTER RUN TIME OR IT WILL NO LONGER GROW THE LIGHT.
 
+    [SerializeField]
+    StatusEffects illuminate;
+
     SpriteRenderer sr;
     CapsuleCollider2D cc2d;
 
@@ -123,9 +126,13 @@ public class FakeLighting : MonoBehaviour
     /// <param name="collision">The colliding object</param>
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.GetComponent<FakeLightingDetection>())
+        if (collision.GetComponent<Status>())
         {
-            collision.GetComponent<FakeLightingDetection>().visible = true;
+            if (!collision.GetComponent<Status>().statusEffects.Contains(illuminate))
+            {
+                collision.GetComponent<Status>().statusEffects.Add(illuminate);
+            }
+            
         }
     }
     
@@ -135,9 +142,12 @@ public class FakeLighting : MonoBehaviour
     /// <param name="collision"></param>
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.GetComponent<FakeLightingDetection>())
+        if (collision.GetComponent<Status>())
         {
-            collision.GetComponent<FakeLightingDetection>().visible = false;
+            if (collision.GetComponent<Status>().statusEffects.Contains(illuminate))
+            {
+                collision.GetComponent<Status>().statusEffects.Remove(illuminate);
+            }  
         }
     }
 }

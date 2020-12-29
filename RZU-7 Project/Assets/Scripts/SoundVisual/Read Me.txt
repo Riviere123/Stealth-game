@@ -17,3 +17,7 @@ TestBool: when the game is running clicking the checkbox will spawn a ringwith t
 You can call the function and set all the parameters in the function from another script.
 
 CreateSound(Vector2 position, float maxSize, float duration, Color color)
+
+
+
+USE: This creates a gameobject based on the soundring prefab... this prefab has the tag sound and has a trigger circle collider you can use for the trigger.

@@ -7,15 +7,15 @@ using UnityEngine;
 public class SoundRingVisual : MonoBehaviour
 {
     [SerializeField]
-    GameObject soundRingPrefab;
+    GameObject soundRingPrefab; //The prefab of the soundring we are instantiating.
     [Range(.1f,10)]
     [SerializeField]
-    float maxSize = 3;
+    float maxSize = 3; //the max size of the sound ring.
     [Range(.01f,3)]
     [SerializeField]
-    float duration = 5;
+    float duration = 5; //the time it takes the soundring to reach max size.
     [SerializeField]
-    Color color;
+    Color color; //the color we will set the sound ring to.
 
     [SerializeField]
     bool trigger = false;

@@ -386,6 +386,7 @@ MonoBehaviour:
   sizeScaleSpeedVariation: 0.05
   independentXYGrow: 0
   sync: 0
+  illuminate: {fileID: 11400000, guid: a12fc2bc95868d24d88c8dee933bc0c3, type: 2}
 --- !u!70 &1129010902
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -431,10 +432,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1166102608}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 905047c110dedc142976120e88c4e3a8, type: 3}
+  m_Script: {fileID: 11500000, guid: 801d581c954a2084397b622a29ba0c10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  visible: 0
+  statusEffects: []
 --- !u!58 &1166102610
 CircleCollider2D:
   m_ObjectHideFlags: 0

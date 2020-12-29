@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f0c168b7835e394b843052e40a9db99, type: 3}
   m_Name: Illuminated
   m_EditorClassIdentifier: 
+  Name: Illuminated

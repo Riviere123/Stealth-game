@@ -18,9 +18,12 @@ public class FakeLighting : MonoBehaviour
     [SerializeField]
     [Range(0, 1)]
     float flickerSpeedVariation; //The range of variation on the flicker speed.
-
     [SerializeField]
-    Vector2 startScale; //The starting scale of the object. This can be changed after runtime in the inspector but is set at start to equal the localscale of the object.
+    [Range(1, 25)]
+    float flickerAlphaSpeed; //The speed in which the alpha changes to the new value. 
+    [SerializeField]
+    [Range(1, 25)]
+    float timeToGrow; //The time it takes the gameobject to get to the target size.
     [SerializeField]
     [Range(0, 1)]
     float scaleSizeDifference; //The possible variance in scale when changed from the startScale.
@@ -34,10 +37,14 @@ public class FakeLighting : MonoBehaviour
     [SerializeField]
     bool independentXYGrow; //Allows the gameobject's X and Y to scale independantly creating oblong lighting.
     [SerializeField]
-    bool sync; //Syncs the growing and flickering effect.
+    bool sync; //Syncs the growing and flickering effect. THIS OPTION CAN NOT BE EDITED AFTER RUN TIME OR IT WILL NO LONGER GROW THE LIGHT.
 
     SpriteRenderer sr;
     CapsuleCollider2D cc2d;
+
+    Vector2 startScale; //The starting scale of the object. This can be changed after runtime in the inspector but is set at start to equal the localscale of the object.
+    Vector3 targetScale; //this is the size we want the object to grow or shrink to.
+    float targetAlpha; //this is the alpha we want to get to.
 
     private void Start()
     {
@@ -49,14 +56,21 @@ public class FakeLighting : MonoBehaviour
         StartCoroutine(ScaleLight());
     }
 
+
+    private void Update()
+    {
+        transform.localScale = Vector3.Lerp(transform.localScale, targetScale, Time.deltaTime * timeToGrow);
+        sr.color = new Color(sr.color[0], sr.color[1], sr.color[2], Mathf.Lerp(sr.color[3], targetAlpha, Time.deltaTime * flickerAlphaSpeed)); 
+    }
+
     /// <summary>
     /// Flickers the light based on the classes variables.
     /// </summary>
     /// <returns>Wait for flickertime</returns>
     IEnumerator Flicker()
     {  
-        float flickerAmount = Mathf.Clamp(Random.Range(-flickerAlphaDifference, flickerAlphaDifference) + startAlpha, 0, 1);
-        sr.color = new Color(sr.color[0], sr.color[1], sr.color[2], flickerAmount);
+        targetAlpha = Mathf.Clamp(Random.Range(-flickerAlphaDifference, flickerAlphaDifference) + startAlpha, 0, 1);
+        
 
         Mathf.Clamp(Random.Range(-flickerSpeedVariation, flickerSpeedVariation) + flickerSpeed,0,5);
         float flickerTime = Random.Range(-flickerSpeedVariation, flickerSpeedVariation) + flickerSpeed;
@@ -88,11 +102,11 @@ public class FakeLighting : MonoBehaviour
         
         if (independentXYGrow)
         {
-            transform.localScale = new Vector2(x, y);
+            targetScale = new Vector2(x, y);
         }
         else
         {
-            transform.localScale = new Vector2(x,x);
+            targetScale = new Vector2(x,x);
         }
  
         if (!sync)

@@ -1,10 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// The base component for any pathfinding script. They will use this grid of nodes to calculate a path.
-/// You want to put this on it's own empty game object.
-/// </summary>
 public class Grid : MonoBehaviour
 {
     [SerializeField]
@@ -36,9 +32,6 @@ public class Grid : MonoBehaviour
         CreateGrid();
     }
 
-    /// <summary>
-    /// creates the grid based on the classes defined variables.
-    /// </summary>
     void CreateGrid()
     {
         grid = new Node[gridSizeX, gridSizeY];
@@ -65,11 +58,6 @@ public class Grid : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Find the closest node from the provided vector2 position
-    /// </summary>
-    /// <param name="a_worldPosition">The vector2 position in the world.</param>
-    /// <returns>The closest Node class to the position.</returns>
     public Node NodeFromWorldPosition(Vector2 a_worldPosition) 
     {
         Vector2 bottomLeft = (startPosition - (Vector2.right * ((gridWorldSize.x / 2))) - (Vector2.up * ((gridWorldSize.y / 2))) + new Vector2(nodeRadius, nodeRadius));
@@ -82,11 +70,6 @@ public class Grid : MonoBehaviour
         
     }
 
-    /// <summary>
-    /// This populates all node classes neighbors list with there neighboring nodes for pathfinding.
-    /// </summary>
-    /// <param name="a_Node">The node to get all neighboring nodes for.</param>
-    /// <returns>List of neighboring nodes.</returns>
     public List<Node> GetNeighboringNodes(Node a_Node) //gets all the neighboring nodes
     {
         
@@ -159,12 +142,6 @@ public class Grid : MonoBehaviour
         return neighboringNodes;
     }
 
-    /// <summary>
-    /// Checks if the int x and int y are in bounds of the grid map
-    /// </summary>
-    /// <param name="x">Position X</param>
-    /// <param name="y">Position Y</param>
-    /// <returns>True or false</returns>
     bool XandYChecker(int x, int y)
     {
         if (x >= 0 && x < gridSizeX)

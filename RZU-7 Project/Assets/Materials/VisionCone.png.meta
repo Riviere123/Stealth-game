@@ -1,16 +1,12 @@
 fileFormatVersion: 2
-<<<<<<< HEAD:RZU-7 Project/Assets/test.png.meta
-guid: 6acfa794e52d5724ea3d94373bca20fe
-=======
 guid: bb94e92562c3afc40956525cb646d124
->>>>>>> main:RZU-7 Project/Assets/Materials/VisionCone.png.meta
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 0
+    enableMipMap: 1
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -54,7 +50,7 @@ TextureImporter:
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
-  alphaIsTransparency: 1
+  alphaIsTransparency: 0
   spriteTessellationDetail: -1
   textureType: 0
   textureShape: 1
@@ -70,8 +66,6 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-<<<<<<< HEAD:RZU-7 Project/Assets/test.png.meta
-=======
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
@@ -108,7 +102,6 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
->>>>>>> main:RZU-7 Project/Assets/Materials/VisionCone.png.meta
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0

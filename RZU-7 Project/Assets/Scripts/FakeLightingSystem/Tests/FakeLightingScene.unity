@@ -207,6 +207,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 --- !u!1 &46732628
 GameObject:
 <<<<<<< HEAD
@@ -321,6 +322,8 @@ Transform:
 >>>>>>> parent of 631922b... Redid status effects and updated docstrings
 =======
 >>>>>>> parent of 1eafb19... Revert "Redid status effects and updated docstrings"
+=======
+>>>>>>> parent of 631922b... Redid status effects and updated docstrings
 --- !u!1001 &786562134
 PrefabInstance:
 >>>>>>> parent of ab881dc... Revert "Redid status effects and updated docstrings"
@@ -533,7 +536,7 @@ MonoBehaviour:
   sizeScaleSpeedVariation: 0.05
   independentXYGrow: 0
   sync: 0
-  illuminate: {fileID: 0}
+  illuminate: {fileID: 11400000, guid: a12fc2bc95868d24d88c8dee933bc0c3, type: 2}
 --- !u!70 &1129010902
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -687,6 +690,7 @@ Rigidbody2D:
   m_Constraints: 0
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> parent of 1eafb19... Revert "Redid status effects and updated docstrings"
 --- !u!1 &1276049764
@@ -827,6 +831,8 @@ SpriteRenderer:
 >>>>>>> parent of 631922b... Redid status effects and updated docstrings
 =======
 >>>>>>> parent of 1eafb19... Revert "Redid status effects and updated docstrings"
+=======
+>>>>>>> parent of 631922b... Redid status effects and updated docstrings
 --- !u!1 &1282688715
 GameObject:
   m_ObjectHideFlags: 0
@@ -932,6 +938,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> parent of 1eafb19... Revert "Redid status effects and updated docstrings"
 --- !u!1 &1844372886
@@ -1029,6 +1036,8 @@ SpriteRenderer:
 >>>>>>> parent of 631922b... Redid status effects and updated docstrings
 =======
 >>>>>>> parent of 1eafb19... Revert "Redid status effects and updated docstrings"
+=======
+>>>>>>> parent of 631922b... Redid status effects and updated docstrings
 --- !u!1 &1879299531
 GameObject:
   m_ObjectHideFlags: 0

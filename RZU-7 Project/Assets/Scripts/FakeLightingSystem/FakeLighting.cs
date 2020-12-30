@@ -4,63 +4,50 @@ using UnityEngine;
 /// <summary>
 /// Attach this to any object that will create lighting that the AI or player should be aware of.
 /// </summary>
-/// <param name="startAlpha">The alpha can be changed in the inspector after run time. But this will be set to the sprites alpha value at Start.</param>
-/// <param name="flickerAlphaDifference">The range of difference the alpha will flicker to.</param>
-/// <param name="flickerSpeed">The frequency the alpha flickers.</param>
-/// <param name="flickerSpeedVariation">The range of variation on the flicker speed.</param>
-/// <param name="flickerAlphaSpeed">The speed in which the alpha changes to the new value.</param>
-/// <param name="timeToGrow">The time it takes the gameobject to get to the target size.</param>
-/// <param name="scaleSizeDifference">The possible variance in scale when changed from the startScale.</param>
-/// <param name="scaleSizeSpeed">The time between changing sizes.</param>
-/// <param name="sizeScaleSpeedVariation">The variance ontop of scaleSizeSpeed to change between changing size.</param>
-/// <param name="independentXYGrow">Allows the gameobject's X and Y to scale independantly creating oblong lighting.</param>
-/// <param name="sync">Syncs the growing and flickering effect. THIS OPTION CAN NOT BE EDITED AFTER RUN TIME OR IT WILL NO LONGER GROW THE LIGHT.</param>
-/// <param name="sr">Sprite renderer reference</param>
-/// <param name="cc2d">Collider 2D reference</param>
-/// <param name="startScale">The starting scale of the object. This can be changed after runtime in the inspector but is set at start to equal the localscale of the object.</param>
-/// <param name="targetScale">this is the size we want the object to grow or shrink to.</param>
-/// <param name="targetAlpha">this is the alpha we want to get to.</param>
 public class FakeLighting : MonoBehaviour
 {
     [SerializeField]
     [Range(0,1)]
-    float startAlpha; 
+    float startAlpha; //The alpha can be changed in the inspector after run time. But this will be set to the sprites alpha value at Start.
     [SerializeField]
     [Range(0, 1)]
-    float flickerAlphaDifference;
+    float flickerAlphaDifference; //The range of difference the alpha will flicker to.
     [SerializeField]
     [Range(0, 1)]
-    float flickerSpeed;
+    float flickerSpeed; //The frequency the alpha flickers.
     [SerializeField]
     [Range(0, 1)]
-    float flickerSpeedVariation;
+    float flickerSpeedVariation; //The range of variation on the flicker speed.
     [SerializeField]
     [Range(1, 25)]
-    float flickerAlphaSpeed;
+    float flickerAlphaSpeed; //The speed in which the alpha changes to the new value. 
     [SerializeField]
     [Range(1, 25)]
-    float timeToGrow;
+    float timeToGrow; //The time it takes the gameobject to get to the target size.
     [SerializeField]
     [Range(0, 1)]
-    float scaleSizeDifference;
+    float scaleSizeDifference; //The possible variance in scale when changed from the startScale.
     [SerializeField]
     [Range(0, 1)]
-    float scaleSizeSpeed;
+    float scaleSizeSpeed; //The time between changing sizes.
     [SerializeField]
     [Range(0, 1)]
-    float sizeScaleSpeedVariation;
+    float sizeScaleSpeedVariation; //The variance ontop of scaleSizeSpeed to change between changing size.
 
     [SerializeField]
-    bool independentXYGrow;
+    bool independentXYGrow; //Allows the gameobject's X and Y to scale independantly creating oblong lighting.
     [SerializeField]
-    bool sync;
+    bool sync; //Syncs the growing and flickering effect. THIS OPTION CAN NOT BE EDITED AFTER RUN TIME OR IT WILL NO LONGER GROW THE LIGHT.
+
+    [SerializeField]
+    StatusEffects illuminate;
 
     SpriteRenderer sr;
     CapsuleCollider2D cc2d;
 
-    Vector2 startScale;
-    Vector3 targetScale;
-    float targetAlpha;
+    Vector2 startScale; //The starting scale of the object. This can be changed after runtime in the inspector but is set at start to equal the localscale of the object.
+    Vector3 targetScale; //this is the size we want the object to grow or shrink to.
+    float targetAlpha; //this is the alpha we want to get to.
 
     private void Start()
     {
@@ -141,14 +128,14 @@ public class FakeLighting : MonoBehaviour
     {
         if (collision.GetComponent<Status>())
         {
-            if (!collision.GetComponent<Status>().statusEffects.Contains(new Illuminated("Illuminated")))
+            if (!collision.GetComponent<Status>().statusEffects.Contains(illuminate))
             {
-                Illuminated illuminated = new Illuminated("Illuminated");
-                collision.GetComponent<Status>().statusEffects.Add(illuminated);
-            }               
+                collision.GetComponent<Status>().statusEffects.Add(illuminate);
+            }
+            
         }
     }
-
+    
     /// <summary>
     /// On collision exit, if the colliding object has the fakelighting detection script, set visible to false.
     /// </summary>
@@ -157,10 +144,10 @@ public class FakeLighting : MonoBehaviour
     {
         if (collision.GetComponent<Status>())
         {
-            if (collision.GetComponent<Status>().statusEffects.Contains(new Illuminated("Illuminated")))
+            if (collision.GetComponent<Status>().statusEffects.Contains(illuminate))
             {
-                collision.GetComponent<Status>().statusEffects.Remove(new Illuminated("Illuminated"));
-            }
+                collision.GetComponent<Status>().statusEffects.Remove(illuminate);
+            }  
         }
     }
 }

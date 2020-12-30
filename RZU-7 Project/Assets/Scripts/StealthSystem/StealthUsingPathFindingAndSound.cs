@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/// <summary>
+/// This is a simple reference script for AI functionality.
+/// </summary>
 public class StealthUsingPathFindingAndSound : MonoBehaviour
 {
     [SerializeField]

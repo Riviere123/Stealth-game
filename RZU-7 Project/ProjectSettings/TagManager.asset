@@ -6,7 +6,6 @@ TagManager:
   tags:
   - Enemy
   - System
-  - PathFindingGrid
   layers:
   - Default
   - TransparentFX
@@ -49,9 +48,6 @@ TagManager:
     locked: 0
   - name: Characters
     uniqueID: 2313595795
-    locked: 0
-  - name: Player
-    uniqueID: 1979202481
     locked: 0
   - name: Middle
     uniqueID: 296011337

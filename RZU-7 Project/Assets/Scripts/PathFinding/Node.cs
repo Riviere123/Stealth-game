@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Nodes hold all the relevant information they need for finding and calculating paths.
+/// </summary>
 [System.Serializable]
 public class Node 
 {

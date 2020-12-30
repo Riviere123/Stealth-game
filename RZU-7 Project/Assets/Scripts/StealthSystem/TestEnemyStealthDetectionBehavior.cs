@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 
-
+/// <summary>
+/// This is a reference script for enemy functionality.
+/// </summary>
 public class TestEnemyStealthDetectionBehavior : MonoBehaviour
-{
-    
+{ 
     bool spotted;
     [SerializeField]
     float rotationSpeed = 15;
@@ -40,6 +41,4 @@ public class TestEnemyStealthDetectionBehavior : MonoBehaviour
              transform.Rotate(0, 0, Time.deltaTime * rotationSpeed);
         }
     }
-
-
 }

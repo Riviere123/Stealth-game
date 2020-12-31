@@ -9,7 +9,7 @@ using UnityEngine;
 /// <param name="itemCollider">The item's 2D interaction trigger collider</param>
 /// <param name="sprites">The sprites that denote the interaction taking place</param>
 /// <param name="timeDelta">The amount of time to wait before rendering the next sprite</param>
-/// <param name="triggerSequence">Denotes whether or not to trigger the sequence</param>
+/// <param name="triggeredSequence">Denotes whether or not the sequence has been triggered</param>
 /// <param name="isOn">Denotes whether or not the item is in the "On" state</param>
 public class InteractableItem : MonoBehaviour
 {
@@ -22,7 +22,7 @@ public class InteractableItem : MonoBehaviour
     [SerializeField]
     List<Sprite> sprites;
     [SerializeField]
-    float timeDelta = InteractionConstants.defaultTimeDelta;
+    float timeDelta = InteractionConstants.defaultSpriteRenderingTimeDelta;
     bool triggeredSequence;
     bool isOn;
 

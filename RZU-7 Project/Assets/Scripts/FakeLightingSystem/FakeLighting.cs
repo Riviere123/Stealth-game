@@ -24,31 +24,31 @@ public class FakeLighting : MonoBehaviour
 {
     [SerializeField]
     [Range(0,1)]
-    float startAlpha; 
+    float startAlpha = 0; 
     [SerializeField]
     [Range(0, 1)]
-    float flickerAlphaDifference;
+    float flickerAlphaDifference = 0;
     [SerializeField]
     [Range(0, 1)]
-    float flickerSpeed;
+    float flickerSpeed = 0;
     [SerializeField]
     [Range(0, 1)]
-    float flickerSpeedVariation;
+    float flickerSpeedVariation = 0;
     [SerializeField]
     [Range(1, 25)]
-    float flickerAlphaSpeed;
+    float flickerAlphaSpeed = 0;
     [SerializeField]
     [Range(1, 25)]
-    float timeToGrow;
+    float timeToGrow = 0;
     [SerializeField]
     [Range(0, 1)]
-    float scaleSizeDifference;
+    float scaleSizeDifference = 0;
     [SerializeField]
     [Range(0, 1)]
-    float scaleSizeSpeed;
+    float scaleSizeSpeed = 0;
     [SerializeField]
     [Range(0, 1)]
-    float sizeScaleSpeedVariation;
+    float sizeScaleSpeedVariation = 0;
 
     [SerializeField]
     bool independentXYGrow;

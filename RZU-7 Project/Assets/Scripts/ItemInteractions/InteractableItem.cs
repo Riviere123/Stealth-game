@@ -23,7 +23,7 @@ public class InteractableItem : MonoBehaviour
     List<Sprite> sprites;
     [SerializeField]
     float timeDelta = InteractionConstants.defaultTimeDelta;
-    bool triggerSequence;
+    bool triggeredSequence;
     bool isOn;
 
     // Start is called before the first frame update
@@ -40,14 +40,6 @@ public class InteractableItem : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        if (triggerSequence)
-        {
-            StartCoroutine(RunSpriteSequence());
-        }
-    }
-
     /// <summary>
     /// sets the SpriteRenderer sprite to each sprite in the list on a timer interval.
     /// </summary>
@@ -59,12 +51,12 @@ public class InteractableItem : MonoBehaviour
         foreach (Sprite sprite in sprites)
         {
             spriteRenderer.sprite = sprite;
-            triggerSequence = false;
 
             yield return new WaitForSeconds(timeDelta);
         }
 
         sprites.Reverse();
+        triggeredSequence = false;
 
         yield return null;
     }
@@ -75,8 +67,12 @@ public class InteractableItem : MonoBehaviour
     /// <param name="collision">The player's interaction collider</param>
     void OnTriggerEnter2D(Collider2D collision)
     {
-        triggerSequence = collision.gameObject.CompareTag(InteractionConstants.interactTag);
-        isOn = !isOn;
-        interaction.OnInteract(isOn);
+        if (!triggeredSequence && collision.gameObject.CompareTag(InteractionConstants.interactTag))
+        {
+            StartCoroutine(RunSpriteSequence());
+            triggeredSequence = true;
+            isOn = !isOn;
+            interaction.OnInteract(isOn);
+        }
     }
 }

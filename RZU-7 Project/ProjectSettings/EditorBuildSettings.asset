@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scripts/LevelLogic/Tests/LevelLogicTest.unity
     guid: bb167f0941778b647863a512dbd7a1f9
+  - enabled: 1
+    path: Assets/Scripts/Renderer Limiter/Tests/Render Limiter Test.unity
+    guid: 4763455c39d248d428d51a1ff21436e9
   m_configObjects: {}

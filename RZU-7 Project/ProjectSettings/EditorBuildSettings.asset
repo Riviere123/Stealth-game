@@ -5,19 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 0
-    path: Assets/Scripts/PathFinding/Tests/Testing PathFinding Room.unity
-    guid: ab0f67a60e99538409cc8f228a12855b
-  - enabled: 0
-    path: Assets/Scripts/StealthSystem/Tests/StealthTestScene.unity
-    guid: a9abbc4bb59bc1c42911c55974b91c94
-  - enabled: 0
-    path: Assets/Scripts/StealthSystem/Tests/SoundTestScene.unity
-    guid: 2425c9e95ffdd0345ac9fecdbb83a638
   - enabled: 1
-    path: Assets/Scripts/StealthSystem/Tests/GamePlayerStealthLoop.unity
-    guid: 6207648db1d4632438247aa5f7458886
+    path: Assets/Scripts/LevelLogic/Tests/LevelLogicTest.unity
+    guid: bb167f0941778b647863a512dbd7a1f9
   m_configObjects: {}

@@ -10,6 +10,9 @@ public class ChaseAction : Actions
     }
     void Chase(StateController controller)
     {
-        Debug.Log("I'm Chasing!");
+        if (controller.vision.target)
+        {
+            controller.rb2d.AddForce((controller.vision.target.transform.position - controller.transform.position).normalized * controller.stats.runSpeed, ForceMode2D.Impulse);
+        }
     }
 }

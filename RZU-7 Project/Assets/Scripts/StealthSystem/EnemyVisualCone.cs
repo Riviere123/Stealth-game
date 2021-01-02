@@ -98,7 +98,6 @@ public class EnemyVisualCone : MonoBehaviour
             {
                 if (Time.time >= endTime)
                 {
-                    Debug.Log("Trigger");
                     aqcuireTarget = true;
                     countDown = false;
                 }

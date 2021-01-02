@@ -14,9 +14,7 @@ public class LookDecision : Decision
 
     bool Look(StateController controller)
     {
-        RaycastHit2D hit = Physics2D.Raycast(controller.transform.position, Vector2.right);
-        Debug.DrawRay(controller.transform.position, Vector2.right * 20);
-        if (hit)
+        if(controller.vision.target != null)
         {
             return true;
         }

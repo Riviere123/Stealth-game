@@ -2,32 +2,53 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+
 public class StateController : MonoBehaviour
 {
     public bool aiActive;
     public State currentState;
-    
-    public GameObject target;
+    public AIStats stats;
 
+    [HideInInspector]
     public PathFinding pathFinding;
-    public Vector2[] patrolPoints;
-    public Vector2 currentPatrolPoint;
 
+    public Vector2[] patrolPoints;
+    
+    [HideInInspector]
+    public Vector2 currentPatrolPoint;
+    [HideInInspector]
+    public PatrolDirection patrolDirection;
+    [HideInInspector]
     public List<Node> path;
 
-    public Rigidbody2D rb2d;
     [SerializeField]
     Color wayPointGizmoColor;
     [SerializeField]
     Color pathNodeColor;
 
+    [HideInInspector]
+    public Rigidbody2D rb2d;
+    [HideInInspector]
+    public EnemyVisualCone vision;
+
+    private void Awake()
+    {
+        if(patrolPoints.Length > 0)
+        {
+            currentPatrolPoint = patrolPoints[0];
+        }
+        vision = GetComponentInChildren<EnemyVisualCone>();
+        rb2d = GetComponent<Rigidbody2D>();
+        pathFinding = GetComponent<PathFinding>();
+    }
     private void Update()
     {
         if (!aiActive)
         {
             return;
         }
-
+        
         currentState.UpdateState(this);
     }
 
@@ -49,9 +70,16 @@ public class StateController : MonoBehaviour
             Gizmos.DrawWireSphere(path[i].position, .33f);
         }
     }
+    
 
     public void TransitionToState(State nextState)
     {
         currentState = nextState;
     }
+
+    public enum PatrolDirection
+    {
+        forwards,backwards
+    }
+    on
 }

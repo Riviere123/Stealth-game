@@ -154,7 +154,8 @@ public class Grid : MonoBehaviour
 
         return false;
     }
-    private void OnDrawGizmos()
+
+    private void OnDrawGizmosSelected()
     {
         Gizmos.DrawWireCube(startPosition, new Vector2(gridWorldSize.x, gridWorldSize.y)); //draw a wire cube with the given dimentions
 

@@ -6,7 +6,7 @@ public class PathFinding : MonoBehaviour
     public Grid grid;
     public List<Node> finalPath;
 
-    public void FindPath(Vector2 a_startPos, Vector2 a_targetPos) //finds the closest path from start to target position
+    public List<Node> FindPath(Vector2 a_startPos, Vector2 a_targetPos) //finds the closest path from start to target position
     {
         float startTime = Time.realtimeSinceStartup;
         Node startNode = grid.NodeFromWorldPosition(a_startPos);
@@ -57,6 +57,7 @@ public class PathFinding : MonoBehaviour
                 }
             }
         }
+        return finalPath;
     }
 
     void GetFinalPath(Node a_startingNode, Node a_endNode) //sets the final path to the correct 

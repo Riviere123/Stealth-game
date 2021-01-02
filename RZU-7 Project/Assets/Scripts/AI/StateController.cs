@@ -4,18 +4,22 @@ using UnityEngine;
 
 public class StateController : MonoBehaviour
 {
-    public State currentState;
     public bool aiActive;
+    public State currentState;
+    
     public GameObject target;
 
     public PathFinding pathFinding;
     public Vector2[] patrolPoints;
+    public Vector2 currentPatrolPoint;
 
-    public List<Node> Path;
+    public List<Node> path;
 
     public Rigidbody2D rb2d;
     [SerializeField]
     Color wayPointGizmoColor;
+    [SerializeField]
+    Color pathNodeColor;
 
     private void Update()
     {
@@ -38,6 +42,11 @@ public class StateController : MonoBehaviour
         {
             Gizmos.color = wayPointGizmoColor;
             Gizmos.DrawWireSphere(patrolPoints[i], .25f);
+        }
+        for(int i = 0; i < path.Count; i++)
+        {
+            Gizmos.color = pathNodeColor;
+            Gizmos.DrawWireSphere(path[i].position, .33f);
         }
     }
 

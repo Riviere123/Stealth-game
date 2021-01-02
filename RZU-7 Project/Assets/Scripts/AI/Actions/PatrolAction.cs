@@ -15,6 +15,6 @@ public class PatrolAction : Actions
 
     void Patrol(StateController controller)
     {
-        Debug.Log($"I'm patrolling to {controller.patrolPoints[0]}!");
+        Debug.Log("I'm Patrolling!");
     }
 }

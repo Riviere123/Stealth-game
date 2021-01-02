@@ -26,6 +26,7 @@ public struct KeyToDoor
 /// <param name="gold">The players score value.</param>
 /// <param name="levelTime">The ammount of time the player has on the level in seconds.</param>
 /// <param name="currentTime">The current time remaining in the level.</param>
+/// <param name="Pause">If true pause time.</param>
 /// <param name="sDoors">An array of structs that stores what key goes to what do and if the player has the key to the door.</param>
 public class LevelLogic : MonoBehaviour
 {
@@ -45,6 +46,8 @@ public class LevelLogic : MonoBehaviour
     int levelTime;
     [SerializeField]
     int currentTime;
+    [SerializeField]
+    bool pause;
     public KeyToDoor[] sDoors;
 
     private void Awake()
@@ -108,6 +111,20 @@ public class LevelLogic : MonoBehaviour
     {
         SceneManager.LoadScene(SceneName);
     }
+    /// <summary>
+    /// pauses the decrement of time.
+    /// </summary>
+    void PauseGame()
+    {
+        pause = true;
+    }
+    /// <summary>
+    /// unpauses the decrement of time.
+    /// </summary>
+    void UnPauseGame()
+    {
+        pause = false;
+    }
 
     /// <summary>
     /// This counts down the timer and displays the correct time in the time text gameobject.
@@ -138,7 +155,10 @@ public class LevelLogic : MonoBehaviour
         if (currentTime != 0)
         {
             yield return new WaitForSeconds(1);
-            currentTime -= 1;
+            if (!pause)
+            {
+                currentTime -= 1;
+            }
             StartCoroutine(CountDown());
         }
     }

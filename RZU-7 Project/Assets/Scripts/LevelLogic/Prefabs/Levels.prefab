@@ -49,4 +49,4 @@ MonoBehaviour:
     unlocked: 1
   - displayName: Level 2
     sceneName: Test2
-    unlocked: 1
+    unlocked: 0

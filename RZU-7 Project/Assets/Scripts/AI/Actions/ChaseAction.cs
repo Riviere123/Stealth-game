@@ -17,12 +17,12 @@ public class ChaseAction : Actions
                 FindNewPath(controller);
                 return;
             }
-            else if(Vector2.Distance(controller.vision.target.transform.position ,controller.path[controller.path.Count-1].position) > ChaseActionConstants.TargetDistanceToFindNewPath)
+            else if(Vector2.Distance(controller.vision.target.transform.position ,controller.path[controller.path.Count-1].position) > AiConstants.TargetDistanceToFindNewPath)
             {
                 FindNewPath(controller);
                 return;
             }
-            else if (Vector2.Distance(controller.transform.position, controller.path[0].position) < ChaseActionConstants.DistanceToRemovePoint)
+            else if (Vector2.Distance(controller.transform.position, controller.path[0].position) < AiConstants.DistanceToRemovePoint)
             {
                 controller.path.RemoveAt(0);
                 return;

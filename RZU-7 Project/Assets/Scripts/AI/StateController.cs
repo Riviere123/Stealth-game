@@ -15,11 +15,11 @@ public class StateController : MonoBehaviour
     public bool patrolLoop;
     public Vector2[] patrolPoints;
 
-/*    [HideInInspector]*/
+    [HideInInspector]
     public Vector2 currentPatrolPoint;
     [HideInInspector]
     public PatrolDirection patrolDirection;
-/*    [HideInInspector]*/
+    [HideInInspector]
     public List<Node> path;
 
     [SerializeField]
@@ -53,7 +53,7 @@ public class StateController : MonoBehaviour
         RotateToMovement();
     }
 
-    private void OnDrawGizmos()
+    private void OnDrawGizmosSelected()
     {
         if (currentState!= null)
         {

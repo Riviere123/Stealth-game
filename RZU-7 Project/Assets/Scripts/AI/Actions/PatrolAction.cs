@@ -24,14 +24,13 @@ public class PatrolAction : Actions
 
         if (hit)
         {
-            Debug.Log("Hit");
             if(controller.path.Count <= 0)
             {
                 controller.path = controller.pathFinding.FindPath(controller.transform.position, controller.currentPatrolPoint);
             }
             if (controller.path.Count > 0)
             {
-                if(Vector2.Distance(controller.transform.position,controller.path[0].position) < ChaseActionConstants.DistanceToRemovePoint)
+                if(Vector2.Distance(controller.transform.position,controller.path[0].position) < AiConstants.DistanceToRemovePoint)
                 {
                     controller.path.RemoveAt(0);
                     return;

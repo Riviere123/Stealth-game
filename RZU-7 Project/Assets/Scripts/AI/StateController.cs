@@ -12,14 +12,14 @@ public class StateController : MonoBehaviour
 
     [HideInInspector]
     public PathFinding pathFinding;
-
+    public bool patrolLoop;
     public Vector2[] patrolPoints;
-    
-    [HideInInspector]
+
+/*    [HideInInspector]*/
     public Vector2 currentPatrolPoint;
     [HideInInspector]
     public PatrolDirection patrolDirection;
-    [HideInInspector]
+/*    [HideInInspector]*/
     public List<Node> path;
 
     [SerializeField]
@@ -50,9 +50,10 @@ public class StateController : MonoBehaviour
         }
         
         currentState.UpdateState(this);
+        RotateToMovement();
     }
 
-    private void OnDrawGizmosSelected()
+    private void OnDrawGizmos()
     {
         if (currentState!= null)
         {
@@ -81,5 +82,21 @@ public class StateController : MonoBehaviour
     {
         forwards,backwards
     }
-    on
+
+    void RotateToMovement()
+    {
+        if (!vision.target)
+        {
+            Vector3 dir = rb2d.velocity;
+            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        }
+        else
+        {
+            Vector3 dir = vision.target.transform.position - transform.position;
+            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        }
+        
+    }
 }

@@ -20,8 +20,8 @@ public class Grid : MonoBehaviour
     float nodeDiameter;
     int gridSizeX, gridSizeY;
 
-    Color white = new Color(1, 1, 1, .5f);
-    Color yellow = new Color(.5f, .25f, .1f, .5f);
+    Color white = new Color(1, 1, 1, .2f);
+    Color yellow = new Color(.5f, .25f, .1f, .2f);
 
 
     private void Start()

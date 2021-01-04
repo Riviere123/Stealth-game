@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab04d1fc0bfa39f40bef587e125baee3, type: 3}
   m_Name: BasicStats
   m_EditorClassIdentifier: 
-  walkSpeed: 0.1
-  runSpeed: 0.25
+  walkSpeed: 0.2
+  runSpeed: 0.3

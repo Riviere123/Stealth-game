@@ -15,47 +15,98 @@ public class PatrolAction : Actions
 
     void Patrol(StateController controller)
     {
-        if(controller.patrolPoints.Length >= 2)
+        RaycastHit2D hit = Physics2D.Raycast(controller.transform.position, controller.currentPatrolPoint - (Vector2)controller.transform.position,Vector2.Distance(controller.transform.position,controller.currentPatrolPoint),LayerMask.GetMask("Obstacle"));
+        Debug.DrawRay(controller.transform.position, controller.currentPatrolPoint - (Vector2)controller.transform.position);
+        if (!hit)
         {
-            if (Vector2.Distance(controller.transform.position, controller.currentPatrolPoint) < .25f)
+            controller.path.Clear();
+        }
+
+        if (hit)
+        {
+            Debug.Log("Hit");
+            if(controller.path.Count <= 0)
             {
-                for (int i = 0; i < controller.patrolPoints.Length; i++)
+                controller.path = controller.pathFinding.FindPath(controller.transform.position, controller.currentPatrolPoint);
+            }
+            if (controller.path.Count > 0)
+            {
+                if(Vector2.Distance(controller.transform.position,controller.path[0].position) < ChaseActionConstants.DistanceToRemovePoint)
                 {
-                    if (controller.patrolDirection == StateController.PatrolDirection.forwards)
+                    controller.path.RemoveAt(0);
+                    return;
+                }
+                controller.rb2d.AddForce((controller.path[0].position - controller.transform.position).normalized * controller.stats.walkSpeed, ForceMode2D.Impulse);
+            }
+        }
+        
+        else if(controller.patrolPoints.Length >= 2)
+        {
+            if (!controller.patrolLoop)
+            {
+                if (Vector2.Distance(controller.transform.position, controller.currentPatrolPoint) < .5f)
+                {
+                    for (int i = 0; i < controller.patrolPoints.Length; i++)
                     {
-                        if(controller.currentPatrolPoint == controller.patrolPoints[i])
+                        if (controller.patrolDirection == StateController.PatrolDirection.forwards)
                         {
-                            if(i < controller.patrolPoints.Length - 1)
+                            if (controller.currentPatrolPoint == controller.patrolPoints[i])
                             {
-                                controller.currentPatrolPoint = controller.patrolPoints[i + 1];
-                                break;
+                                if (i < controller.patrolPoints.Length - 1)
+                                {
+                                    controller.currentPatrolPoint = controller.patrolPoints[i + 1];
+                                    break;
+                                }
+                                else
+                                {
+                                    controller.patrolDirection = StateController.PatrolDirection.backwards;
+                                    break;
+                                }
                             }
-                            else
+                        }
+                        else if (controller.patrolDirection == StateController.PatrolDirection.backwards)
+                        {
+                            if (controller.currentPatrolPoint == controller.patrolPoints[i])
                             {
-                                controller.patrolDirection = StateController.PatrolDirection.backwards;
-                                break;
+                                if (i > 0)
+                                {
+                                    controller.currentPatrolPoint = controller.patrolPoints[i - 1];
+                                    break;
+                                }
+                                else
+                                {
+                                    controller.patrolDirection = StateController.PatrolDirection.forwards;
+                                    break;
+                                }
                             }
                         }
                     }
-                    else if(controller.patrolDirection == StateController.PatrolDirection.backwards)
+                }
+                controller.rb2d.AddForce((controller.currentPatrolPoint - (Vector2)controller.transform.position).normalized * controller.stats.walkSpeed, ForceMode2D.Impulse);
+            }
+            else
+            {
+                if (Vector2.Distance(controller.transform.position, controller.currentPatrolPoint) < .5f)
+                {
+                    for (int i = 0; i < controller.patrolPoints.Length; i++)
                     {
-                        if(controller.currentPatrolPoint == controller.patrolPoints[i])
+                        if (controller.currentPatrolPoint == controller.patrolPoints[i])
                         {
-                            if(i > 0)
+                            if (i == controller.patrolPoints.Length - 1)
                             {
-                                controller.currentPatrolPoint = controller.patrolPoints[i - 1];
+                                controller.currentPatrolPoint = controller.patrolPoints[0];
                                 break;
                             }
                             else
                             {
-                                controller.patrolDirection = StateController.PatrolDirection.forwards;
+                                controller.currentPatrolPoint = controller.patrolPoints[i + 1];
                                 break;
                             }
                         }
                     }
                 }
+                controller.rb2d.AddForce((controller.currentPatrolPoint - (Vector2)controller.transform.position).normalized * controller.stats.walkSpeed, ForceMode2D.Impulse);
             }
-            controller.rb2d.AddForce((controller.currentPatrolPoint - (Vector2)controller.transform.position).normalized * controller.stats.walkSpeed, ForceMode2D.Impulse);
         }
         else
         {

@@ -35,7 +35,7 @@ public class PatrolAction : Actions
                     controller.path.RemoveAt(0);
                     return;
                 }
-                controller.rb2d.AddForce((controller.path[0].position - controller.transform.position).normalized * controller.stats.walkSpeed, ForceMode2D.Impulse);
+                controller.rb2d.AddForce((controller.path[0].position - controller.transform.position).normalized * controller.stats.walkSpeed * Time.deltaTime, ForceMode2D.Impulse);
             }
         }
         
@@ -81,7 +81,7 @@ public class PatrolAction : Actions
                         }
                     }
                 }
-                controller.rb2d.AddForce((controller.currentPatrolPoint - (Vector2)controller.transform.position).normalized * controller.stats.walkSpeed, ForceMode2D.Impulse);
+                controller.rb2d.AddForce((controller.currentPatrolPoint - (Vector2)controller.transform.position).normalized * controller.stats.walkSpeed * Time.deltaTime, ForceMode2D.Impulse);
             }
             else
             {
@@ -104,7 +104,7 @@ public class PatrolAction : Actions
                         }
                     }
                 }
-                controller.rb2d.AddForce((controller.currentPatrolPoint - (Vector2)controller.transform.position).normalized * controller.stats.walkSpeed, ForceMode2D.Impulse);
+                controller.rb2d.AddForce((controller.currentPatrolPoint - (Vector2)controller.transform.position).normalized * controller.stats.walkSpeed * Time.deltaTime, ForceMode2D.Impulse);
             }
         }
         else

@@ -27,7 +27,7 @@ public class ChaseAction : Actions
                 controller.path.RemoveAt(0);
                 return;
             }
-            controller.rb2d.AddForce((controller.path[0].position - controller.transform.position).normalized * controller.stats.runSpeed, ForceMode2D.Impulse);
+            controller.rb2d.AddForce((controller.path[0].position - controller.transform.position).normalized * controller.stats.runSpeed * Time.deltaTime, ForceMode2D.Impulse);
         }
     }
 

@@ -42,9 +42,13 @@ public class StateController : MonoBehaviour
         }
         vision = GetComponentInChildren<EnemyVisualCone>();
         rb2d = GetComponent<Rigidbody2D>();
+<<<<<<< Updated upstream
         
         grid = GameObject.FindGameObjectWithTag("GameMaster").GetComponent<Grid>();
         pathFinding = grid.pathFinding;
+=======
+        pathFinding = new PathFinding();
+>>>>>>> Stashed changes
     }
     private void Update()
     {

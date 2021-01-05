@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class StateController : MonoBehaviour
 {
+    public Grid grid;
+
     public bool aiActive;
     public State currentState;
     public AIStats stats;
@@ -40,7 +42,9 @@ public class StateController : MonoBehaviour
         }
         vision = GetComponentInChildren<EnemyVisualCone>();
         rb2d = GetComponent<Rigidbody2D>();
-        pathFinding = GetComponent<PathFinding>();
+        
+        grid = GameObject.FindGameObjectWithTag("GameMaster").GetComponent<Grid>();
+        pathFinding = grid.pathFinding;
     }
     private void Update()
     {

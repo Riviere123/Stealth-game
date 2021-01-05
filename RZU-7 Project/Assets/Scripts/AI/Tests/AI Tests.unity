@@ -1135,7 +1135,6 @@ GameObject:
   m_Component:
   - component: {fileID: 571944663}
   - component: {fileID: 571944662}
-  - component: {fileID: 571944661}
   - component: {fileID: 571944665}
   - component: {fileID: 571944664}
   - component: {fileID: 571944666}
@@ -1146,20 +1145,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &571944661
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 571944660}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05ee9e0df2e03fb42a8be0be85b427fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  grid: {fileID: 2066150078}
-  finalPath: []
 --- !u!114 &571944662
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1172,10 +1157,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a57484c4bd4fab44bdbd7dc9090a263, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  grid: {fileID: 0}
   aiActive: 1
   currentState: {fileID: 11400000, guid: 7198418d64b8ee941aed52b93f0ae740, type: 2}
   stats: {fileID: 11400000, guid: 169f62c5500470f478e6ef2f83fe42ce, type: 2}
-  pathFinding: {fileID: 0}
   patrolLoop: 0
   patrolPoints:
   - {x: 10.86, y: 0}
@@ -1517,7 +1502,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 388013211}
-  - {fileID: 2066150079}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2448,6 +2432,57 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1158940255
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1158940257}
+  - component: {fileID: 1158940256}
+  m_Layer: 0
+  m_Name: GameMaster
+  m_TagString: GameMaster
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1158940256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1158940255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41eee14ed95445748949599a3e6333f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wallMask:
+    serializedVersion: 2
+    m_Bits: 256
+  gridWorldSize: {x: 102.5, y: 115.5}
+  startPosition: {x: 0, y: 0}
+  nodeRadius: 1
+  distance: 0.5
+  finalPath: []
+--- !u!4 &1158940257
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1158940255}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.2512174, y: -5.095261, z: -0.68132883}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1169289931
 GameObject:
   m_ObjectHideFlags: 0
@@ -2782,7 +2817,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1320789754}
   - component: {fileID: 1320789759}
-  - component: {fileID: 1320789758}
   - component: {fileID: 1320789757}
   - component: {fileID: 1320789756}
   - component: {fileID: 1320789755}
@@ -2897,20 +2931,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &1320789758
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1320789753}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05ee9e0df2e03fb42a8be0be85b427fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  grid: {fileID: 2066150078}
-  finalPath: []
 --- !u!114 &1320789759
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2923,10 +2943,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a57484c4bd4fab44bdbd7dc9090a263, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  grid: {fileID: 0}
   aiActive: 1
   currentState: {fileID: 11400000, guid: 7198418d64b8ee941aed52b93f0ae740, type: 2}
   stats: {fileID: 11400000, guid: 169f62c5500470f478e6ef2f83fe42ce, type: 2}
-  pathFinding: {fileID: 0}
   patrolLoop: 1
   patrolPoints:
   - {x: 45.02, y: -50}
@@ -2950,7 +2970,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1469315592}
   - component: {fileID: 1469315597}
-  - component: {fileID: 1469315596}
   - component: {fileID: 1469315595}
   - component: {fileID: 1469315594}
   - component: {fileID: 1469315593}
@@ -3065,20 +3084,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &1469315596
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1469315591}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05ee9e0df2e03fb42a8be0be85b427fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  grid: {fileID: 2066150078}
-  finalPath: []
 --- !u!114 &1469315597
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3091,10 +3096,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a57484c4bd4fab44bdbd7dc9090a263, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  grid: {fileID: 0}
   aiActive: 1
   currentState: {fileID: 11400000, guid: 7198418d64b8ee941aed52b93f0ae740, type: 2}
   stats: {fileID: 11400000, guid: 169f62c5500470f478e6ef2f83fe42ce, type: 2}
-  pathFinding: {fileID: 0}
   patrolLoop: 1
   patrolPoints:
   - {x: -14.78, y: 44.71}
@@ -3342,7 +3347,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1748849305}
   - component: {fileID: 1748849304}
-  - component: {fileID: 1748849303}
   - component: {fileID: 1748849302}
   - component: {fileID: 1748849301}
   - component: {fileID: 1748849306}
@@ -3425,20 +3429,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &1748849303
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1748849300}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05ee9e0df2e03fb42a8be0be85b427fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  grid: {fileID: 2066150078}
-  finalPath: []
 --- !u!114 &1748849304
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3451,10 +3441,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a57484c4bd4fab44bdbd7dc9090a263, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  grid: {fileID: 0}
   aiActive: 1
   currentState: {fileID: 11400000, guid: 7198418d64b8ee941aed52b93f0ae740, type: 2}
   stats: {fileID: 11400000, guid: 169f62c5500470f478e6ef2f83fe42ce, type: 2}
-  pathFinding: {fileID: 0}
   patrolLoop: 1
   patrolPoints:
   - {x: -25, y: 21}
@@ -3883,57 +3873,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &2066150077
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2066150079}
-  - component: {fileID: 2066150078}
-  m_Layer: 0
-  m_Name: PathFindingGrid
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &2066150078
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2066150077}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41eee14ed95445748949599a3e6333f1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  wallMask:
-    serializedVersion: 2
-    m_Bits: 256
-  gridWorldSize: {x: 100, y: 100}
-  startPosition: {x: 0, y: 0}
-  nodeRadius: 1.5
-  distance: 1.5
-  finalPath: []
---- !u!4 &2066150079
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2066150077}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 452.39053, y: 314.94238, z: -108.42946}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 623723854}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2101748490
 GameObject:
   m_ObjectHideFlags: 0
@@ -3944,7 +3883,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2101748491}
   - component: {fileID: 2101748496}
-  - component: {fileID: 2101748495}
   - component: {fileID: 2101748494}
   - component: {fileID: 2101748493}
   - component: {fileID: 2101748492}
@@ -4059,20 +3997,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &2101748495
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2101748490}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05ee9e0df2e03fb42a8be0be85b427fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  grid: {fileID: 2066150078}
-  finalPath: []
 --- !u!114 &2101748496
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4085,10 +4009,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a57484c4bd4fab44bdbd7dc9090a263, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  grid: {fileID: 0}
   aiActive: 1
   currentState: {fileID: 11400000, guid: 7198418d64b8ee941aed52b93f0ae740, type: 2}
   stats: {fileID: 11400000, guid: 169f62c5500470f478e6ef2f83fe42ce, type: 2}
-  pathFinding: {fileID: 0}
   patrolLoop: 1
   patrolPoints:
   - {x: 5.71, y: 27.99}

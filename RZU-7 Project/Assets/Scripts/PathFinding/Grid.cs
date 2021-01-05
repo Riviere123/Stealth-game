@@ -23,7 +23,14 @@ public class Grid : MonoBehaviour
     Color white = new Color(1, 1, 1, .2f);
     Color yellow = new Color(.5f, .25f, .1f, .2f);
 
+    [HideInInspector]
+    public PathFinding pathFinding;
 
+
+    private void Awake()
+    {
+       pathFinding = new PathFinding(this);
+    }
     private void Start()
     {
         nodeDiameter = nodeRadius * 2;

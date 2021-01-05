@@ -72,8 +72,7 @@ public class StealthUsingPathFindingAndSound : MonoBehaviour
 
                     if(pathNodes.Count <= 0 || Vector2.Distance(target.transform.position, pathNodes[pathNodes.Count - 1].position) >= recalculateDistance)
                     {
-                        pf.FindPath(transform.position, target.transform.position);
-                        pathNodes = pf.finalPath;
+                        pathNodes = pf.FindPath(transform.position, target.transform.position);
                     }
                 }
 

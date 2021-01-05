@@ -1,17 +1,21 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class PathFinding : MonoBehaviour
+public class PathFinding 
 {
     public Grid grid;
-    public List<Node> finalPath;
 
-    public void FindPath(Vector2 a_startPos, Vector2 a_targetPos) //finds the closest path from start to target position
+    public PathFinding(Grid grid)
+    {
+        this.grid = grid;
+    }
+    public List<Node> FindPath(Vector2 a_startPos, Vector2 a_targetPos) //finds the closest path from start to target position
     {
         float startTime = Time.realtimeSinceStartup;
         Node startNode = grid.NodeFromWorldPosition(a_startPos);
         Node targetNode = grid.NodeFromWorldPosition(a_targetPos);
         List<Node> openList = new List<Node>();
+        List<Node> finalPath = new List<Node>();
         HashSet<Node> closedList = new HashSet<Node>();
         openList.Add(startNode);
 
@@ -32,7 +36,7 @@ public class PathFinding : MonoBehaviour
 
             if(currentNode == targetNode)
             {
-                GetFinalPath(startNode, targetNode);
+                finalPath = GetFinalPath(startNode, targetNode);
             }
 
             foreach(Node neighborNode in grid.GetNeighboringNodes(currentNode))
@@ -57,11 +61,12 @@ public class PathFinding : MonoBehaviour
                 }
             }
         }
+        return finalPath;
     }
 
-    void GetFinalPath(Node a_startingNode, Node a_endNode) //sets the final path to the correct 
+    private List<Node> GetFinalPath(Node a_startingNode, Node a_endNode) //sets the final path to the correct 
     {
-        finalPath.Clear();
+        List<Node> finalPath = new List<Node>();
         Node currentNode = a_endNode;
 
         while(currentNode != a_startingNode)
@@ -71,6 +76,7 @@ public class PathFinding : MonoBehaviour
         }
 
         finalPath.Reverse();
+        return finalPath;
     }
 
     int GetManhattenDistance(Node a_nodeA, Node a_nodeB)

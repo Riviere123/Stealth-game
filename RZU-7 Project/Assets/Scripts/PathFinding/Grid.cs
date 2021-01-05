@@ -20,10 +20,17 @@ public class Grid : MonoBehaviour
     float nodeDiameter;
     int gridSizeX, gridSizeY;
 
-    Color white = new Color(1, 1, 1, .5f);
-    Color yellow = new Color(.5f, .25f, .1f, .5f);
+    Color white = new Color(1, 1, 1, .2f);
+    Color yellow = new Color(.5f, .25f, .1f, .2f);
+
+    [HideInInspector]
+    public PathFinding pathFinding;
 
 
+    private void Awake()
+    {
+       pathFinding = new PathFinding(this);
+    }
     private void Start()
     {
         nodeDiameter = nodeRadius * 2;
@@ -154,6 +161,7 @@ public class Grid : MonoBehaviour
 
         return false;
     }
+
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireCube(startPosition, new Vector2(gridWorldSize.x, gridWorldSize.y)); //draw a wire cube with the given dimentions

@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scripts/LevelLogic/Tests/LevelLogicTest.unity
+    path: Assets/Scripts/HuD/Tests/LevelLogicTest.unity
     guid: bb167f0941778b647863a512dbd7a1f9
   - enabled: 1
     path: Assets/Scripts/Renderer Limiter/Tests/Render Limiter Test.unity

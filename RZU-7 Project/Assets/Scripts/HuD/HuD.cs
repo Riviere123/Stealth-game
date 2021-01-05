@@ -4,16 +4,8 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 
-/// <summary>
-/// KeyDoor holds what key goes to what do and checks if you have the key to the door.
-/// </summary>
+
 [System.Serializable]
-public struct KeyToDoor
-{
-    public GameObject Key;
-    public GameObject Door;
-    public bool HasKey;
-}
 
 /// <summary>
 /// Level Logic holds the logic behind the levels objectives, time, and score.
@@ -27,8 +19,7 @@ public struct KeyToDoor
 /// <param name="levelTime">The ammount of time the player has on the level in seconds.</param>
 /// <param name="currentTime">The current time remaining in the level.</param>
 /// <param name="Pause">If true pause time.</param>
-/// <param name="sDoors">An array of structs that stores what key goes to what do and if the player has the key to the door.</param>
-public class LevelLogic : MonoBehaviour
+public class HuD : MonoBehaviour
 {
     [SerializeField]
     GameObject inventoryPanel;
@@ -48,7 +39,6 @@ public class LevelLogic : MonoBehaviour
     int currentTime;
     [SerializeField]
     bool pause;
-    public KeyToDoor[] sDoors;
 
     private void Awake()
     {
@@ -59,23 +49,6 @@ public class LevelLogic : MonoBehaviour
         StartCoroutine(CountDown());
     }
 
-    /// <summary>
-    /// This is for visual feedback if we have the key to the door or not. this is for TESTING purposes only.
-    /// </summary>
-    private void OnGUI()
-    {
-        for(int i = 0; i < sDoors.Length; i++)
-        {
-            if (sDoors[i].HasKey)
-            {
-                sDoors[i].Door.GetComponent<SpriteRenderer>().color = Color.green;
-            }
-            else
-            {
-                sDoors[i].Door.GetComponent<SpriteRenderer>().color = Color.red;
-            }
-        }
-    }
     /// <summary>
     /// Call this method when you want to add an item image to the players inventory.
     /// </summary>

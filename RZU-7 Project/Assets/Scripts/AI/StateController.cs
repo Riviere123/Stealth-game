@@ -34,7 +34,7 @@ public class StateController : MonoBehaviour
     [HideInInspector]
     public EnemyVisualCone vision;
 
-    private void Awake()
+    private void Start()
     {
         if(patrolPoints.Length > 0)
         {

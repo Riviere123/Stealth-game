@@ -10,4 +10,5 @@ public class AnimationConstants
     public static readonly string isCrouching = "IsCrouching";
     public static readonly string isDead = "IsDead";
     public static readonly string isInteracting = "IsInteracting";
+    public static readonly string isAttacking = "IsAttacking";
 }

@@ -14,10 +14,10 @@
 public class ActorAnimations : MonoBehaviour
 {
     [SerializeField]
-    Animator animator;
-    float lastX = 0f;
-    float lastY = 0f;
-    float zeroApproximationBoundary = 0.01f;
+    protected Animator animator;
+    protected float lastX = 0f;
+    protected float lastY = 0f;
+    protected float zeroApproximationBoundary = 0.01f;
 
 
     void Start()
@@ -36,10 +36,7 @@ public class ActorAnimations : MonoBehaviour
     /// <param name="movementState">The actor's movement state</param>
     public void SetMovementValues(float x, float y, MovementConstants.ActorMovementStates movementState)
     {
-        if (animator.GetBool(AnimationConstants.isDead) || animator.GetBool(AnimationConstants.isInteracting))
-        {
-            x = y = 0f;
-        }
+        CheckImobileConditions(ref x, ref y);
 
         animator.SetFloat(AnimationConstants.lastX, lastX);
         animator.SetFloat(AnimationConstants.lastY, lastY);
@@ -54,6 +51,14 @@ public class ActorAnimations : MonoBehaviour
         else
         {
             SetMovementBooleans(MovementConstants.ActorMovementStates.NONE);
+        }
+    }
+
+    public virtual void CheckImobileConditions(ref float x, ref float y)
+    {
+        if (animator.GetBool(AnimationConstants.isDead) || animator.GetBool(AnimationConstants.isInteracting))
+        {
+            x = y = 0f;
         }
     }
 
@@ -107,7 +112,7 @@ public class ActorAnimations : MonoBehaviour
     /// </summary>
     /// <param name="status">The name of the variable to set in the animator</param>
     /// <param name="val">The value to set the boolean to</param>
-    void SetActorStatus(string status, bool val)
+    protected void SetActorStatus(string status, bool val)
     {
         if (val)
         {
@@ -125,7 +130,7 @@ public class ActorAnimations : MonoBehaviour
     /// /// <remarks>
     /// Sigh...This exists because AnimatorEvents do not support calling functions with bool parameters
     /// </remarks>
-    void SetActorStatus(string status, Constants.ActorBoolState val)
+    protected void SetActorStatus(string status, Constants.ActorBoolState val)
     {
         switch (val)
         {
@@ -147,7 +152,7 @@ public class ActorAnimations : MonoBehaviour
     /// </summary>
     /// <param name="newValue"></param>
     /// <param name="lastValue"></param>
-    void SetAxisLastMovementInput(float newValue, ref float lastValue)
+    protected void SetAxisLastMovementInput(float newValue, ref float lastValue)
     {
         if (Mathf.Abs(newValue) > zeroApproximationBoundary)
         {
@@ -164,7 +169,7 @@ public class ActorAnimations : MonoBehaviour
     /// state the actor is in.
     /// </summary>
     /// <param name="movementState">The actor's movement state</param>
-    void SetMovementBooleans(MovementConstants.ActorMovementStates movementState)
+    public virtual void SetMovementBooleans(MovementConstants.ActorMovementStates movementState)
     {
         switch (movementState)
         {

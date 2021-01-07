@@ -5,8 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(menuName ="AI/Stats")]
 public class AIStats : ScriptableObject
 {
-    [Range(.01f,10)]
+    [Range(1,100)]
     public float walkSpeed;
-    [Range(.01f, 10)]
+    [Range(1, 100)]
     public float runSpeed;
 }

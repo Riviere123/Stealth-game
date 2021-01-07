@@ -98,7 +98,6 @@ public class EnemyVisualCone : MonoBehaviour
             {
                 if (Time.time >= endTime)
                 {
-                    Debug.Log("Trigger");
                     aqcuireTarget = true;
                     countDown = false;
                 }
@@ -129,8 +128,8 @@ public class EnemyVisualCone : MonoBehaviour
     {
         return RadianToVector2(degree * Mathf.Deg2Rad);
     }
-    void OnDrawGizmos()
-    {
+    void OnDrawGizmosSelected()
+{
         var increment = angle / rays;
         var start = -(angle / 2);
         for (int i = 1; i < rays; i++)

@@ -1,5 +1,11 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
+using System.Collections;
 
+/// <summary>
+/// Controls the EnemyVisual Cone. 
+/// Attach this to an enemy AI and you will have full power over their individual visual field.
+/// </summary>
 public class EnemyVisualCone : MonoBehaviour
 {
     [SerializeField]
@@ -10,9 +16,11 @@ public class EnemyVisualCone : MonoBehaviour
     float range = 5; //the range of the vision
     [SerializeField]
     float timeToTrigger = .5f; //sets how long you must be in the cone before it triggers
+
     float endTime; //the time till trigger
-    bool countDown = false; //check if we are already counting down
-    bool aqcuireTarget = false;
+    bool countDown; //check if we are already counting down
+    bool aqcuireTarget; //if this is true and the player is in sight we will set target to the player
+
     [SerializeField]
     Material material = null; //material the mesh uses
     [SerializeField]
@@ -21,11 +29,14 @@ public class EnemyVisualCone : MonoBehaviour
     LayerMask objectThatObstruct = 0; //this can only be one
     [SerializeField]
     LayerMask player = 0; //this can only be one
+
     Vector3[] vertices; //array of vertices
     Vector2[] uv; //array of UVs
     int[] triangles; //array of triangles
+
     GameObject coneVisual; //the gameobject to create
     Mesh mesh; //mesh to create
+    MeshRenderer coneMeshRenderer;
 
     public GameObject target;
 
@@ -33,20 +44,25 @@ public class EnemyVisualCone : MonoBehaviour
     {
         mesh = new Mesh();
 
+
         vertices = new Vector3[rays + 1];
         uv = new Vector2[rays + 1];
         triangles = new int[(rays + 2) * 3];
 
         coneVisual = new GameObject("EnemyVisionCone", typeof(MeshFilter), typeof(MeshRenderer));
+        coneMeshRenderer = coneVisual.GetComponent<MeshRenderer>();
         coneVisual.GetComponent<MeshFilter>().mesh = mesh;
-        coneVisual.GetComponent<MeshRenderer>().material = material;
+        coneMeshRenderer.material = material;
         coneVisual.transform.localScale = new Vector3(1, 1, -1);
         coneVisual.layer = layermask_to_layer(LayerMask.GetMask("VisualCone"));
+
     }
 
 
     void Update()
     {
+
+
         var increment = angle / rays;
         var start = -(angle / 2);
         bool seePlayer = false;
@@ -66,7 +82,7 @@ public class EnemyVisualCone : MonoBehaviour
                 {
                     SetMeshStats(i, hit.point);
                 }
-                if(hit.collider.gameObject.layer == layermask_to_layer(player))
+                if (hit.collider.gameObject.layer == layermask_to_layer(player))
                 {
                     RaycastHit2D wallHit = Physics2D.Raycast(transform.position, lDirection, range, objectThatObstruct);
                     if (wallHit)
@@ -77,7 +93,7 @@ public class EnemyVisualCone : MonoBehaviour
                     {
                         SetMeshStats(i, (transform.position + ((Vector3)lDirection * range)));
                     }
-                    
+
                     if (aqcuireTarget) //This is the trigger event
                     {
                         target = hit.collider.gameObject;
@@ -89,7 +105,7 @@ public class EnemyVisualCone : MonoBehaviour
             else
             {
                 SetMeshStats(i, (transform.position + ((Vector3)lDirection * range)));
-            }  
+            }
         }
 
         if (seePlayer)
@@ -98,6 +114,7 @@ public class EnemyVisualCone : MonoBehaviour
             {
                 if (Time.time >= endTime)
                 {
+                    //this is the trigger after the end time
                     aqcuireTarget = true;
                     countDown = false;
                 }
@@ -118,18 +135,29 @@ public class EnemyVisualCone : MonoBehaviour
         mesh.triangles = triangles;
         mesh.RecalculateBounds();
     }
-    
+
+
+    /// <summary>
+    /// Turns radian angles to a Vector2 direction
+    /// </summary>
+    /// <param name="radian">The radian angle to change.</param>
+    /// <returns>Vector2 Direction</returns>
     Vector2 RadianToVector2(float radian)
     {
         return new Vector2(Mathf.Cos(radian), Mathf.Sin(radian));
     }
 
+    /// <summary>
+    /// Turns degree angles to a Vector2 direction
+    /// </summary>
+    /// <param name="degree">The degree angle to change.</param>
+    /// <returns>Vector2 Direction</returns>
     Vector2 DegreeToVector2(float degree)
     {
         return RadianToVector2(degree * Mathf.Deg2Rad);
     }
-    void OnDrawGizmosSelected()
-{
+    void OnDrawGizmos()
+    {
         var increment = angle / rays;
         var start = -(angle / 2);
         for (int i = 1; i < rays; i++)
@@ -140,6 +168,12 @@ public class EnemyVisualCone : MonoBehaviour
             Gizmos.DrawRay(transform.position, lDirection * range);
         }
     }
+
+    /// <summary>
+    /// Gets the correct layer mask Int 
+    /// </summary>
+    /// <param name="layerMask">The layermask you want to get the int for.</param>
+    /// <returns>Integer of layermask</returns>
     int layermask_to_layer(LayerMask layerMask)
     {
         int layerNumber = 0;
@@ -152,9 +186,14 @@ public class EnemyVisualCone : MonoBehaviour
         return layerNumber - 1;
     }
 
+    /// <summary>
+    /// Sets the mesh positions to create the mesh.
+    /// </summary>
+    /// <param name="i">The place in the arrays</param>
+    /// <param name="position">The Vector3 position to set the active point</param>
     void SetMeshStats(int i, Vector3 position)
     {
-        vertices[i] = position + new Vector3(0,0,2);
+        vertices[i] = position + new Vector3(0, 0, 2);
         uv[i] = vertices[i];
         triangles[i * 3] = 0;
         triangles[i * 3 + 1] = i;
@@ -166,5 +205,5 @@ public class EnemyVisualCone : MonoBehaviour
         {
             triangles[i * 3 + 2] = 0;
         }
-    } 
+    }
 }

@@ -1,12 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 using TMPro;
 
 
-[System.Serializable]
+
 
 /// <summary>
 /// Level Logic holds the logic behind the levels objectives, time, and score.
@@ -17,6 +15,8 @@ using TMPro;
 /// <param name="itemImage">The Prefab that we use to instantiate item images for the inventory panel.</param>
 /// <param name="goldText">Reference to the text object that displays our current gold.</param>
 /// <param name="timeText">Reference to the text object that displays our current time left.</param>
+
+[System.Serializable]
 
 public class HuD : MonoBehaviour
 {
@@ -41,10 +41,16 @@ public class HuD : MonoBehaviour
         playerMaster = new PlayerMaster(this);
         levelTimer = GetComponent<LevelTimer>();
     }
+    /// <summary>
+    /// Refreshes the gold display.
+    /// </summary>
     public void DisplayGold()
     {
         goldText.text = playerMaster.GetGold().ToString();
     }
+    /// <summary>
+    /// Refreshes the time display.
+    /// </summary>
     public void DisplayTime()
     {
         int minutes;
@@ -61,6 +67,9 @@ public class HuD : MonoBehaviour
             timeText.text = $"{minutes}:{seconds}";
         }
     }
+    /// <summary>
+    /// refreshes the keys display.
+    /// </summary>
     public void DisplayKeys()
     {
         for(int i = 0; i < keyImages.Count; i++)
@@ -84,6 +93,10 @@ public class HuD : MonoBehaviour
             }
         }
     }
+    /// <summary>
+    /// gets the playerMaster script that is generated from this HuD Script.
+    /// </summary>
+    /// <returns>The playerMaster script reference.</returns>
     public PlayerMaster GetPlayerMaster()
     {
         return playerMaster;

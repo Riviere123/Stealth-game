@@ -2,29 +2,34 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerInventory : MonoBehaviour
+/// <summary>
+/// This would be inside the players controller
+/// </summary>
+public class Player: MonoBehaviour
 {  
-    public List<GameObject> Keys = new List<GameObject>();
     HuD hud;
+    PlayerMaster playerMaster;
 
-    private void Awake()
+    private void Start()
     {
         hud = GameObject.FindGameObjectWithTag("HuD").GetComponent<HuD>();
+        playerMaster = hud.GetPlayerMaster();
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.tag == "Key")
         {
-            if (!Keys.Contains(collision.gameObject))
+            if (!playerMaster.GetKeys().Contains(collision.gameObject))
             {
-                Keys.Add(collision.gameObject);
-                Destroy(collision.GetComponent<SpriteRenderer>());
-                Destroy(collision.GetComponent<Collider2D>());
+                GameObject key = collision.gameObject;
+                playerMaster.AddKey(key);
+                key.transform.position = new Vector2(9999, 9999);
+                hud.DisplayKeys();
             }
         }
         if (collision.tag == "Valuable")
         {
-            hud.AddGold(collision.GetComponent<Valuable>().value);
+            playerMaster.AddGold(collision.GetComponent<Valuable>().value);
             Destroy(collision.GetComponent<SpriteRenderer>());
             Destroy(collision.GetComponent<Collider2D>());
         }
@@ -34,7 +39,7 @@ public class PlayerInventory : MonoBehaviour
         if(collision.gameObject.tag == "Door")
         {
             Door door = collision.gameObject.GetComponent<Door>();
-            if (Keys.Contains(door.Key))
+            if (playerMaster.GetKeys().Contains(door.Key))
             {
                 Debug.Log("I have the key!");
             }

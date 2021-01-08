@@ -14,7 +14,8 @@ public class LookDecision : Decision
 
     bool Look(StateController controller)
     {
-        if(controller.vision.target != null)
+
+        if(((MovementHelper)controller.GetHelper(AIConstants.movementHelperKey)).vision.target != null)
         {
             return true;
         }

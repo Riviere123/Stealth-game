@@ -6,47 +6,16 @@ using UnityEngine;
 
 public class StateController : MonoBehaviour
 {
-    Grid grid;
-
+    [SerializeField]
+    public List<MonoHelperSet> helpers;
     public bool aiActive;
     public State currentState;
-    public AIStats stats;
 
-    [HideInInspector]
-    public PathFinding pathFinding;
-    public bool patrolLoop;
-    public Vector2[] patrolPoints;
-
-    [HideInInspector]
-    public Vector2 currentPatrolPoint;
-    [HideInInspector]
-    public PatrolDirection patrolDirection;
-    [HideInInspector]
-    public List<Node> path;
-
-    [SerializeField]
-    Color wayPointGizmoColor;
-    [SerializeField]
-    Color pathNodeColor;
-
-    [HideInInspector]
-    public Rigidbody2D rb2d;
-    [HideInInspector]
-    public EnemyVisualCone vision;
-
-    private void Start()
+    private void Awake()
     {
-        if(patrolPoints.Length > 0)
-        {
-            currentPatrolPoint = patrolPoints[0];
-        }
-        vision = GetComponentInChildren<EnemyVisualCone>();
-        rb2d = GetComponent<Rigidbody2D>();
-        
-        grid = GameObject.FindGameObjectWithTag("GameMaster").GetComponent<Grid>();
-        pathFinding = grid.pathFinding;
-
+        SetHelperNames();
     }
+
     private void Update()
     {
         if (!aiActive)
@@ -55,7 +24,7 @@ public class StateController : MonoBehaviour
         }
         
         currentState.UpdateState(this);
-        RotateToMovement();
+        //RotateToMovement();
     }
 
     private void OnDrawGizmosSelected()
@@ -65,16 +34,16 @@ public class StateController : MonoBehaviour
             Gizmos.color = currentState.sceneGizmoColor;
             Gizmos.DrawWireSphere(transform.position, 1);
         }
-        for(int i = 0; i < patrolPoints.Length; i++)
-        {
-            Gizmos.color = wayPointGizmoColor;
-            Gizmos.DrawWireSphere(patrolPoints[i], .25f);
-        }
-        for(int i = 0; i < path.Count; i++)
-        {
-            Gizmos.color = pathNodeColor;
-            Gizmos.DrawWireSphere(path[i].position, .33f);
-        }
+        //for(int i = 0; i < patrolPoints.Length; i++)
+        //{
+        //    Gizmos.color = wayPointGizmoColor;
+        //    Gizmos.DrawWireSphere(patrolPoints[i], .25f);
+        //}
+        //for(int i = 0; i < path.Count; i++)
+        //{
+        //    Gizmos.color = pathNodeColor;
+        //    Gizmos.DrawWireSphere(path[i].position, .33f);
+        //}
     }
     
 
@@ -83,25 +52,54 @@ public class StateController : MonoBehaviour
         currentState = nextState;
     }
 
-    public enum PatrolDirection
+    //void RotateToMovement()
+    //{
+    //    if (!vision.target)
+    //    {
+    //        Vector3 dir = rb2d.velocity;
+    //        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+    //        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+    //    }
+    //    else
+    //    {
+    //        Vector3 dir = vision.target.transform.position - transform.position;
+    //        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+    //        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+    //    }
+        
+    //}
+
+    public StateMonoHelper GetHelper(string name)
     {
-        forwards,backwards
+        foreach (MonoHelperSet helperSet in helpers)
+        {
+            if (helperSet.GetName().Equals(name))
+            {
+                return helperSet.GetHelper();
+            }
+        }
+
+        Debug.LogError("Could not find StateMonoHelper object with name " + name);
+        return null;
     }
 
-    void RotateToMovement()
+    public List<string> GetHelperNames()
     {
-        if (!vision.target)
+        List<string> names = new List<string>();
+
+        foreach (MonoHelperSet helperSet in helpers)
         {
-            Vector3 dir = rb2d.velocity;
-            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            names.Add(helperSet.GetName());
         }
-        else
+
+        return names;
+    }
+
+    private void SetHelperNames()
+    {
+        foreach (MonoHelperSet helperSet in helpers)
         {
-            Vector3 dir = vision.target.transform.position - transform.position;
-            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            helperSet.GetHelper().SetName(helperSet.GetName());
         }
-        
     }
 }

@@ -25,7 +25,7 @@ TagManager:
   - Player
   - VisualCone
   - Interact
-  - 
+  - Light
   - 
   - 
   - 
@@ -51,11 +51,14 @@ TagManager:
   - name: Background
     uniqueID: 2934329573
     locked: 0
-  - name: Characters
-    uniqueID: 2313595795
-    locked: 0
   - name: Middle
     uniqueID: 296011337
+    locked: 0
+  - name: Character
+    uniqueID: 566816337
+    locked: 0
+  - name: FakeLights
+    uniqueID: 1127561689
     locked: 0
   - name: Foreground
     uniqueID: 210451815

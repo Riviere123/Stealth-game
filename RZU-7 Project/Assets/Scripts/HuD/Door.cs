@@ -1,7 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+/// <summary>
+/// Holds what key opens the door.
+/// </summary>
 public class Door : MonoBehaviour
 {
     public GameObject Key;

@@ -1,7 +1,13 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Controlls the timer for the level
+/// </summary>
+/// <param name="hud">Reference to the HUD Script (This script should be on the same game object.</param>
+/// <param name="pause">Pauses the time.</param>
+/// <param name="levelTime">The starting time for the level.</param>
+/// <param name="currentTime">The remaining tim of the level.</param>
 public class LevelTimer : MonoBehaviour
 {
     HuD hud;

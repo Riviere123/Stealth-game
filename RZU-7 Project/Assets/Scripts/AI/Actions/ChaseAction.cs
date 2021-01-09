@@ -11,8 +11,8 @@ public class ChaseAction : Actions
 
     void Chase(StateController controller)
     {
-        MovementHelper moveHelper = (MovementHelper)controller.GetHelper(AIConstants.movementHelperKey);
-        GeneralHelper generalHelper = (GeneralHelper)controller.GetHelper(AIConstants.generalHelperKey);
+        MovementHelper moveHelper = controller.GetHelper<MovementHelper>();
+        //GeneralHelper generalHelper = controller.GetHelper<GeneralHelper>();
 
         if (moveHelper.vision.target)
         {
@@ -31,13 +31,14 @@ public class ChaseAction : Actions
                 moveHelper.path.RemoveAt(0);
                 return;
             }
-            generalHelper.rigidBody.AddForce((moveHelper.path[0].position - controller.transform.position).normalized * generalHelper.stats.runSpeed * Time.deltaTime, ForceMode2D.Impulse);
+            //generalHelper.rigidBody.AddForce((moveHelper.path[0].position - controller.transform.position).normalized * generalHelper.stats.runSpeed * Time.deltaTime, ForceMode2D.Impulse);
+            controller.components.Get<Rigidbody2D>("rigidBody").AddForce((moveHelper.path[0].position - controller.transform.position).normalized * controller.components.Get<AIStats>("stats").runSpeed * Time.deltaTime, ForceMode2D.Impulse);
         }
     }
 
     void FindNewPath(StateController controller)
     {
-        MovementHelper moveHelper = (MovementHelper)controller.GetHelper(AIConstants.movementHelperKey);
+        MovementHelper moveHelper = controller.GetHelper<MovementHelper>();
         moveHelper.path = moveHelper.pathFinding.FindPath(controller.transform.position, moveHelper.vision.target.transform.position);
     }
 }

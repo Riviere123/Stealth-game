@@ -7,7 +7,7 @@ public class PatrolAction : Actions
 {
     public override void Act(StateController controller)
     {
-        MovementHelper moveHelper = (MovementHelper)controller.GetHelper(AIConstants.movementHelperKey);
+        MovementHelper moveHelper = controller.GetHelper<MovementHelper>();
         if (moveHelper.patrolPoints.Length > 0)
         {
             Patrol(controller);
@@ -16,8 +16,9 @@ public class PatrolAction : Actions
 
     void Patrol(StateController controller)
     {
-        MovementHelper moveHelper = (MovementHelper)controller.GetHelper(AIConstants.movementHelperKey);
-        GeneralHelper generalHelper = (GeneralHelper)controller.GetHelper(AIConstants.generalHelperKey);
+        MovementHelper moveHelper = controller.GetHelper<MovementHelper>();
+        //GeneralHelper generalHelper = controller.GetHelper<GeneralHelper>();
+
         RaycastHit2D hit = Physics2D.Raycast(controller.transform.position, moveHelper.currentPatrolPoint - (Vector2)controller.transform.position,Vector2.Distance(controller.transform.position,moveHelper.currentPatrolPoint),LayerMask.GetMask("Obstacle"));
         Debug.DrawRay(controller.transform.position, moveHelper.currentPatrolPoint - (Vector2)controller.transform.position);
         if (!hit)
@@ -38,7 +39,8 @@ public class PatrolAction : Actions
                     moveHelper.path.RemoveAt(0);
                     return;
                 }
-                generalHelper.rigidBody.AddForce((moveHelper.path[0].position - controller.transform.position).normalized * generalHelper.stats.walkSpeed * Time.deltaTime, ForceMode2D.Impulse);
+                //generalHelper.rigidBody.AddForce((moveHelper.path[0].position - controller.transform.position).normalized * generalHelper.stats.walkSpeed * Time.deltaTime, ForceMode2D.Impulse);
+                controller.components.Get<Rigidbody2D>("rigidBody").AddForce((moveHelper.path[0].position - controller.transform.position).normalized * controller.components.Get<AIStats>("stats").walkSpeed * Time.deltaTime, ForceMode2D.Impulse);
             }
         }
         
@@ -84,7 +86,8 @@ public class PatrolAction : Actions
                         }
                     }
                 }
-                generalHelper.rigidBody.AddForce((moveHelper.currentPatrolPoint - (Vector2)controller.transform.position).normalized * generalHelper.stats.walkSpeed * Time.deltaTime, ForceMode2D.Impulse);
+                //generalHelper.rigidBody.AddForce((moveHelper.currentPatrolPoint - (Vector2)controller.transform.position).normalized * generalHelper.stats.walkSpeed * Time.deltaTime, ForceMode2D.Impulse);
+                controller.components.Get<Rigidbody2D>("rigidBody").AddForce((moveHelper.currentPatrolPoint - (Vector2)controller.transform.position).normalized * controller.components.Get<AIStats>("stats").walkSpeed * Time.deltaTime, ForceMode2D.Impulse);
             }
             else
             {
@@ -107,7 +110,8 @@ public class PatrolAction : Actions
                         }
                     }
                 }
-                generalHelper.rigidBody.AddForce((moveHelper.currentPatrolPoint - (Vector2)controller.transform.position).normalized * generalHelper.stats.walkSpeed * Time.deltaTime, ForceMode2D.Impulse);
+                //generalHelper.rigidBody.AddForce((moveHelper.currentPatrolPoint - (Vector2)controller.transform.position).normalized * generalHelper.stats.walkSpeed * Time.deltaTime, ForceMode2D.Impulse);
+                controller.components.Get<Rigidbody2D>("rigidBody").AddForce((moveHelper.currentPatrolPoint - (Vector2)controller.transform.position).normalized * controller.components.Get<AIStats>("stats").walkSpeed * Time.deltaTime, ForceMode2D.Impulse);
             }
         }
         else

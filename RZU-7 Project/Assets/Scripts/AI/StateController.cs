@@ -6,15 +6,10 @@ using UnityEngine;
 
 public class StateController : MonoBehaviour
 {
-    [SerializeField]
-    public List<MonoHelperSet> helpers;
+    public Components components;
+    public List<StateMonoHelper> helpers;
     public bool aiActive;
     public State currentState;
-
-    private void Awake()
-    {
-        SetHelperNames();
-    }
 
     private void Update()
     {
@@ -52,54 +47,17 @@ public class StateController : MonoBehaviour
         currentState = nextState;
     }
 
-    //void RotateToMovement()
-    //{
-    //    if (!vision.target)
-    //    {
-    //        Vector3 dir = rb2d.velocity;
-    //        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-    //        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-    //    }
-    //    else
-    //    {
-    //        Vector3 dir = vision.target.transform.position - transform.position;
-    //        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-    //        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-    //    }
-        
-    //}
-
-    public StateMonoHelper GetHelper(string name)
+    public T GetHelper<T>()
     {
-        foreach (MonoHelperSet helperSet in helpers)
+        foreach (StateMonoHelper helper in helpers)
         {
-            if (helperSet.GetName().Equals(name))
+            if (typeof(T).Equals(helper.GetType()))
             {
-                return helperSet.GetHelper();
+                return (T)(object)helper;
             }
         }
 
         Debug.LogError("Could not find StateMonoHelper object with name " + name);
-        return null;
-    }
-
-    public List<string> GetHelperNames()
-    {
-        List<string> names = new List<string>();
-
-        foreach (MonoHelperSet helperSet in helpers)
-        {
-            names.Add(helperSet.GetName());
-        }
-
-        return names;
-    }
-
-    private void SetHelperNames()
-    {
-        foreach (MonoHelperSet helperSet in helpers)
-        {
-            helperSet.GetHelper().SetName(helperSet.GetName());
-        }
+        return default;
     }
 }

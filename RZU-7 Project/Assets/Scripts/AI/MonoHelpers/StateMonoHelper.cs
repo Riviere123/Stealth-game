@@ -1,16 +1,16 @@
 ﻿using UnityEngine;
 
+[RequireComponent(typeof(StateController))]
 public abstract class StateMonoHelper : MonoBehaviour
 {
-    protected string Name;
+    protected StateController controller;
 
-    public string GetName()
+    private void Awake()
     {
-        return Name;
-    }
-
-    public void SetName(string name)
-    {
-        Name = name;
+        controller = gameObject.GetComponent<StateController>();
+        if (controller == null)
+        {
+            Debug.LogError("Did not find expected StateController component in " + gameObject.name + ".");
+        }
     }
 }

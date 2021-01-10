@@ -5,11 +5,12 @@ using UnityEngine;
 public class MovementHelper : StateMonoHelper
 {
     [Header("Movement")]
+    [HideInInspector]
     public Grid grid;
 
     [HideInInspector]
     public PathFinding pathFinding;
-    [SerializeField] // DEBUG
+    [HideInInspector]
     public bool patrolLoop;
     public Vector2[] patrolPoints;
 
@@ -25,8 +26,7 @@ public class MovementHelper : StateMonoHelper
     [SerializeField]
     Color pathNodeColor;
 
-    [HideInInspector]
-    public EnemyVisualCone vision;
+    EnemyVisualCone vision;
 
     public bool GetPatrolLoop()
     {
@@ -44,7 +44,8 @@ public class MovementHelper : StateMonoHelper
         {
             currentPatrolPoint = patrolPoints[0];
         }
-        vision = GetComponentInChildren<EnemyVisualCone>();
+        //vision = GetComponentInChildren<EnemyVisualCone>();
+        vision = controller.references.Get<EnemyVisualCone>("visualCone");
 
         grid = GameObject.FindGameObjectWithTag("GameMaster").GetComponent<Grid>();
         pathFinding = grid.pathFinding;
@@ -73,7 +74,8 @@ public class MovementHelper : StateMonoHelper
     {
         if (!vision.target)
         {
-            Vector3 dir = GetComponent<Rigidbody2D>().velocity;
+            //Vector3 dir = GetComponent<Rigidbody2D>().velocity;
+            Vector3 dir = controller.references.Get<Rigidbody2D>("rigidBody").velocity;
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }

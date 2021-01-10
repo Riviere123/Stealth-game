@@ -15,7 +15,7 @@ public class LookDecision : Decision
     bool Look(StateController controller)
     {
 
-        if(controller.GetHelper<MovementHelper>().vision.target != null)
+        if(controller.references.Get<EnemyVisualCone>("visualCone").target != null)
         {
             return true;
         }

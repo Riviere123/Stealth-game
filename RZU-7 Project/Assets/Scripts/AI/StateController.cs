@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class StateController : MonoBehaviour
 {
-    public Components components;
+    public References references;
     public List<StateMonoHelper> helpers;
     public bool aiActive;
     public State currentState;
@@ -19,7 +19,6 @@ public class StateController : MonoBehaviour
         }
         
         currentState.UpdateState(this);
-        //RotateToMovement();
     }
 
     private void OnDrawGizmosSelected()

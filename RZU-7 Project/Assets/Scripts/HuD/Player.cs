@@ -24,7 +24,8 @@ public class Player: MonoBehaviour
             {
                 GameObject key = collision.gameObject;
                 playerMaster.AddKey(key);
-                key.transform.position = new Vector2(9999, 9999);
+                key.GetComponent<SpriteRenderer>().enabled = false;
+                key.GetComponent<Collider2D>().enabled = false;
                 hud.DisplayKeys();
             }
         }

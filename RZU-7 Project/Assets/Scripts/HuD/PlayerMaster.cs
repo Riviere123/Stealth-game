@@ -17,8 +17,15 @@ public class PlayerMaster
     /// <param name="newGold">The ammount of gold to add.</param>
     public void AddGold(int newGold)
     {
-        gold += newGold;
-        hud.DisplayGold();
+        if(newGold < 0)
+        {
+            Debug.LogError($"cannot add a negative quantity of gold!");
+        }
+        else
+        {
+            gold += newGold;
+            hud.DisplayGold();
+        }
     }
     public int GetGold()
     {

@@ -41,6 +41,7 @@ public class HuD : MonoBehaviour
         playerMaster = new PlayerMaster(this);
         levelTimer = GetComponent<LevelTimer>();
     }
+
     /// <summary>
     /// Refreshes the gold display.
     /// </summary>
@@ -48,6 +49,7 @@ public class HuD : MonoBehaviour
     {
         goldText.text = playerMaster.GetGold().ToString();
     }
+
     /// <summary>
     /// Refreshes the time display.
     /// </summary>
@@ -67,6 +69,7 @@ public class HuD : MonoBehaviour
             timeText.text = $"{minutes}:{seconds}";
         }
     }
+
     /// <summary>
     /// refreshes the keys display.
     /// </summary>
@@ -89,7 +92,7 @@ public class HuD : MonoBehaviour
             }
             catch
             {
-                Debug.Log($"{item} does not have a sprite renderer");
+                Debug.LogError($"{item} does not have a sprite renderer");
             }
         }
     }
@@ -97,6 +100,7 @@ public class HuD : MonoBehaviour
     /// gets the playerMaster script that is generated from this HuD Script.
     /// </summary>
     /// <returns>The playerMaster script reference.</returns>
+    
     public PlayerMaster GetPlayerMaster()
     {
         return playerMaster;

@@ -23,21 +23,29 @@ public class LevelTimer : MonoBehaviour
         currentTime = levelTime;
         StartCoroutine(CountDown());
     }
-
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            PauseGame();
+        }
+    }
     /// <summary>
     /// pauses the decrement of time.
     /// </summary>
     void PauseGame()
     {
-        pause = true;
+        pause = !pause;
+        if (pause)
+        {
+            Time.timeScale = 0;
+        }
+        else
+        {
+            Time.timeScale = 1;
+        }
     }
-    /// <summary>
-    /// unpauses the decrement of time.
-    /// </summary>
-    void UnPauseGame()
-    {
-        pause = false;
-    }
+
 
     /// <summary>
     /// This counts down the timer and displays the correct time in the time text gameobject.
@@ -55,11 +63,8 @@ public class LevelTimer : MonoBehaviour
         if (currentTime != 0)
         {
             yield return new WaitForSeconds(1);
-            if (!pause)
-            {
-                currentTime -= 1;
-            }
-            StartCoroutine(CountDown());
+            currentTime -= 1;
+            StartCoroutine(CountDown()); 
             hud.DisplayTime();
         }
     }

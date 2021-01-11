@@ -23,6 +23,7 @@ public class LevelTimer : MonoBehaviour
         currentTime = levelTime;
         StartCoroutine(CountDown());
     }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Mouse0))
@@ -30,12 +31,21 @@ public class LevelTimer : MonoBehaviour
             Pause();
         }
     }
+
     /// <summary>
     /// pauses the decrement of time.
     /// </summary>
     void Pause()
     {
         pause = !pause;
+        if (pause)
+        {
+            Time.timeScale = 0;
+        }
+        else
+        {
+            Time.timeScale = 1;
+        }
     }
 
 
@@ -53,20 +63,11 @@ public class LevelTimer : MonoBehaviour
 
         if (currentTime > 0)
         {
-            
-            if (!pause)
-            {
-                currentTime -= 1;
-                yield return new WaitForSeconds(1);
-                StartCoroutine(CountDown());
-            }
-            else
-            {
-                yield return null;
-                StartCoroutine(CountDown());
-            }
-
+            yield return new WaitForSeconds(1);
+            currentTime -= 1;
+            Mathf.Clamp(currentTime, 0, Mathf.Infinity);
             hud.DisplayTime();
+            StartCoroutine(CountDown());
         }
     }
 }

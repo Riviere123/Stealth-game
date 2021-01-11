@@ -12,8 +12,15 @@ public class Player: MonoBehaviour
 
     private void Start()
     {
-        hud = GameObject.FindGameObjectWithTag("HuD").GetComponent<HuD>();
-        playerMaster = hud.GetPlayerMaster();
+        try
+        {
+            hud = GameObject.FindGameObjectWithTag("HuD").GetComponent<HuD>();
+            playerMaster = hud.GetPlayerMaster();
+        }
+        catch
+        {
+            Debug.LogError($"Hud has no HuD Tag or is not in the scene.");
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

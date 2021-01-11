@@ -24,14 +24,6 @@ public class LevelTimer : MonoBehaviour
         StartCoroutine(CountDown());
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            Pause();
-        }
-    }
-
     /// <summary>
     /// pauses the decrement of time.
     /// </summary>

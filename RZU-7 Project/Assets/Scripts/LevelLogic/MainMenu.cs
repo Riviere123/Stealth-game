@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+
 /// <summary>
 /// The logic behind the main menu also creates the levelsPrefab which stores our levels and keeps track of there unlocked state.
 /// </summary>
@@ -12,6 +11,7 @@ public class MainMenu : MonoBehaviour
     Levels levels;
     [SerializeField]
     GameObject levelsPrefab;
+    
     /// <summary>
     /// If the levelsPrefab doesn't already exist we make one.
     /// </summary>
@@ -43,15 +43,7 @@ public class MainMenu : MonoBehaviour
     /// </summary>
     public void ContinueButton()
     {
-        for (int i = levels.allLevels.Length-1; i >= 0; i--)
-        {
-            Level lev = levels.allLevels[i];
-            if (lev.unlocked)
-            {
-                levels.LoadLevel(lev);
-                break;
-            }
-        }
+        levels.Continue();
     }
 
     /// <summary>
@@ -60,5 +52,9 @@ public class MainMenu : MonoBehaviour
     public void CreditsButton()
     {
         SceneManager.LoadScene("Credits");
+    }
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }

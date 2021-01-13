@@ -43,22 +43,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1fe1c492b9f7af4d996b48bb301c27e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentLevelIndex: 0
+  totalBadges: 0
+  speedCount: 0
+  goldCount: 0
+  secretCount: 0
   allLevels:
   - displayName: Level 1
     sceneName: Test1
+    badgesToUnlock: 0
     unlocked: 1
     speedBadge: 0
     goldBadge: 0
     secretBadge: 0
   - displayName: Level 2
     sceneName: Test2
-    unlocked: 0
-    speedBadge: 0
-    goldBadge: 0
-    secretBadge: 0
-  currentLevel:
-    displayName: 
-    sceneName: 
+    badgesToUnlock: 1
     unlocked: 0
     speedBadge: 0
     goldBadge: 0

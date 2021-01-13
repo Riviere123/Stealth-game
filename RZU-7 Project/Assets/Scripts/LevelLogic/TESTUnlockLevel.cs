@@ -1,7 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+
+/// <summary>
+/// This script is run in TestScene 1 to test method calls for Levels script.
+/// </summary>
 public class TESTUnlockLevel : MonoBehaviour
 {
     Levels levels;
@@ -13,10 +15,6 @@ public class TESTUnlockLevel : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            levels.UnlockNextLevel();
-        }
         if (Input.GetKeyDown(KeyCode.Q))
         {
             levels.UnlockGoldBadge();

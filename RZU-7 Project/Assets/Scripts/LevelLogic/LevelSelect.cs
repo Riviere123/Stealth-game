@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -23,6 +21,14 @@ public class LevelSelect : MonoBehaviour
     Color lockedColor;
     [SerializeField]
     Color lockedBadge;
+
+    [SerializeField]
+    TextMeshProUGUI goldText;
+    [SerializeField]
+    TextMeshProUGUI speedText;
+    [SerializeField]
+    TextMeshProUGUI secretText;
+
     private void Awake()
     {
         try
@@ -55,9 +61,12 @@ public class LevelSelect : MonoBehaviour
             if (!current.unlocked)
             {
                 temp.GetComponent<Image>().color = lockedColor;
+                TextMeshProUGUI locktext = temp.transform.GetChild(3).GetChild(0).GetComponent<TextMeshProUGUI>();
+                locktext.text = current.badgesToUnlock.ToString();
             }
             else
             {
+                temp.transform.GetChild(3).gameObject.SetActive(false);
                 temp.GetComponent<Button>().onClick.AddListener(delegate { levels.LoadLevel(current); });
             }
             if (!levels.allLevels[i].goldBadge)
@@ -72,7 +81,11 @@ public class LevelSelect : MonoBehaviour
             {
                 temp.transform.GetChild(2).GetComponent<Image>().color = lockedBadge;
             }
+            
         }
+        goldText.text = levels.goldCount.ToString();
+        speedText.text = levels.speedCount.ToString();
+        secretText.text = levels.secretCount.ToString();
     }
 
     /// <summary>

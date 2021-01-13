@@ -21,19 +21,23 @@ public class LevelSelect : MonoBehaviour
     GameObject levelsPanel;
     [SerializeField]
     Color lockedColor;
+    [SerializeField]
+    Color lockedBadge;
     private void Awake()
     {
-        if (GameObject.FindGameObjectWithTag("Levels"))
+        try
         {
-            if (GameObject.FindGameObjectWithTag("Levels").GetComponent<Levels>())
+            if (GameObject.FindGameObjectWithTag("Levels"))
             {
-                levels = GameObject.FindGameObjectWithTag("Levels").GetComponent<Levels>();
+                if (GameObject.FindGameObjectWithTag("Levels").GetComponent<Levels>())
+                {
+                    levels = GameObject.FindGameObjectWithTag("Levels").GetComponent<Levels>();
+                }
             }
-            Debug.Log("Found the gameobject but it does not have the Levels script!");
         }
-        else
+        catch
         {
-            Debug.Log("Levels is not on this scene!");
+            Debug.LogError("Error with either finding the Tag Levels or object getting the component named Levels from the gameobject tagged Levels");
         }
         
     }
@@ -45,7 +49,6 @@ public class LevelSelect : MonoBehaviour
     {
         for(int i = 0; i < levels.allLevels.Length; i++)
         {
-            int order = i;
             Level current = levels.allLevels[i];
             GameObject temp = Instantiate(button, levelsPanel.transform);
             temp.GetComponentInChildren<TextMeshProUGUI>().text = current.DisplayName;
@@ -55,7 +58,19 @@ public class LevelSelect : MonoBehaviour
             }
             else
             {
-                temp.GetComponent<Button>().onClick.AddListener(delegate { levels.LoadLevel(order); });
+                temp.GetComponent<Button>().onClick.AddListener(delegate { levels.LoadLevel(current); });
+            }
+            if (!levels.allLevels[i].goldBadge)
+            {
+                temp.transform.GetChild(0).GetComponent<Image>().color = lockedBadge;
+            }
+            if (!levels.allLevels[i].secretBadge)
+            {
+                temp.transform.GetChild(1).GetComponent<Image>().color = lockedBadge;
+            }
+            if (!levels.allLevels[i].speedBadge)
+            {
+                temp.transform.GetChild(2).GetComponent<Image>().color = lockedBadge;
             }
         }
     }

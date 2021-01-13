@@ -37,6 +37,7 @@ public class MainMenu : MonoBehaviour
     {
         SceneManager.LoadScene("Level Select");
     }
+
     /// <summary>
     /// Loads the latest level unlocked.
     /// </summary>
@@ -44,13 +45,15 @@ public class MainMenu : MonoBehaviour
     {
         for (int i = levels.allLevels.Length-1; i >= 0; i--)
         {
-            if (levels.allLevels[i].unlocked)
+            Level lev = levels.allLevels[i];
+            if (lev.unlocked)
             {
-                levels.LoadLevel(i);
+                levels.LoadLevel(lev);
                 break;
             }
         }
     }
+
     /// <summary>
     /// Loads the credits scene.
     /// </summary>

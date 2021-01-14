@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:RZU-7 Project/Assets/Scripts/LevelLogic.meta
+guid: c0256123814138141b4d386f310ec4f1
+=======
 guid: 18875a42f9fbe41b59d96bc7c2f8472f
+>>>>>>> main:RZU-7 Project/Assets/Animations.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

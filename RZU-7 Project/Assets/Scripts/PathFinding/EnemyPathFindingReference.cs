@@ -32,8 +32,7 @@ public class EnemyPathFindingReference : MonoBehaviour
             case State.Hunt: //if the state is hunt
                 if (target && pathNodes.Count == 0 && Vector2.Distance(target.transform.position, transform.position) > 3)//if we have a target and no nodes
                 {
-                    pathFinding.FindPath(transform.position, target.transform.position); //find the closest path to the target
-                    pathNodes = pathFinding.finalPath; //sets the pathnodes list to to correct path to reach the target
+                    pathNodes = pathFinding.FindPath(transform.position, target.transform.position); //find the closest path to the target
                 }
                 if(pathNodes.Count > 0)//if there are path nodes
                 {

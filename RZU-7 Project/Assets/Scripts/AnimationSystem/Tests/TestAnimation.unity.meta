@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:RZU-7 Project/Assets/Scripts/LevelLogic/Tests/LevelLogicTest.unity.meta
+guid: 0834e05bc103a9d4da85e86cee135de9
+=======
 guid: 375e00164793e419196bbb4ffdc3a35f
+>>>>>>> main:RZU-7 Project/Assets/Scripts/AnimationSystem/Tests/TestAnimation.unity.meta
 DefaultImporter:
   externalObjects: {}
   userData: 

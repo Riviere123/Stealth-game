@@ -5,22 +5,19 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: Assets/Scripts/StealthSystem/Tests/StealthTestScene.unity
-    guid: a9abbc4bb59bc1c42911c55974b91c94
-  - enabled: 0
-    path: Assets/Scripts/StealthSystem/Tests/SoundTestScene.unity
-    guid: 2425c9e95ffdd0345ac9fecdbb83a638
-  - enabled: 0
-    path: Assets/Scripts/StealthSystem/Tests/GamePlayerStealthLoop.unity
-    guid: 6207648db1d4632438247aa5f7458886
   - enabled: 1
-    path: Assets/Scripts/AI/Tests/AI Tests.unity
-    guid: 2f9cde55d29f49e43b69e61bbeddbb62
+    path: Assets/Scripts/LevelLogic/Tests/Main Menu.unity
+    guid: c2b616ee6ecc36345a06c159e42fcc31
+  - enabled: 1
+    path: Assets/Scripts/LevelLogic/Tests/Level Select.unity
+    guid: d246b7c05aa2b8545abbe3c196ca627c
+  - enabled: 1
+    path: Assets/Scripts/LevelLogic/Tests/Credits.unity
+    guid: 7d30833c05ed9f145b73381b766d2a1a
+  - enabled: 1
+    path: Assets/Scripts/LevelLogic/Tests/Test1.unity
+    guid: 0ac3b4b682086084f8f2245c03592687
+  - enabled: 1
+    path: Assets/Scripts/LevelLogic/Tests/Test2.unity
+    guid: 3f4f3a7df45c48540935fb2ba55772b9
   m_configObjects: {}

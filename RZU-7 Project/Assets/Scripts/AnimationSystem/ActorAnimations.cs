@@ -14,11 +14,11 @@
 public class ActorAnimations : MonoBehaviour
 {
     [SerializeField]
+    protected float zeroApproximationBoundary = 0.01f;
+    [SerializeField]
     protected Animator animator;
     protected float lastX = 0f;
     protected float lastY = 0f;
-    protected float zeroApproximationBoundary = 0.01f;
-
 
     void Start()
     {

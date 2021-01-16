@@ -28,16 +28,6 @@ public class StateController : MonoBehaviour
             Gizmos.color = currentState.sceneGizmoColor;
             Gizmos.DrawWireSphere(transform.position, 1);
         }
-        //for(int i = 0; i < patrolPoints.Length; i++)
-        //{
-        //    Gizmos.color = wayPointGizmoColor;
-        //    Gizmos.DrawWireSphere(patrolPoints[i], .25f);
-        //}
-        //for(int i = 0; i < path.Count; i++)
-        //{
-        //    Gizmos.color = pathNodeColor;
-        //    Gizmos.DrawWireSphere(path[i].position, .33f);
-        //}
     }
     
 

@@ -38,7 +38,7 @@ public class PatrolAction : Actions
                     moveHelper.path.RemoveAt(0);
                     return;
                 }
-                controller.references.Get<Rigidbody2D>("rigidBody").AddForce((moveHelper.path[0].position - controller.transform.position).normalized * controller.references.Get<AIStats>("stats").walkSpeed * Time.deltaTime, ForceMode2D.Impulse);
+                controller.references.Get<Rigidbody2D>(EnemyReferencesConstants.rigidBody).AddForce((moveHelper.path[0].position - controller.transform.position).normalized * controller.references.Get<AIStats>(EnemyReferencesConstants.stats).walkSpeed * Time.deltaTime, ForceMode2D.Impulse);
             }
         }
         
@@ -84,7 +84,7 @@ public class PatrolAction : Actions
                         }
                     }
                 }
-                controller.references.Get<Rigidbody2D>("rigidBody").AddForce((moveHelper.currentPatrolPoint - (Vector2)controller.transform.position).normalized * controller.references.Get<AIStats>("stats").walkSpeed * Time.deltaTime, ForceMode2D.Impulse);
+                controller.references.Get<Rigidbody2D>(EnemyReferencesConstants.rigidBody).AddForce((moveHelper.currentPatrolPoint - (Vector2)controller.transform.position).normalized * controller.references.Get<AIStats>(EnemyReferencesConstants.stats).walkSpeed * Time.deltaTime, ForceMode2D.Impulse);
             }
             else
             {
@@ -107,7 +107,7 @@ public class PatrolAction : Actions
                         }
                     }
                 }
-                controller.references.Get<Rigidbody2D>("rigidBody").AddForce((moveHelper.currentPatrolPoint - (Vector2)controller.transform.position).normalized * controller.references.Get<AIStats>("stats").walkSpeed * Time.deltaTime, ForceMode2D.Impulse);
+                controller.references.Get<Rigidbody2D>(EnemyReferencesConstants.rigidBody).AddForce((moveHelper.currentPatrolPoint - (Vector2)controller.transform.position).normalized * controller.references.Get<AIStats>(EnemyReferencesConstants.stats).walkSpeed * Time.deltaTime, ForceMode2D.Impulse);
             }
         }
         else

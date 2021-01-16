@@ -12,7 +12,7 @@ public class ChaseAction : Actions
     void Chase(StateController controller)
     {
         MovementHelper moveHelper = controller.GetHelper<MovementHelper>();
-        EnemyVisualCone vision = controller.references.Get<EnemyVisualCone>("visualCone");
+        EnemyVisualCone vision = controller.references.Get<EnemyVisualCone>(EnemyReferencesConstants.visualCone);
 
         if (vision.target)
         {
@@ -31,14 +31,14 @@ public class ChaseAction : Actions
                 moveHelper.path.RemoveAt(0);
                 return;
             }
-            controller.references.Get<Rigidbody2D>("rigidBody").AddForce((moveHelper.path[0].position - controller.transform.position).normalized * controller.references.Get<AIStats>("stats").runSpeed * Time.deltaTime, ForceMode2D.Impulse);
+            controller.references.Get<Rigidbody2D>(EnemyReferencesConstants.rigidBody).AddForce((moveHelper.path[0].position - controller.transform.position).normalized * controller.references.Get<AIStats>("stats").runSpeed * Time.deltaTime, ForceMode2D.Impulse);
         }
     }
 
     void FindNewPath(StateController controller)
     {
         MovementHelper moveHelper = controller.GetHelper<MovementHelper>();
-        moveHelper.path = moveHelper.pathFinding.FindPath(controller.transform.position, controller.references.Get<EnemyVisualCone>("visualCone").target.transform.position);
+        moveHelper.path = moveHelper.pathFinding.FindPath(controller.transform.position, controller.references.Get<EnemyVisualCone>(EnemyReferencesConstants.visualCone).target.transform.position);
     }
 }
 

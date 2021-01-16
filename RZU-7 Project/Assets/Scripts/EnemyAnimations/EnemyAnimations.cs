@@ -2,9 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : ActorAnimations
+public class EnemyAnimations : ActorAnimations
 {
-    Rigidbody2D rigidBody;
+    [SerializeField]
+    protected Rigidbody2D rigidBody;
+
+    void Update()
+    {
+        SetMovementValues(MovementConstants.ActorMovementStates.WALK);
+    }
 
     public override void SetMovementBooleans(MovementConstants.ActorMovementStates movementState)
     {

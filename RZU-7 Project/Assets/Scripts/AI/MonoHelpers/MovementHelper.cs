@@ -1,10 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class MovementHelper : StateMonoHelper
 {
-    [Header("Movement")]
     [HideInInspector]
     public Grid grid;
 
@@ -44,16 +42,15 @@ public class MovementHelper : StateMonoHelper
         {
             currentPatrolPoint = patrolPoints[0];
         }
-        //vision = GetComponentInChildren<EnemyVisualCone>();
-        vision = controller.references.Get<EnemyVisualCone>("visualCone");
+        vision = controller.references.Get<EnemyVisualCone>(EnemyReferencesConstants.visualCone);
 
-        grid = GameObject.FindGameObjectWithTag("GameMaster").GetComponent<Grid>();
+        grid = GameObject.FindGameObjectWithTag(Constants.gameMaster).GetComponent<Grid>();
         pathFinding = grid.pathFinding;
 
     }
     private void Update()
     {
-        RotateToMovement();
+        SnapConeDirection();
     }
 
     private void OnDrawGizmosSelected()
@@ -70,20 +67,23 @@ public class MovementHelper : StateMonoHelper
         }
     }
 
-    void RotateToMovement()
+    void SnapConeDirection()
     {
+        Animator animator = controller.references.Get<Animator>(EnemyReferencesConstants.animator);
+        GameObject visualCone = controller.references.Get<GameObject>(EnemyReferencesConstants.visualConeGameObject);
+
         if (!vision.target)
         {
-            //Vector3 dir = GetComponent<Rigidbody2D>().velocity;
-            Vector3 dir = controller.references.Get<Rigidbody2D>("rigidBody").velocity;
-            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            float x = animator.GetFloat(AnimationConstants.lastX);
+            float y = animator.GetFloat(AnimationConstants.lastY);
+            float angle = Mathf.Atan2(y, x) * Mathf.Rad2Deg;
+            visualCone.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }
         else
         {
             Vector3 dir = vision.target.transform.position - transform.position;
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            visualCone.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }
 
     }

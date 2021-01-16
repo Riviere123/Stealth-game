@@ -11,5 +11,7 @@ public class EnemyReferences : References
 
     [Header("Movement")]
     public EnemyVisualCone visualCone;
+    public Animator animator;
+    public GameObject visualConeGameObject;
 
 }

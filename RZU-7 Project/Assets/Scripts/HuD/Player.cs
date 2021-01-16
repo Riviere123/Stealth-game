@@ -6,7 +6,8 @@
 /// <param name"hud">Reference to the hud script</param>
 /// <param name"playerMaster">Reference to the PlayerMasterScript</param>
 public class Player: MonoBehaviour
-{  
+{
+    GameMaster gameMaster;
     HuD hud;
     PlayerMaster playerMaster;
 
@@ -14,12 +15,22 @@ public class Player: MonoBehaviour
     {
         try
         {
-            hud = GameObject.FindGameObjectWithTag("HuD").GetComponent<HuD>();
-            playerMaster = hud.GetPlayerMaster();
+            gameMaster = GameObject.FindGameObjectWithTag("GameMaster").GetComponent<GameMaster>();
+            hud = gameMaster.GetHud();
+            playerMaster = gameMaster.GetPlayerMaster();
         }
         catch
         {
             Debug.LogError($"Hud has no HuD Tag or is not in the scene.");
+        }
+    }
+    private void Update()
+    {
+        //////////THIS IS FOR TESTING
+        ///
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            gameMaster.CompleteLevel();
         }
     }
 
@@ -42,6 +53,14 @@ public class Player: MonoBehaviour
             playerMaster.AddGold(collision.GetComponent<Valuable>().value);
             Destroy(collision.GetComponent<SpriteRenderer>());
             Destroy(collision.GetComponent<Collider2D>());
+        }
+
+        if(collision.tag == "SecretItem")
+        {
+            playerMaster.AddSecretItem(collision.gameObject);
+            collision.GetComponent<SpriteRenderer>().enabled = false;
+            collision.GetComponent<Collider2D>().enabled = false;
+            hud.DisplaySecretItems();
         }
     }
     private void OnCollisionEnter2D(Collision2D collision)

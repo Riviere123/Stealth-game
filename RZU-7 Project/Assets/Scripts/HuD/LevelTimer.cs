@@ -10,6 +10,7 @@ using UnityEngine;
 /// <param name="currentTime">The remaining tim of the level.</param>
 public class LevelTimer : MonoBehaviour
 {
+    [SerializeField]
     HuD hud;
     [SerializeField]
     bool pause;
@@ -19,7 +20,6 @@ public class LevelTimer : MonoBehaviour
 
     private void Start()
     {
-        hud = GetComponent<HuD>();
         currentTime = levelTime;
         StartCoroutine(CountDown());
     }
@@ -61,5 +61,10 @@ public class LevelTimer : MonoBehaviour
             hud.DisplayTime();
             StartCoroutine(CountDown());
         }
+    }
+
+    public int GetStartTime()
+    {
+        return levelTime;
     }
 }

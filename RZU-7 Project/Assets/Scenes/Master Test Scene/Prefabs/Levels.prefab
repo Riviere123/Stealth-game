@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &265434763029764584
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 265434763029764590}
+  - component: {fileID: 265434763029764591}
+  m_Layer: 0
+  m_Name: Levels
+  m_TagString: Levels
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &265434763029764590
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 265434763029764584}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 592.4926, y: 233.28926, z: -86.67221}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &265434763029764591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 265434763029764584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1fe1c492b9f7af4d996b48bb301c27e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentLevelIndex: 0
+  totalBadges: 0
+  speedCount: 0
+  goldCount: 0
+  secretCount: 0
+  allLevels:
+  - displayName: Level 1
+    sceneName: Master Test Scene - reorganized
+    badgesToUnlock: 0
+    unlocked: 1
+    speedToUnlock: 30
+    speedBadge: 0
+    goldToUnlock: 50
+    goldBadge: 0
+    secretsToUnlock: 2
+    secretBadge: 0

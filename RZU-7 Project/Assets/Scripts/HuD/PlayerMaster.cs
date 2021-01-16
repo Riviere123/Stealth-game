@@ -1,11 +1,17 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class PlayerMaster
 {
+    [SerializeField]
     HuD hud;
+    [SerializeField]
     int gold;
+    [SerializeField]
     List<GameObject> keys = new List<GameObject>();
+    [SerializeField]
+    List<GameObject> secretItems = new List<GameObject>();
 
     public PlayerMaster(HuD hud)
     {
@@ -27,16 +33,29 @@ public class PlayerMaster
             hud.DisplayGold();
         }
     }
+
     public int GetGold()
     {
         return gold;
     }
+
     public List<GameObject> GetKeys()
     {
         return keys;
     }
+
     public void AddKey(GameObject key)
     {
         keys.Add(key);
+    }
+
+    public void AddSecretItem(GameObject item)
+    {
+        secretItems.Add(item);
+    }
+
+    public List<GameObject> GetSecretItems()
+    {
+        return secretItems;
     }
 }

@@ -12,6 +12,8 @@ TagManager:
   - Valuable
   - Door
   - HuD
+  - GameMaster
+  - SecretItem
   layers:
   - Default
   - TransparentFX

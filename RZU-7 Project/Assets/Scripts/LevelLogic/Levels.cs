@@ -25,8 +25,16 @@ public struct Level
     public int badgesToUnlock;
     public bool unlocked;
 
+    [Range(1, 1000)]
+    public int speedToUnlock;
     public bool speedBadge;
+
+    [Range(1, 1000)]
+    public int goldToUnlock;
     public bool goldBadge;
+
+    [Range(1, 10)]
+    public int secretsToUnlock;
     public bool secretBadge;
 
 

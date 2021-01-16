@@ -21,14 +21,17 @@ using TMPro;
 public class HuD : MonoBehaviour
 {
     [SerializeField]
+    GameMaster gameMaster;
     PlayerMaster playerMaster;
-    [SerializeField]
     LevelTimer levelTimer;
 
     List<GameObject> keyImages = new List<GameObject>();
+    List<GameObject> secretImages = new List<GameObject>();
 
     [SerializeField]
     GameObject keyPanel;
+    [SerializeField]
+    GameObject secretPanel;
     [SerializeField]
     GameObject itemImage;
     [SerializeField]
@@ -38,8 +41,9 @@ public class HuD : MonoBehaviour
 
     private void Start()
     {
-        playerMaster = new PlayerMaster(this);
-        levelTimer = GetComponent<LevelTimer>();
+        playerMaster = gameMaster.GetPlayerMaster();
+        levelTimer = gameMaster.GetLevelTimer();
+        DisplayTime();
     }
 
     /// <summary>
@@ -96,15 +100,29 @@ public class HuD : MonoBehaviour
             }
         }
     }
-    /// <summary>
-    /// gets the playerMaster script that is generated from this HuD Script.
-    /// </summary>
-    /// <returns>The playerMaster script reference.</returns>
-    
-    public PlayerMaster GetPlayerMaster()
-    {
-        return playerMaster;
-    }
 
+    public void DisplaySecretItems()
+    {
+        for (int i = 0; i < secretImages.Count; i++)
+        {
+            Destroy(secretImages[i].gameObject);
+        }
+        secretImages.Clear();
+
+        List<GameObject> inventory = playerMaster.GetSecretItems();
+        for (int i = 0; i < inventory.Count; i++)
+        {
+            GameObject item = Instantiate(itemImage, secretPanel.transform);
+            secretImages.Add(item);
+            try
+            {
+                item.GetComponent<Image>().sprite = inventory[i].GetComponent<SpriteRenderer>().sprite;
+            }
+            catch
+            {
+                Debug.LogError($"{item} does not have a sprite renderer");
+            }
+        }
+    }
 }
 

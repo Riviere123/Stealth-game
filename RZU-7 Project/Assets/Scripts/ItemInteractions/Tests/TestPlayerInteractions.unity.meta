@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:RZU-7 Project/Assets/Scripts/LevelLogic/Item Image.prefab.meta
+guid: 6a829fbb9a25b5f4083e97951fed893b
+PrefabImporter:
+=======
 guid: d1a33c3e45671456d843e6984f18e732
 DefaultImporter:
+>>>>>>> main:RZU-7 Project/Assets/Scripts/ItemInteractions/Tests/TestPlayerInteractions.unity.meta
   externalObjects: {}
   userData: 
   assetBundleName: 

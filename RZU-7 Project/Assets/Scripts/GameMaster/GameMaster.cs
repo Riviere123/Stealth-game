@@ -11,10 +11,19 @@ public class GameMaster : MonoBehaviour
     [SerializeField]
     HuD hud;
     Levels levels;
+    [SerializeField]
+    GameObject TestLevels;
     private void Awake()
     {
         playerMaster = new PlayerMaster(hud);
-        levels = GameObject.FindGameObjectWithTag("Levels").GetComponent<Levels>();
+        try
+        {
+            levels = GameObject.FindGameObjectWithTag("Levels").GetComponent<Levels>();
+        }
+        catch
+        {
+            Instantiate(TestLevels);
+        }
     }
 
     public PlayerMaster GetPlayerMaster()

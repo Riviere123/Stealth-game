@@ -59,3 +59,23 @@ MonoBehaviour:
     goldBadge: 0
     secretsToUnlock: 2
     secretBadge: 0
+  - displayName: Level 1
+    sceneName: Master Test Scene - reorganized
+    badgesToUnlock: 2
+    unlocked: 0
+    speedToUnlock: 30
+    speedBadge: 0
+    goldToUnlock: 50
+    goldBadge: 0
+    secretsToUnlock: 2
+    secretBadge: 0
+  - displayName: Level 1
+    sceneName: Master Test Scene - reorganized
+    badgesToUnlock: 22
+    unlocked: 0
+    speedToUnlock: 30
+    speedBadge: 0
+    goldToUnlock: 50
+    goldBadge: 0
+    secretsToUnlock: 2
+    secretBadge: 0

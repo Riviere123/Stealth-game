@@ -35,7 +35,15 @@ public class EnemyAnimations : ActorAnimations
 
     public void SetMovementValues(MovementConstants.ActorMovementStates movementState)
     {
-        SetMovementValues(rigidBody.velocity.x, rigidBody.velocity.y, movementState);
+        if(Mathf.Abs(rigidBody.velocity.x) > Mathf.Abs(rigidBody.velocity.y))
+        {
+            SetMovementValues(rigidBody.velocity.x, 0, movementState);
+        }
+        else
+        {
+            SetMovementValues(0, rigidBody.velocity.y, movementState);
+        }
+        
     }
 
     /// <summary>

@@ -7,7 +7,8 @@ public class PatrolAction : Actions
 {
     public override void Act(StateController controller)
     {
-        if(controller.patrolPoints.Length > 0)
+        MovementHelper moveHelper = controller.GetHelper<MovementHelper>();
+        if (moveHelper.patrolPoints.Length > 0)
         {
             Patrol(controller);
         }
@@ -15,96 +16,98 @@ public class PatrolAction : Actions
 
     void Patrol(StateController controller)
     {
-        RaycastHit2D hit = Physics2D.Raycast(controller.transform.position, controller.currentPatrolPoint - (Vector2)controller.transform.position,Vector2.Distance(controller.transform.position,controller.currentPatrolPoint),LayerMask.GetMask("Obstacle"));
-        Debug.DrawRay(controller.transform.position, controller.currentPatrolPoint - (Vector2)controller.transform.position);
+        MovementHelper moveHelper = controller.GetHelper<MovementHelper>();
+
+        RaycastHit2D hit = Physics2D.Raycast(controller.transform.position, moveHelper.currentPatrolPoint - (Vector2)controller.transform.position,Vector2.Distance(controller.transform.position,moveHelper.currentPatrolPoint),LayerMask.GetMask("Obstacle"));
+        Debug.DrawRay(controller.transform.position, moveHelper.currentPatrolPoint - (Vector2)controller.transform.position);
         if (!hit)
         {
-            controller.path.Clear();
+            moveHelper.path.Clear();
         }
 
         if (hit)
         {
-            if(controller.path.Count <= 0)
+            if(moveHelper.path.Count <= 0)
             {
-                controller.path = controller.pathFinding.FindPath(controller.transform.position, controller.currentPatrolPoint);
+                moveHelper.path = moveHelper.pathFinding.FindPath(controller.transform.position, moveHelper.currentPatrolPoint);
             }
-            if (controller.path.Count > 0)
+            if (moveHelper.path.Count > 0)
             {
-                if(Vector2.Distance(controller.transform.position,controller.path[0].position) < AiConstants.DistanceToRemovePoint)
+                if(Vector2.Distance(controller.transform.position,moveHelper.path[0].position) < AIConstants.DistanceToRemovePoint)
                 {
-                    controller.path.RemoveAt(0);
+                    moveHelper.path.RemoveAt(0);
                     return;
                 }
-                controller.rb2d.AddForce((controller.path[0].position - controller.transform.position).normalized * controller.stats.walkSpeed * Time.deltaTime, ForceMode2D.Impulse);
+                controller.references.Get<Rigidbody2D>(EnemyReferencesConstants.rigidBody).AddForce((moveHelper.path[0].position - controller.transform.position).normalized * controller.references.Get<AIStats>(EnemyReferencesConstants.stats).walkSpeed * Time.deltaTime, ForceMode2D.Impulse);
             }
         }
         
-        else if(controller.patrolPoints.Length >= 2)
+        else if(moveHelper.patrolPoints.Length >= 2)
         {
-            if (!controller.patrolLoop)
+            if (!moveHelper.patrolLoop)
             {
-                if (Vector2.Distance(controller.transform.position, controller.currentPatrolPoint) < .5f)
+                if (Vector2.Distance(controller.transform.position, moveHelper.currentPatrolPoint) < .5f)
                 {
-                    for (int i = 0; i < controller.patrolPoints.Length; i++)
+                    for (int i = 0; i < moveHelper.patrolPoints.Length; i++)
                     {
-                        if (controller.patrolDirection == StateController.PatrolDirection.forwards)
+                        if (moveHelper.patrolDirection == AIConstants.PatrolCycleDirection.forwards)
                         {
-                            if (controller.currentPatrolPoint == controller.patrolPoints[i])
+                            if (moveHelper.currentPatrolPoint == moveHelper.patrolPoints[i])
                             {
-                                if (i < controller.patrolPoints.Length - 1)
+                                if (i < moveHelper.patrolPoints.Length - 1)
                                 {
-                                    controller.currentPatrolPoint = controller.patrolPoints[i + 1];
+                                    moveHelper.currentPatrolPoint = moveHelper.patrolPoints[i + 1];
                                     break;
                                 }
                                 else
                                 {
-                                    controller.patrolDirection = StateController.PatrolDirection.backwards;
+                                    moveHelper.patrolDirection = AIConstants.PatrolCycleDirection.backwards;
                                     break;
                                 }
                             }
                         }
-                        else if (controller.patrolDirection == StateController.PatrolDirection.backwards)
+                        else if (moveHelper.patrolDirection == AIConstants.PatrolCycleDirection.backwards)
                         {
-                            if (controller.currentPatrolPoint == controller.patrolPoints[i])
+                            if (moveHelper.currentPatrolPoint == moveHelper.patrolPoints[i])
                             {
                                 if (i > 0)
                                 {
-                                    controller.currentPatrolPoint = controller.patrolPoints[i - 1];
+                                    moveHelper.currentPatrolPoint = moveHelper.patrolPoints[i - 1];
                                     break;
                                 }
                                 else
                                 {
-                                    controller.patrolDirection = StateController.PatrolDirection.forwards;
+                                    moveHelper.patrolDirection = AIConstants.PatrolCycleDirection.forwards;
                                     break;
                                 }
                             }
                         }
                     }
                 }
-                controller.rb2d.AddForce((controller.currentPatrolPoint - (Vector2)controller.transform.position).normalized * controller.stats.walkSpeed * Time.deltaTime, ForceMode2D.Impulse);
+                controller.references.Get<Rigidbody2D>(EnemyReferencesConstants.rigidBody).AddForce((moveHelper.currentPatrolPoint - (Vector2)controller.transform.position).normalized * controller.references.Get<AIStats>(EnemyReferencesConstants.stats).walkSpeed * Time.deltaTime, ForceMode2D.Impulse);
             }
             else
             {
-                if (Vector2.Distance(controller.transform.position, controller.currentPatrolPoint) < .5f)
+                if (Vector2.Distance(controller.transform.position, moveHelper.currentPatrolPoint) < .5f)
                 {
-                    for (int i = 0; i < controller.patrolPoints.Length; i++)
+                    for (int i = 0; i < moveHelper.patrolPoints.Length; i++)
                     {
-                        if (controller.currentPatrolPoint == controller.patrolPoints[i])
+                        if (moveHelper.currentPatrolPoint == moveHelper.patrolPoints[i])
                         {
-                            if (i == controller.patrolPoints.Length - 1)
+                            if (i == moveHelper.patrolPoints.Length - 1)
                             {
-                                controller.currentPatrolPoint = controller.patrolPoints[0];
+                                moveHelper.currentPatrolPoint = moveHelper.patrolPoints[0];
                                 break;
                             }
                             else
                             {
-                                controller.currentPatrolPoint = controller.patrolPoints[i + 1];
+                                moveHelper.currentPatrolPoint = moveHelper.patrolPoints[i + 1];
                                 break;
                             }
                         }
                     }
                 }
-                controller.rb2d.AddForce((controller.currentPatrolPoint - (Vector2)controller.transform.position).normalized * controller.stats.walkSpeed * Time.deltaTime, ForceMode2D.Impulse);
+                controller.references.Get<Rigidbody2D>(EnemyReferencesConstants.rigidBody).AddForce((moveHelper.currentPatrolPoint - (Vector2)controller.transform.position).normalized * controller.references.Get<AIStats>(EnemyReferencesConstants.stats).walkSpeed * Time.deltaTime, ForceMode2D.Impulse);
             }
         }
         else

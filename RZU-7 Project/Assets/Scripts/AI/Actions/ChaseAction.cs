@@ -8,32 +8,40 @@ public class ChaseAction : Actions
     {
         Chase(controller);
     }
+
     void Chase(StateController controller)
     {
-        if (controller.vision.target)
+        MovementHelper moveHelper = controller.GetHelper<MovementHelper>();
+        EnemyVisualCone vision = controller.references.Get<EnemyVisualCone>(EnemyReferencesConstants.visualCone);
+        EnemyAnimations animations = controller.references.Get<EnemyAnimations>(EnemyReferencesConstants.animations);
+        animations.SetMovementBooleans(MovementConstants.ActorMovementStates.WALK);
+        animations.SetImobileBools(AnimationConstants.ImobileStates.NONE);
+
+        if (vision.target)
         {
-            if(controller.path.Count <= 0)
+            if(moveHelper.path.Count <= 0)
             {
                 FindNewPath(controller);
                 return;
             }
-            else if(Vector2.Distance(controller.vision.target.transform.position ,controller.path[controller.path.Count-1].position) > AiConstants.TargetDistanceToFindNewPath)
+            else if(Vector2.Distance(vision.target.transform.position ,moveHelper.path[moveHelper.path.Count-1].position) > AIConstants.TargetDistanceToFindNewPath)
             {
                 FindNewPath(controller);
                 return;
             }
-            else if (Vector2.Distance(controller.transform.position, controller.path[0].position) < AiConstants.DistanceToRemovePoint)
+            else if (Vector2.Distance(controller.transform.position, moveHelper.path[0].position) < AIConstants.DistanceToRemovePoint)
             {
-                controller.path.RemoveAt(0);
+                moveHelper.path.RemoveAt(0);
                 return;
             }
-            controller.rb2d.AddForce((controller.path[0].position - controller.transform.position).normalized * controller.stats.runSpeed * Time.deltaTime, ForceMode2D.Impulse);
+            controller.references.Get<Rigidbody2D>(EnemyReferencesConstants.rigidBody).AddForce((moveHelper.path[0].position - controller.transform.position).normalized * controller.references.Get<AIStats>("stats").runSpeed * Time.deltaTime, ForceMode2D.Impulse);
         }
     }
 
     void FindNewPath(StateController controller)
     {
-        controller.path = controller.pathFinding.FindPath(controller.transform.position, controller.vision.target.transform.position);
+        MovementHelper moveHelper = controller.GetHelper<MovementHelper>();
+        moveHelper.path = moveHelper.pathFinding.FindPath(controller.transform.position, controller.references.Get<EnemyVisualCone>(EnemyReferencesConstants.visualCone).target.transform.position);
     }
 }
 

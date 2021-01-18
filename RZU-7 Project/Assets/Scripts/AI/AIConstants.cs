@@ -5,6 +5,7 @@ public class AIConstants
 {
     public static readonly float TargetDistanceToFindNewPath = 5f;
     public static readonly float DistanceToRemovePoint = .5f;
+    public static readonly float DistanceToAttack = 1f;
 
     public enum PatrolCycleDirection
     {

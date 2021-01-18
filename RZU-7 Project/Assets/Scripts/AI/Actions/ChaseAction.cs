@@ -13,6 +13,9 @@ public class ChaseAction : Actions
     {
         MovementHelper moveHelper = controller.GetHelper<MovementHelper>();
         EnemyVisualCone vision = controller.references.Get<EnemyVisualCone>(EnemyReferencesConstants.visualCone);
+        EnemyAnimations animations = controller.references.Get<EnemyAnimations>(EnemyReferencesConstants.animations);
+        animations.SetMovementBooleans(MovementConstants.ActorMovementStates.WALK);
+        animations.SetImobileBools(AnimationConstants.ImobileStates.NONE);
 
         if (vision.target)
         {

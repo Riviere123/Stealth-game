@@ -11,4 +11,6 @@ public class AnimationConstants
     public static readonly string isDead = "IsDead";
     public static readonly string isInteracting = "IsInteracting";
     public static readonly string isAttacking = "IsAttacking";
+
+    public enum ImobileStates { DEAD, INTERACT, ATTACK, NONE }
 }

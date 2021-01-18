@@ -71,4 +71,31 @@ public class EnemyAnimations : ActorAnimations
             x = y = 0f;
         }
     }
+
+    public void SetImobileBools(AnimationConstants.ImobileStates state)
+    {
+        switch (state)
+        {
+            case AnimationConstants.ImobileStates.ATTACK:
+                animator.SetBool(AnimationConstants.isDead, false);
+                animator.SetBool(AnimationConstants.isInteracting, false);
+                animator.SetBool(AnimationConstants.isAttacking, true);
+                break;
+            case AnimationConstants.ImobileStates.INTERACT:
+                animator.SetBool(AnimationConstants.isDead, false);
+                animator.SetBool(AnimationConstants.isInteracting, true);
+                animator.SetBool(AnimationConstants.isAttacking, false);
+                break;
+            case AnimationConstants.ImobileStates.DEAD:
+                animator.SetBool(AnimationConstants.isDead, true);
+                animator.SetBool(AnimationConstants.isInteracting, false);
+                animator.SetBool(AnimationConstants.isAttacking, false);
+                break;
+            case AnimationConstants.ImobileStates.NONE:
+                animator.SetBool(AnimationConstants.isDead, false);
+                animator.SetBool(AnimationConstants.isInteracting, false);
+                animator.SetBool(AnimationConstants.isAttacking, false);
+                break;
+        }
+    }
 }

@@ -15,11 +15,14 @@ public class AttackAction : Actions
         EnemyAnimations animations = controller.references.Get<EnemyAnimations>(EnemyReferencesConstants.animations);
         EnemyVisualCone vision = controller.references.Get<EnemyVisualCone>(EnemyReferencesConstants.visualCone);
 
-        animations.SetMovementBooleans(MovementConstants.ActorMovementStates.NONE);
-        Vector2 attackDirection = (vision.target.transform.position - controller.gameObject.transform.position).normalized;
-        animator.SetFloat(AnimationConstants.lastX, attackDirection.x);
-        animator.SetFloat(AnimationConstants.lastY, attackDirection.y);
-        animations.SetImobileBools(AnimationConstants.ImobileStates.ATTACK);
+        if (vision.target)
+        {
+            animations.SetMovementBooleans(MovementConstants.ActorMovementStates.NONE);
+            Vector2 attackDirection = (vision.target.transform.position - controller.gameObject.transform.position).normalized;
+            animator.SetFloat(AnimationConstants.lastX, attackDirection.x);
+            animator.SetFloat(AnimationConstants.lastY, attackDirection.y);
+            animations.SetImobileBools(AnimationConstants.ImobileStates.ATTACK);
+        }    
     }
 }
 

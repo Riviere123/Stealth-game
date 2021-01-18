@@ -9,6 +9,13 @@ public class AttackDecision : Decision
     public override bool Decide(StateController controller)
     {
         EnemyVisualCone vision = controller.references.Get<EnemyVisualCone>(EnemyReferencesConstants.visualCone);
-        return Mathf.Abs(Vector2.Distance(vision.target.transform.position, controller.gameObject.transform.position)) < AIConstants.DistanceToAttack;
+        if (vision.target)
+        {
+            return Mathf.Abs(Vector2.Distance(vision.target.transform.position, controller.gameObject.transform.position)) < AIConstants.DistanceToAttack;
+        }
+        else
+        {
+            return false;
+        }
     }
 }

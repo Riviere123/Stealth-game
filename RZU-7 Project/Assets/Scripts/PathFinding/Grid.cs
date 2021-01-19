@@ -72,9 +72,22 @@ public class Grid : MonoBehaviour
         float myY = ((a_worldPosition.y - bottomLeft.y) / nodeDiameter); //gets the grid position y relative to the world position
         myX = Mathf.Clamp(myX, 0, gridSizeX - 1);
         myY = Mathf.Clamp(myY, 0, gridSizeY - 1);
-
-        return grid[(int)myX, (int)myY];
-        
+        Node node = grid[(int)myX, (int)myY];
+        if (node.isWall)
+        {
+            if((int)myX < gridSizeX)
+            {
+                return grid[(int)myX + 1, (int)myY];
+            }
+            else
+            {
+                return grid[(int)myX, (int)myY];
+            }
+        }
+        else
+        {
+            return grid[(int)myX, (int)myY];
+        }
     }
 
     public List<Node> GetNeighboringNodes(Node a_Node) //gets all the neighboring nodes

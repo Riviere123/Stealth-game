@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-
 /// <summary>
 /// This would be inside the players controller
 /// </summary>
@@ -70,8 +69,7 @@ public class Player: MonoBehaviour
             Door door = collision.gameObject.GetComponent<Door>();
             if (playerMaster.GetKeys().Contains(door.Key))
             {
-                //This is where we would trigger door opening animation
-                Debug.Log("I have the key!");
+                Destroy(collision.gameObject);
             }
             else
             {

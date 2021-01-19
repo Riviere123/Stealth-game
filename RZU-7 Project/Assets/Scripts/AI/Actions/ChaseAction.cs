@@ -16,6 +16,7 @@ public class ChaseAction : Actions
         EnemyAnimations animations = controller.references.Get<EnemyAnimations>(EnemyReferencesConstants.animations);
         animations.SetMovementBooleans(MovementConstants.ActorMovementStates.WALK);
         animations.SetImobileBools(AnimationConstants.ImobileStates.NONE);
+        animations.SetIsAttackingStatus(false);
 
         if (vision.target)
         {
@@ -41,7 +42,8 @@ public class ChaseAction : Actions
     void FindNewPath(StateController controller)
     {
         MovementHelper moveHelper = controller.GetHelper<MovementHelper>();
-        moveHelper.path = moveHelper.pathFinding.FindPath(controller.transform.position, controller.references.Get<EnemyVisualCone>(EnemyReferencesConstants.visualCone).target.transform.position);
+        GameObject target = controller.references.Get<EnemyVisualCone>(EnemyReferencesConstants.visualCone).target;
+        moveHelper.path = moveHelper.pathFinding.FindPath(controller.transform.position, target.transform.position );
     }
 }
 

@@ -17,7 +17,8 @@ public class PatrolAction : Actions
     void Patrol(StateController controller)
     {
         MovementHelper moveHelper = controller.GetHelper<MovementHelper>();
-
+        EnemyAnimations animations = controller.references.Get<EnemyAnimations>(EnemyReferencesConstants.animations);
+        animations.SetIsAttackingStatus(false);
         RaycastHit2D hit = Physics2D.Raycast(controller.transform.position, moveHelper.currentPatrolPoint - (Vector2)controller.transform.position,Vector2.Distance(controller.transform.position,moveHelper.currentPatrolPoint),LayerMask.GetMask("Obstacle"));
         Debug.DrawRay(controller.transform.position, moveHelper.currentPatrolPoint - (Vector2)controller.transform.position);
         if (!hit)

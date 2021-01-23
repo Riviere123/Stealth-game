@@ -9,8 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab04d1fc0bfa39f40bef587e125baee3, type: 3}
-  m_Name: BasicStats
+  m_Script: {fileID: 11500000, guid: ae690c9aa386c824fa61087c2f437abc, type: 3}
+  m_Name: InvestigateAction
   m_EditorClassIdentifier: 
-  walkSpeed: 14
-  runSpeed: 75

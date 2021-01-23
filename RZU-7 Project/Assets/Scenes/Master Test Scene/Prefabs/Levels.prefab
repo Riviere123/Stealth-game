@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &265434763029764584
+--- !u!1 &9118342306358883900
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,8 +8,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 265434763029764590}
-  - component: {fileID: 265434763029764591}
+  - component: {fileID: 9118342306358883898}
+  - component: {fileID: 9118342306358883899}
   m_Layer: 0
   m_Name: Levels
   m_TagString: Levels
@@ -17,13 +17,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &265434763029764590
+--- !u!4 &9118342306358883898
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 265434763029764584}
+  m_GameObject: {fileID: 9118342306358883900}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 592.4926, y: 233.28926, z: -86.67221}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -31,13 +31,13 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &265434763029764591
+--- !u!114 &9118342306358883899
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 265434763029764584}
+  m_GameObject: {fileID: 9118342306358883900}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f1fe1c492b9f7af4d996b48bb301c27e, type: 3}
@@ -55,27 +55,17 @@ MonoBehaviour:
     unlocked: 1
     speedToUnlock: 30
     speedBadge: 0
-    goldToUnlock: 50
+    goldToUnlock: 10
     goldBadge: 0
     secretsToUnlock: 2
     secretBadge: 0
-  - displayName: Level 1
-    sceneName: Master Test Scene - reorganized
+  - displayName: Level 2
+    sceneName: 
     badgesToUnlock: 2
     unlocked: 0
-    speedToUnlock: 30
+    speedToUnlock: 0
     speedBadge: 0
-    goldToUnlock: 50
+    goldToUnlock: 0
     goldBadge: 0
-    secretsToUnlock: 2
-    secretBadge: 0
-  - displayName: Level 1
-    sceneName: Master Test Scene - reorganized
-    badgesToUnlock: 22
-    unlocked: 0
-    speedToUnlock: 30
-    speedBadge: 0
-    goldToUnlock: 50
-    goldBadge: 0
-    secretsToUnlock: 2
+    secretsToUnlock: 0
     secretBadge: 0

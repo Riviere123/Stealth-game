@@ -20,22 +20,32 @@ public class ChaseAction : Actions
 
         if (vision.target)
         {
-            if(moveHelper.path.Count <= 0)
+            RaycastHit2D hit = Physics2D.Raycast(controller.transform.position, vision.target.transform.position - controller.transform.position, LayerMask.NameToLayer("Player"));
+            if (hit)
             {
-                FindNewPath(controller);
-                return;
+                controller.references.Get<Rigidbody2D>(EnemyReferencesConstants.rigidBody).AddForce((vision.target.transform.position - controller.transform.position).normalized * controller.references.Get<AIStats>("stats").runSpeed * Time.deltaTime, ForceMode2D.Impulse);
             }
-            else if(Vector2.Distance(vision.target.transform.position ,moveHelper.path[moveHelper.path.Count-1].position) > AIConstants.TargetDistanceToFindNewPath)
+            else
             {
-                FindNewPath(controller);
-                return;
+                if (moveHelper.path.Count <= 0)
+                {
+                    FindNewPath(controller);
+                    return;
+                }
+                else if (Vector2.Distance(vision.target.transform.position, moveHelper.path[moveHelper.path.Count - 1].position) > AIConstants.TargetDistanceToFindNewPath)
+                {
+                    FindNewPath(controller);
+                    return;
+                }
+                else if (Vector2.Distance(controller.transform.position, moveHelper.path[0].position) < AIConstants.DistanceToRemovePoint)
+                {
+                    moveHelper.path.RemoveAt(0);
+                    return;
+                }
+                controller.references.Get<Rigidbody2D>(EnemyReferencesConstants.rigidBody).AddForce((moveHelper.path[0].position - controller.transform.position).normalized * controller.references.Get<AIStats>("stats").runSpeed * Time.deltaTime, ForceMode2D.Impulse);
+
             }
-            else if (Vector2.Distance(controller.transform.position, moveHelper.path[0].position) < AIConstants.DistanceToRemovePoint)
-            {
-                moveHelper.path.RemoveAt(0);
-                return;
-            }
-            controller.references.Get<Rigidbody2D>(EnemyReferencesConstants.rigidBody).AddForce((moveHelper.path[0].position - controller.transform.position).normalized * controller.references.Get<AIStats>("stats").runSpeed * Time.deltaTime, ForceMode2D.Impulse);
+
         }
     }
 

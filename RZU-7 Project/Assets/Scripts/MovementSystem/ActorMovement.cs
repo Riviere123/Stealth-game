@@ -27,8 +27,7 @@ public class ActorMovement : MonoBehaviour
     float sprintSpeed = 28f;
     [SerializeField]
     float crouchSpeed = 8f;
-    [SerializeField]
-    MovementConstants.ActorMovementStates currentMoveState;
+    public MovementConstants.ActorMovementStates currentMoveState;
     float currentSpeed;
     float speedValueMultiplier = 10f;  // Because the values get too high in the editor
 
@@ -88,7 +87,7 @@ public class ActorMovement : MonoBehaviour
     /// <param name="newState">The new state to set <paramref name="currentMoveState"/> to</param>
     void ToggleState(MovementConstants.ActorMovementStates newState)
     {
-        if (currentMoveState != newState)
+        if (Input.GetButton(InputConstants.action1) || Input.GetButton(InputConstants.action2))
         {
             SetSpeed(newState);
         }

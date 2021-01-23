@@ -179,4 +179,9 @@ public class Levels : MonoBehaviour
         allLevels[currentLevelIndex].goldBadge = true;
         UpdateTotalBadges();
     }
+
+    public void MainMenu()
+    {
+        SceneManager.LoadScene("Main Menu");
+    }
 }

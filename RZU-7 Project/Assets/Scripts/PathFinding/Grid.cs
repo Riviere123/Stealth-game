@@ -39,7 +39,7 @@ public class Grid : MonoBehaviour
         CreateGrid();
     }
 
-    void CreateGrid()
+    public void CreateGrid()
     {
         grid = new Node[gridSizeX, gridSizeY];
         Vector2 bottomLeft = (startPosition - (Vector2.right * ((gridWorldSize.x / 2)))  - (Vector2.up * ((gridWorldSize.y / 2))) + new Vector2(nodeRadius,nodeRadius));

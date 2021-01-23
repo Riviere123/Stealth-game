@@ -36,8 +36,7 @@ public class SoundRingVisual : MonoBehaviour
     {
         GameObject soundRing = Instantiate(soundRingPrefab);
         SpriteRenderer SR = soundRing.GetComponent<SpriteRenderer>();
-
-        soundRing.transform.localScale = new Vector2(0, 0);
+        soundRing.transform.localScale = new Vector2(0f, 0f);
         soundRing.transform.position = transform.position;
         SR.color = color;
 
@@ -55,7 +54,7 @@ public class SoundRingVisual : MonoBehaviour
     {
         GameObject soundRing = Instantiate(soundRingPrefab);
         SpriteRenderer SR = soundRing.GetComponent<SpriteRenderer>();
-        soundRing.transform.localScale = new Vector2(0, 0);
+        soundRing.transform.localScale = new Vector2(0f, 0f);
         soundRing.transform.position = position;
         SR.color = color;
 

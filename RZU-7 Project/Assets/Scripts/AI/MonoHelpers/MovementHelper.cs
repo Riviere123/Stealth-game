@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
+[System.Serializable]
 public class MovementHelper : StateMonoHelper
 {
     [HideInInspector]
@@ -19,12 +21,16 @@ public class MovementHelper : StateMonoHelper
     [HideInInspector]
     public List<Node> path;
 
+    GameObject player;
+    SpriteRenderer sr;
+
     [SerializeField]
     Color wayPointGizmoColor;
     [SerializeField]
     Color pathNodeColor;
 
     EnemyVisualCone vision;
+    bool attacking;
 
     public bool GetPatrolLoop()
     {
@@ -46,11 +52,22 @@ public class MovementHelper : StateMonoHelper
 
         grid = GameObject.FindGameObjectWithTag(Constants.gameMaster).GetComponent<Grid>();
         pathFinding = grid.pathFinding;
+        player = GameObject.FindGameObjectWithTag("Player");
+        sr = GetComponent<SpriteRenderer>();
 
     }
     private void Update()
     {
         SnapConeDirection();
+
+        if (CheckVision())
+        {
+            sr.color = new Color(1, 1, 1, 0);
+        }
+        else
+        {
+            sr.color = new Color(1, 1, 1, 1);
+        }
     }
 
     private void OnDrawGizmosSelected()
@@ -85,6 +102,38 @@ public class MovementHelper : StateMonoHelper
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
             visualCone.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }
+    }
+    public void Attack(EnemyAnimations animations)
+    { 
+        if(!attacking)
+        {
+            StartCoroutine(EndAttack(animations));
+        }
+    }
+    IEnumerator EndAttack(EnemyAnimations animations)
+    {
+        animations.SetImobileBools(AnimationConstants.ImobileStates.ATTACK);
+        attacking = true;
+        yield return new WaitForSeconds(.1f);
+        GetComponentInChildren<BoxCollider2D>().enabled = true;
+        yield return new WaitForSeconds(.25f);
+        GetComponentInChildren<BoxCollider2D>().enabled = false;
+        attacking = false;
+    }
 
+    bool CheckVision()
+    {
+        RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, player.transform.position - transform.position,Vector2.Distance(player.transform.position,transform.position));
+        
+        foreach (RaycastHit2D hit in hits)
+        {
+            if (hit.collider.tag == "Wall")
+            {
+                Debug.DrawRay(transform.position, player.transform.position - transform.position, Color.red);
+                return true;
+            }
+        }
+        Debug.DrawRay(transform.position, player.transform.position - transform.position, Color.green);
+        return false;
     }
 }

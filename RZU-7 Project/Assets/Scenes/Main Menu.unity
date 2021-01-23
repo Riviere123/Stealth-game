@@ -309,6 +309,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6956270943215652573, guid: 2aea45030f4d6da46abde61baa2562da, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6956270943215652573, guid: 2aea45030f4d6da46abde61baa2562da, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6956270943215652573, guid: 2aea45030f4d6da46abde61baa2562da, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 695
+      objectReference: {fileID: 0}
     - target: {fileID: 6956270944499514680, guid: 2aea45030f4d6da46abde61baa2562da, type: 3}
       propertyPath: m_Name
       value: Main Menu
@@ -316,7 +328,7 @@ PrefabInstance:
     - target: {fileID: 6956270944499514681, guid: 2aea45030f4d6da46abde61baa2562da, type: 3}
       propertyPath: levelsPrefab
       value: 
-      objectReference: {fileID: 265434763029764584, guid: 2fe1d47a914737a4d99475e890b38bfe, type: 3}
+      objectReference: {fileID: 9118342306358883900, guid: da8a396ef641a1340bb9aa3235a88add, type: 3}
     - target: {fileID: 6956270944499514682, guid: 2aea45030f4d6da46abde61baa2562da, type: 3}
       propertyPath: m_LocalPosition.x
       value: 592.4926

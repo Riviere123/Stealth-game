@@ -53,13 +53,19 @@ MonoBehaviour:
     sceneName: Test1
     badgesToUnlock: 0
     unlocked: 1
+    speedToUnlock: 30
     speedBadge: 0
+    goldToUnlock: 10
     goldBadge: 0
+    secretsToUnlock: 2
     secretBadge: 0
   - displayName: Level 2
     sceneName: Test2
     badgesToUnlock: 1
     unlocked: 0
+    speedToUnlock: 0
     speedBadge: 0
+    goldToUnlock: 0
     goldBadge: 0
+    secretsToUnlock: 0
     secretBadge: 0

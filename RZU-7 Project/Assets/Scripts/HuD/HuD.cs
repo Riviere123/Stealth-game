@@ -39,6 +39,26 @@ public class HuD : MonoBehaviour
     [SerializeField]
     TextMeshProUGUI timeText;
 
+    [SerializeField]
+    Color unlockedBadgeColor;
+
+    [SerializeField]
+    GameObject completePanel;
+    [SerializeField]
+    Image completeSpeedBadge;
+    [SerializeField]
+    Image completeGoldBadge;
+    [SerializeField]
+    Image completeSecretBage;
+    [SerializeField]
+    TextMeshProUGUI completeSpeedText;
+    [SerializeField]
+    TextMeshProUGUI completeSecretText;
+    [SerializeField]
+    TextMeshProUGUI completeGoldText;
+
+    [SerializeField]
+    Button homeButton;
     private void Start()
     {
         playerMaster = gameMaster.GetPlayerMaster();
@@ -59,19 +79,7 @@ public class HuD : MonoBehaviour
     /// </summary>
     public void DisplayTime()
     {
-        int minutes;
-        int seconds;
-
-        minutes = levelTimer.currentTime / 60;
-        seconds = levelTimer.currentTime % 60;
-        if (seconds < 10)
-        {
-            timeText.text = $"{minutes}:0{seconds}";
-        }
-        else
-        {
-            timeText.text = $"{minutes}:{seconds}";
-        }
+        timeText.text = ConvertToTime(levelTimer.currentTime);
     }
 
     /// <summary>
@@ -101,6 +109,45 @@ public class HuD : MonoBehaviour
         }
     }
 
+    public void CompletePanelEnable()
+    {
+        Levels levs = gameMaster.GetLevels();
+        completePanel.SetActive(true);
+        completeGoldText.text = $"{playerMaster.GetGold().ToString()}/{levs.allLevels[levs.currentLevelIndex].goldToUnlock}";
+        completeSecretText.text = $"{playerMaster.GetSecretItems().Count.ToString()}/{levs.allLevels[levs.currentLevelIndex].secretsToUnlock}";
+        completeSpeedText.text = $"{ConvertToTime(levelTimer.GetStartTime() - levelTimer.currentTime)}/{ConvertToTime(levs.allLevels[levs.currentLevelIndex].speedToUnlock)}";
+        if(playerMaster.GetGold() >= levs.allLevels[levs.currentLevelIndex].goldToUnlock)
+        {
+            completeGoldBadge.color = unlockedBadgeColor;
+        }
+
+        if(playerMaster.GetSecretItems().Count >= levs.allLevels[levs.currentLevelIndex].secretsToUnlock)
+        {
+            completeSecretBage.color = unlockedBadgeColor;
+        }
+
+        if((levelTimer.GetStartTime() - levelTimer.currentTime) <= levs.allLevels[levs.currentLevelIndex].speedToUnlock)
+        {
+            completeSpeedBadge.color = unlockedBadgeColor;
+        }
+        homeButton.onClick.AddListener(delegate { levs.MainMenu(); });
+    }
+    public string ConvertToTime(int time)
+    {
+        int minutes;
+        int seconds;
+
+        minutes = time / 60;
+        seconds = time % 60;
+        if (seconds < 10)
+        {
+            return ($"{minutes}:0{seconds}");
+        }
+        else
+        {
+            return ($"{minutes}:{seconds}");
+        }
+    }
     public void DisplaySecretItems()
     {
         for (int i = 0; i < secretImages.Count; i++)

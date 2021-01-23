@@ -22,7 +22,9 @@ public class GameMaster : MonoBehaviour
         }
         catch
         {
-            Instantiate(TestLevels);
+            
+            GameObject temp = Instantiate(TestLevels);
+            levels = temp.GetComponent<Levels>();
         }
     }
 
@@ -38,9 +40,14 @@ public class GameMaster : MonoBehaviour
     {
         return hud;
     }
-
+    public Levels GetLevels()
+    {
+        return levels;
+    }
     public void CompleteLevel()
     {
+        hud.CompletePanelEnable();
+        Debug.Log("Completed Level");
         if((levelTimer.GetStartTime() - levelTimer.currentTime) <= levels.allLevels[levels.currentLevelIndex].speedToUnlock)
         {
             levels.UnlockSpeedBadge();

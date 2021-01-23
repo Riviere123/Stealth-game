@@ -25,12 +25,20 @@ public class InputMonitor : MonoBehaviour
         currentContextClass.HorizontalButtonPress(Input.GetAxis(InputConstants.horizontal));
         currentContextClass.VerticalButtonPress(Input.GetAxis(InputConstants.vertical));
 
-        if (Input.GetButtonDown(InputConstants.action1))
+        if (Input.GetButton(InputConstants.action1))
+        {
+            currentContextClass.Action1ButtonPress();
+        }
+        if (Input.GetButtonUp(InputConstants.action1))
         {
             currentContextClass.Action1ButtonPress();
         }
 
-        if (Input.GetButtonDown(InputConstants.action2))
+        if (Input.GetButton(InputConstants.action2))
+        {
+            currentContextClass.Action2ButtonPress();
+        }
+        if (Input.GetButtonUp(InputConstants.action2))
         {
             currentContextClass.Action2ButtonPress();
         }

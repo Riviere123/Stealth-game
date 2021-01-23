@@ -21,7 +21,7 @@ public class AttackAction : Actions
             Vector2 attackDirection = (vision.target.transform.position - controller.gameObject.transform.position).normalized;
             animator.SetFloat(AnimationConstants.lastX, attackDirection.x);
             animator.SetFloat(AnimationConstants.lastY, attackDirection.y);
-            animations.SetImobileBools(AnimationConstants.ImobileStates.ATTACK);
+            controller.GetHelper<MovementHelper>().Attack(animations);
         }    
     }
 }

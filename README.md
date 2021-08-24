@@ -1,4 +1,4 @@
-# RZU-7
+# Stealth Game
 
 This is a project written in C# using the unity engine. It is currently not being worked on.
 
